@@ -1,0 +1,15 @@
+---
+interface Props {
+  label: string;
+}
+
+const { label } = Astro.props;
+---
+
+<button
+  class="hidden h-10 items-center rounded-md border border-border/80 px-3 text-sm font-semibold text-muted transition hover:border-primary/60 hover:text-foreground sm:inline-flex"
+  type="button"
+  aria-label="Theme toggle placeholder"
+>
+  {label}
+</button>

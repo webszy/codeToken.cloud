@@ -1,0 +1,41 @@
+---
+import type { SiteCopy } from "../i18n";
+
+interface Props {
+  copy: SiteCopy;
+}
+
+const { copy } = Astro.props;
+---
+
+<section class="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-6 sm:py-20 lg:grid-cols-[1.02fr_0.98fr] lg:px-8 lg:py-24">
+  <div class="flex flex-col justify-center">
+    <p class="mb-6 inline-flex w-fit rounded-md border border-primary/30 bg-primary/10 px-3 py-1 text-sm font-bold text-primary">
+      {copy.hero.badge}
+    </p>
+    <h1 class="max-w-4xl font-display text-5xl font-extrabold leading-[1.02] tracking-normal text-foreground sm:text-6xl lg:text-7xl">
+      {copy.hero.titleLine1}
+      <span class="block text-primary">{copy.hero.titleLine2}</span>
+    </h1>
+    <p class="mt-6 max-w-2xl text-lg leading-8 text-muted sm:text-xl">
+      {copy.hero.description}
+    </p>
+    <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+      <a
+        class="inline-flex h-12 items-center justify-center rounded-md bg-primary px-6 text-sm font-bold text-primary-foreground transition hover:brightness-110"
+        href="https://api.codetoken.cloud"
+        rel="noreferrer"
+      >
+        {copy.hero.primaryCta}
+      </a>
+      <a
+        class="inline-flex h-12 items-center justify-center rounded-md border border-border bg-card/70 px-6 text-sm font-bold text-foreground transition hover:border-primary/60"
+        href="#docs"
+      >
+        {copy.hero.secondaryCta}
+      </a>
+    </div>
+  </div>
+
+  <slot name="endpoint" />
+</section>

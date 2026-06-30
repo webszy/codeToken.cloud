@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CodeToken Cloud - AI API Gateway</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&amp;family=Sora:wght@600;700&amp;family=Geist:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed": "#f0dbff",
+                      "inverse-primary": "#006877",
+                      "on-error-container": "#ffdad6",
+                      "surface": "#0e1416",
+                      "on-secondary": "#002e6a",
+                      "surface-container-lowest": "#090f11",
+                      "secondary-fixed": "#d8e2ff",
+                      "on-surface": "#dde4e5",
+                      "error-container": "#93000a",
+                      "inverse-surface": "#dde4e5",
+                      "on-tertiary-container": "#730bc1",
+                      "secondary-container": "#0566d9",
+                      "on-tertiary": "#490080",
+                      "surface-dim": "#0e1416",
+                      "primary-container": "#22d3ee",
+                      "tertiary-container": "#d9b0ff",
+                      "outline": "#859397",
+                      "tertiary": "#ecd3ff",
+                      "outline-variant": "#3c494c",
+                      "on-primary": "#00363e",
+                      "on-tertiary-fixed-variant": "#6900b3",
+                      "surface-container-low": "#161d1e",
+                      "on-tertiary-fixed": "#2c0051",
+                      "error": "#ffb4ab",
+                      "on-primary-fixed-variant": "#004e5a",
+                      "on-surface-variant": "#bbc9cd",
+                      "on-primary-fixed": "#001f25",
+                      "secondary-fixed-dim": "#adc6ff",
+                      "surface-variant": "#2f3638",
+                      "surface-container-high": "#242b2d",
+                      "inverse-on-surface": "#2b3233",
+                      "on-secondary-fixed-variant": "#004395",
+                      "primary": "#8aebff",
+                      "on-background": "#dde4e5",
+                      "primary-fixed-dim": "#2fd9f4",
+                      "surface-container": "#1a2122",
+                      "on-error": "#690005",
+                      "tertiary-fixed-dim": "#ddb7ff",
+                      "on-primary-container": "#005763",
+                      "surface-bright": "#343a3c",
+                      "surface-container-highest": "#2f3638",
+                      "on-secondary-container": "#e6ecff",
+                      "primary-fixed": "#a2eeff",
+                      "on-secondary-fixed": "#001a42",
+                      "surface-tint": "#2fd9f4",
+                      "secondary": "#adc6ff",
+                      "background": "#020617"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "container-max": "1280px",
+                      "unit": "4px",
+                      "margin-mobile": "16px",
+                      "gutter": "24px",
+                      "margin-desktop": "64px"
+              },
+              "fontFamily": {
+                      "code-sm": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-lg-mobile": [
+                              "Sora"
+                      ],
+                      "label-caps": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-lg": [
+                              "Sora"
+                      ],
+                      "display-lg": [
+                              "Sora"
+                      ],
+                      "body-md": [
+                              "Geist"
+                      ]
+              },
+              "fontSize": {
+                      "code-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "1",
+                                      "letterSpacing": "0.1em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "40px", 
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+            },
+          }
+        }
+      </script>
+<style>
+        .glow-button {
+            box-shadow: 0 0 15px theme('colors.primary');
+        }
+        .glow-button:hover {
+            box-shadow: 0 0 25px theme('colors.primary');
+        }
+        .glass-panel {
+            background: rgba(14, 20, 22, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid theme('colors.outline-variant');
+        }
+        .glass-panel:hover {
+             border-color: theme('colors.primary');
+             box-shadow: 0 0 15px rgba(138, 235, 255, 0.2);
+        }
+        .holographic-border {
+            border: 1px transparent;
+            background: linear-gradient(theme('colors.surface-container'), theme('colors.surface-container')) padding-box,
+                        linear-gradient(135deg, theme('colors.primary'), theme('colors.tertiary-fixed')) border-box;
+        }
+        .circuit-bg {
+            background-image: radial-gradient(circle at 50% 50%, rgba(138, 235, 255, 0.05) 0%, transparent 50%);
+        }
+      </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md overflow-x-hidden min-h-screen circuit-bg">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/60 backdrop-blur-xl border-b border-outline-variant/30 shadow-[0_0_15px_rgba(47,217,244,0.1)]">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="font-headline-lg-mobile md:font-headline-lg font-bold bg-gradient-to-r from-primary to-tertiary bg-clip-text text-transparent flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="code" data-weight="fill" style="font-variation-settings: 'FILL' 1;">code</span>
+                CodeToken Cloud
+            </div>
+<!-- Mobile Menu Toggle -->
+<button class="md:hidden text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<!-- Desktop Nav -->
+<div class="hidden md:flex items-center gap-8">
+<a class="text-primary border-b-2 border-primary pb-1 font-body-md" href="#">Features</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-body-md" href="#">Docs</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-body-md" href="#">Pricing</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-body-md" href="#">Status</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-body-md" href="#">Blog</a>
+</div>
+<div class="hidden md:flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="dark_mode">dark_mode</span>
+</button>
+<a class="bg-gradient-to-r from-primary-container to-secondary-container text-on-primary font-label-caps px-4 py-2 rounded-full glow-button flex items-center gap-2 transition-all hover:opacity-90" href="#">
+                    Get API Access
+                    <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</nav>
+<main class="pt-24 pb-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<!-- Hero Section -->
+<section class="flex flex-col md:flex-row items-center gap-12 mt-10 md:mt-20 relative">
+<div class="flex-1 space-y-6 z-10 text-center md:text-left">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/30 bg-primary/10 text-primary font-label-caps mx-auto md:mx-0">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                    AI API GATEWAY FOR DEVELOPERS
+                </div>
+<h1 class="font-display-lg md:text-[56px] font-bold leading-tight">
+<span class="text-on-surface">One Endpoint</span> for <br/>
+<span class="bg-gradient-to-r from-primary to-tertiary-fixed-dim bg-clip-text text-transparent">Multiple AI Models</span>
+</h1>
+<p class="text-on-surface-variant font-body-md max-w-xl mx-auto md:mx-0">
+                    CodeToken Cloud is a fast, reliable, and OpenAI-compatible API gateway that gives your app access to the best AI models through a single, unified endpoint.
+                </p>
+<div class="flex flex-col sm:flex-row items-center gap-4 pt-4 justify-center md:justify-start">
+<a class="w-full sm:w-auto text-center bg-gradient-to-r from-primary-container to-secondary-container text-on-primary font-label-caps px-6 py-3 rounded-full glow-button flex items-center justify-center gap-2 transition-all hover:opacity-90" href="#">
+                        Start Building
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+<a class="w-full sm:w-auto text-center border border-outline-variant hover:border-primary text-on-surface hover:text-primary font-label-caps px-6 py-3 rounded-full flex items-center justify-center gap-2 transition-all glass-panel" href="#">
+                        View Docs
+                        <span class="material-symbols-outlined text-[16px]" data-icon="menu_book">menu_book</span>
+</a>
+</div>
+<!-- API Snippet -->
+<div class="mt-8 p-4 rounded-lg holographic-border bg-surface-container-low/80 backdrop-blur-md relative overflow-hidden group text-left">
+<div class="absolute top-0 right-0 p-2 opacity-50 group-hover:opacity-100 transition-opacity cursor-pointer">
+<span class="material-symbols-outlined text-primary" data-icon="content_copy">content_copy</span>
+</div>
+<div class="font-label-caps text-on-surface-variant mb-2">OPENAI-COMPATIBLE ENDPOINT</div>
+<div class="font-code-sm text-primary break-all">
+<span class="text-tertiary-fixed-dim">POST</span> https://api.codetoken.cloud/v1/chat/completions
+                    </div>
+<div class="font-code-sm text-on-surface-variant mt-2 border-t border-outline-variant/30 pt-2 break-all">
+                        Headers: Authorization: Bearer <span class="text-tertiary-fixed">YOUR_API_KEY</span>
+</div>
+</div>
+</div>
+<div class="flex-1 w-full relative h-[300px] md:h-[500px]">
+<!-- Placeholder for Hero Graphic -->
+<div class="bg-cover bg-center w-full h-full rounded-2xl glass-panel relative overflow-hidden" data-alt="A glowing neon cyan and magenta holographic hexagon rendering of a cloud computing node on a deep dark slate background, highly technical cyberpunk styling, sharp glowing vector lines." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBKu4LMUcD8EGHf3LjcWTyKhR2txjMIqwSoAoCY7dfCYe1kt3rMsmMCr873oK73gk_YWAzfJYunSkA7fDF2SkPf8lAtSOFKVXaHFLRc8p8B7x6Hp1lbHvIKf6nWJGibO5yfny8Dpw1O6Y9zJekx8MWKTKW5_-u7yQ646V5GcqoX7z0OL3s4ZtCSeFREfuZIAWfSnHqPYqmtlvgpxQFr23jHrBEY87RIFlWrWZFUpzkG1VNDGSfiyWmW5H16BO1TUXhsDl99GoGHTjI')">
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+</div>
+</div>
+</section>
+<!-- Metrics -->
+<section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mt-16 md:mt-24">
+<div class="glass-panel p-4 rounded-xl flex items-center gap-4">
+<div class="w-10 h-10 rounded-full border border-primary/30 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+</div>
+<div>
+<div class="font-headline-lg-mobile text-on-surface">99.99%</div>
+<div class="text-on-surface-variant text-sm">Uptime SLA</div>
+</div>
+</div>
+<div class="glass-panel p-4 rounded-xl flex items-center gap-4">
+<div class="w-10 h-10 rounded-full border border-primary/30 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+</div>
+<div>
+<div class="font-headline-lg-mobile text-on-surface">&lt;150ms</div>
+<div class="text-on-surface-variant text-sm">Average Latency</div>
+</div>
+</div>
+<div class="glass-panel p-4 rounded-xl flex items-center gap-4">
+<div class="w-10 h-10 rounded-full border border-tertiary-fixed/30 flex items-center justify-center text-tertiary-fixed">
+<span class="material-symbols-outlined" data-icon="layers">layers</span>
+</div>
+<div>
+<div class="font-headline-lg-mobile text-on-surface">50M+</div>
+<div class="text-on-surface-variant text-sm">Requests Served</div>
+</div>
+</div>
+<div class="glass-panel p-4 rounded-xl flex items-center gap-4">
+<div class="w-10 h-10 rounded-full border border-tertiary-fixed/30 flex items-center justify-center text-tertiary-fixed">
+<span class="material-symbols-outlined" data-icon="lock">lock</span>
+</div>
+<div>
+<div class="font-headline-lg-mobile text-on-surface">Enterprise Grade</div>
+<div class="text-on-surface-variant text-sm">Security &amp; Reliability</div>
+</div>
+</div>
+</section>
+<!-- Features -->
+<section class="mt-24 md:mt-32 text-center">
+<h2 class="font-headline-lg-mobile md:font-headline-lg font-bold text-on-surface mb-2">Everything You Need to <span class="text-primary">Build AI Apps</span></h2>
+<p class="text-on-surface-variant mb-12">Powerful features to ship faster and scale with confidence.</p>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
+<!-- Feature 1 -->
+<div class="glass-panel p-6 rounded-2xl group transition-all duration-300">
+<div class="w-12 h-12 rounded-xl holographic-border flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary" data-icon="code">code</span>
+</div>
+<h3 class="font-headline-lg-mobile text-on-surface text-lg mb-2 group-hover:text-primary transition-colors">OpenAI-Compatible</h3>
+<p class="text-on-surface-variant text-sm mb-4">Drop-in compatible with the OpenAI API. No code changes required—just switch the endpoint.</p>
+<a class="text-primary font-label-caps flex items-center gap-1 group-hover:underline" href="#">
+                        Learn more <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+<!-- Feature 2 -->
+<div class="glass-panel p-6 rounded-2xl group transition-all duration-300">
+<div class="w-12 h-12 rounded-xl holographic-border flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary" data-icon="account_tree">account_tree</span>
+</div>
+<h3 class="font-headline-lg-mobile text-on-surface text-lg mb-2 group-hover:text-primary transition-colors">Multi-Model Routing</h3>
+<p class="text-on-surface-variant text-sm mb-4">Access leading models from OpenAI, Anthropic, Google, Meta and more—through a single API.</p>
+<a class="text-primary font-label-caps flex items-center gap-1 group-hover:underline" href="#">
+                        Learn more <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+<!-- Feature 3 -->
+<div class="glass-panel p-6 rounded-2xl group transition-all duration-300">
+<div class="w-12 h-12 rounded-xl holographic-border flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-tertiary-fixed" data-icon="monitoring">monitoring</span>
+</div>
+<h3 class="font-headline-lg-mobile text-on-surface text-lg mb-2 group-hover:text-tertiary-fixed transition-colors">Usage Tracking</h3>
+<p class="text-on-surface-variant text-sm mb-4">Real-time dashboards, analytics, and logs to monitor usage, cost, and performance.</p>
+<a class="text-tertiary-fixed font-label-caps flex items-center gap-1 group-hover:underline" href="#">
+                        Learn more <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+<!-- Feature 4 -->
+<div class="glass-panel p-6 rounded-2xl group transition-all duration-300">
+<div class="w-12 h-12 rounded-xl holographic-border flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary" data-icon="speed">speed</span>
+</div>
+<h3 class="font-headline-lg-mobile text-on-surface text-lg mb-2 group-hover:text-primary transition-colors">Low Latency</h3>
+<p class="text-on-surface-variant text-sm mb-4">Global edge infrastructure and intelligent routing for blazing fast responses.</p>
+<a class="text-primary font-label-caps flex items-center gap-1 group-hover:underline" href="#">
+                        Learn more <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+<!-- Feature 5 -->
+<div class="glass-panel p-6 rounded-2xl group transition-all duration-300">
+<div class="w-12 h-12 rounded-xl holographic-border flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary" data-icon="shield">shield</span>
+</div>
+<h3 class="font-headline-lg-mobile text-on-surface text-lg mb-2 group-hover:text-primary transition-colors">Secure API Keys</h3>
+<p class="text-on-surface-variant text-sm mb-4">Enterprise-grade security with encrypted keys, rate limits, and permission control.</p>
+<a class="text-primary font-label-caps flex items-center gap-1 group-hover:underline" href="#">
+                        Learn more <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+<!-- Feature 6 -->
+<div class="glass-panel p-6 rounded-2xl group transition-all duration-300">
+<div class="w-12 h-12 rounded-xl holographic-border flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-tertiary-fixed" data-icon="terminal">terminal</span>
+</div>
+<h3 class="font-headline-lg-mobile text-on-surface text-lg mb-2 group-hover:text-tertiary-fixed transition-colors">Developer Friendly</h3>
+<p class="text-on-surface-variant text-sm mb-4">Clean docs, SDKs, code examples, and CLI tools to help you build faster.</p>
+<a class="text-tertiary-fixed font-label-caps flex items-center gap-1 group-hover:underline" href="#">
+                        Learn more <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="mt-24 md:mt-32">
+<div class="holographic-border rounded-2xl p-8 bg-surface-container-low/80 backdrop-blur-xl flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
+<div class="flex items-center gap-6 flex-col md:flex-row">
+<div class="w-16 h-16 rounded-full border border-primary/30 bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="cloud">cloud</span>
+</div>
+<div>
+<h2 class="font-headline-lg-mobile md:font-headline-lg font-bold text-on-surface mb-2">Ready to supercharge your AI application?</h2>
+<p class="text-on-surface-variant">Join thousands of developers building the future with CodeToken Cloud.</p>
+</div>
+</div>
+<a class="whitespace-nowrap bg-gradient-to-r from-primary-container to-secondary-container text-on-primary font-label-caps px-8 py-4 rounded-full glow-button flex items-center justify-center gap-2 transition-all hover:opacity-90" href="#">
+                    Get API Access
+                    <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant/20 w-full pt-16 pb-10 mt-20">
+<div class="grid grid-cols-2 md:grid-cols-5 gap-gutter px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="col-span-2 md:col-span-1 mb-8 md:mb-0">
+<div class="font-headline-lg-mobile text-on-surface font-bold flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary" data-icon="code" data-weight="fill" style="font-variation-settings: 'FILL' 1;">code</span>
+                    CodeToken Cloud
+                </div>
+<p class="text-on-surface-variant text-sm">The AI API gateway built for developers.</p>
+</div>
+<div>
+<h4 class="font-label-caps text-on-surface mb-4">Product</h4>
+<ul class="space-y-2">
+<li><a class="text-on-surface-variant hover:text-primary transition-all font-body-md text-sm" href="#">Features</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all font-body-md text-sm" href="#">Pricing</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all font-body-md text-sm" href="#">Status</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-caps text-on-surface mb-4">Developers</h4>
+<ul class="space-y-2">
+<li><a class="text-on-surface-variant hover:text-primary transition-all font-body-md text-sm" href="#">Docs</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all font-body-md text-sm" href="#">API Reference</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all font-body-md text-sm" href="#">SDKs</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-caps text-on-surface mb-4">Company</h4>
+<ul class="space-y-2">
+<li><a class="text-on-surface-variant hover:text-primary transition-all font-body-md text-sm" href="#">Blog</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all font-body-md text-sm" href="#">About Us</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all font-body-md text-sm" href="#">Contact</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-caps text-on-surface mb-4">Legal</h4>
+<ul class="space-y-2">
+<li><a class="text-on-surface-variant hover:text-primary transition-all font-body-md text-sm" href="#">Privacy Policy</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all font-body-md text-sm" href="#">Terms of Service</a></li>
+</ul>
+</div>
+</div>
+<div class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto mt-12 pt-8 border-t border-outline-variant/10 text-center text-on-surface-variant text-sm">
+            © 2025 CodeToken Cloud, Inc. All rights reserved.
+        </div>
+</footer>
+</body></html>

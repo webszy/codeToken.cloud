@@ -1,0 +1,43 @@
+---
+import type { SiteCopy } from "../i18n";
+
+interface Props {
+  copy: SiteCopy;
+}
+
+const { copy } = Astro.props;
+---
+
+<aside class="flex items-center">
+  <div class="w-full rounded-lg border border-border bg-card/88 p-5 shadow-2xl shadow-sky-950/30">
+    <div class="mb-5 flex items-center justify-between border-b border-border/70 pb-4">
+      <p class="text-xs font-extrabold tracking-[0.22em] text-primary">{copy.endpoint.label}</p>
+      <span class="rounded-md bg-primary/10 px-2.5 py-1 text-xs font-bold text-primary">v1</span>
+    </div>
+    <div class="space-y-4 font-mono text-sm">
+      <div>
+        <p class="mb-2 text-xs font-semibold uppercase text-muted">{copy.endpoint.requestLabel}</p>
+        <div class="overflow-x-auto rounded-md border border-border bg-background/70 p-4">
+          <span class="mr-3 text-primary">{copy.endpoint.method}</span>
+          <span class="text-foreground">{copy.endpoint.url}</span>
+        </div>
+      </div>
+      <div>
+        <p class="mb-2 text-xs font-semibold uppercase text-muted">{copy.endpoint.authLabel}</p>
+        <div class="overflow-x-auto rounded-md border border-border bg-background/70 p-4 text-muted">
+          {copy.endpoint.auth}
+        </div>
+      </div>
+      <div class="grid grid-cols-3 gap-3 pt-2">
+        {
+          copy.endpoint.stats.map((stat) => (
+            <div class="rounded-md border border-border bg-background/50 p-3">
+              <p class="text-xs text-muted">{stat.label}</p>
+              <p class="mt-1 font-sans text-sm font-bold text-foreground">{stat.value}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</aside>

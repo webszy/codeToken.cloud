@@ -1,0 +1,33 @@
+---
+import EndpointCard from "../components/EndpointCard.astro";
+import Features from "../components/Features.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCopy } from "../i18n";
+
+const copy = getCopy("en");
+---
+
+<BaseLayout title={copy.meta.title} description={copy.meta.description}>
+  <Header copy={copy} />
+  <main>
+    <Hero copy={copy}>
+      <EndpointCard copy={copy} slot="endpoint" />
+    </Hero>
+    <Features copy={copy} />
+    <section id="docs" class="mx-auto max-w-7xl px-5 py-14 sm:px-6 lg:px-8">
+      <div class="rounded-lg border border-border bg-card/70 p-6">
+        <p class="text-sm font-bold uppercase tracking-[0.2em] text-primary">{copy.sections.docsEyebrow}</p>
+        <h2 class="mt-3 font-display text-2xl font-extrabold tracking-normal text-foreground">
+          {copy.sections.docsTitle}
+        </h2>
+        <p class="mt-3 max-w-2xl leading-7 text-muted">
+          {copy.sections.docsDescription}
+        </p>
+      </div>
+    </section>
+  </main>
+  <Footer copy={copy} />
+</BaseLayout>

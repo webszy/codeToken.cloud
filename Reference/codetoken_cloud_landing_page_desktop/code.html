@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CodeToken Cloud - One Endpoint for Multiple AI Models</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;600&amp;family=Sora:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#f0dbff",
+                        "inverse-primary": "#006877",
+                        "on-error-container": "#ffdad6",
+                        "surface": "#0e1416",
+                        "on-secondary": "#002e6a",
+                        "surface-container-lowest": "#090f11",
+                        "secondary-fixed": "#d8e2ff",
+                        "on-surface": "#dde4e5",
+                        "error-container": "#93000a",
+                        "inverse-surface": "#dde4e5",
+                        "on-tertiary-container": "#730bc1",
+                        "secondary-container": "#0566d9",
+                        "on-tertiary": "#490080",
+                        "surface-dim": "#0e1416",
+                        "primary-container": "#22d3ee",
+                        "tertiary-container": "#d9b0ff",
+                        "outline": "#859397",
+                        "tertiary": "#ecd3ff",
+                        "outline-variant": "#3c494c",
+                        "on-primary": "#00363e",
+                        "on-tertiary-fixed-variant": "#6900b3",
+                        "surface-container-low": "#161d1e",
+                        "on-tertiary-fixed": "#2c0051",
+                        "error": "#ffb4ab",
+                        "on-primary-fixed-variant": "#004e5a",
+                        "on-surface-variant": "#bbc9cd",
+                        "on-primary-fixed": "#001f25",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "surface-variant": "#2f3638",
+                        "surface-container-high": "#242b2d",
+                        "inverse-on-surface": "#2b3233",
+                        "on-secondary-fixed-variant": "#004395",
+                        "primary": "#8aebff",
+                        "on-background": "#dde4e5",
+                        "primary-fixed-dim": "#2fd9f4",
+                        "surface-container": "#1a2122",
+                        "on-error": "#690005",
+                        "tertiary-fixed-dim": "#ddb7ff",
+                        "on-primary-container": "#005763",
+                        "surface-bright": "#343a3c",
+                        "surface-container-highest": "#2f3638",
+                        "on-secondary-container": "#e6ecff",
+                        "primary-fixed": "#a2eeff",
+                        "on-secondary-fixed": "#001a42",
+                        "surface-tint": "#2fd9f4",
+                        "secondary": "#adc6ff",
+                        "background": "#020617"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "unit": "4px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "margin-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "code-sm": [
+                            "JetBrains Mono"
+                        ],
+                        "headline-lg-mobile": [
+                            "Sora"
+                        ],
+                        "label-caps": [
+                            "JetBrains Mono"
+                        ],
+                        "headline-lg": [
+                            "Sora"
+                        ],
+                        "display-lg": [
+                            "Sora"
+                        ],
+                        "body-md": [
+                            "Geist"
+                        ]
+                    },
+                    "fontSize": {
+                        "code-sm": [
+                            "14px",
+                            {
+                                "lineHeight": "1.5",
+                                "fontWeight": "400"
+                            }
+                        ],
+                        "headline-lg-mobile": [
+                            "24px",
+                            {
+                                "lineHeight": "1.2",
+                                "fontWeight": "600"
+                            }
+                        ],
+                        "label-caps": [
+                            "12px",
+                            {
+                                "lineHeight": "1",
+                                "letterSpacing": "0.1em",
+                                "fontWeight": "600"
+                            }
+                        ],
+                        "headline-lg": [
+                            "32px",
+                            {
+                                "lineHeight": "1.2",
+                                "fontWeight": "600"
+                            }
+                        ],
+                        "display-lg": [
+                            "56px",
+                            {
+                                "lineHeight": "1.1",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                            }
+                        ],
+                        "body-md": [
+                            "16px",
+                            {
+                                "lineHeight": "1.6",
+                                "fontWeight": "400"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    </script>
+<style>.glow-text {
+    text-shadow: 0 0 20px rgba(138, 235, 255, 0.5)
+    }
+.glow-border {
+    box-shadow: 0 0 15px rgba(34, 211, 238, 0.3)
+    }
+.hex-bg {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l25.98 15v30L30 60 4.02 45V15z' fill-opacity='0.02' fill='%238aebff' fill-rule='evenodd'/%3E%3C/svg%3E")
+    }
+.circuit-bg {
+    background-image: linear-gradient(rgba(2, 6, 23, 0.95), rgba(2, 6, 23, 0.95)), url(https://lh3.googleusercontent.com/aida-public/AB6AXuAr4m59fCEkn7sMJEOur259fjZT6Wmk1O-_WdQCydqDn64vFndHicQp48M1HWKtgtrsmCItIt_PSIJBGNxcOIwKz4EnTcAcPH_KQH0lzJWyZaHdbfCU8ovQ2mhr-oRV_2BH9wjYBUNEB7ndIRlT6KA9-N_CW9mPY4qkdtofeMJotRtrdwFRSwLLvAGXsA-SbCnI_URaoHnKbla73C-h6qjYvulnjGqa9VJd9njd8SrLeIMuuTCWy3dwZcMIcouwzReRb1sNM15pJ6c)
+    }</style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen flex flex-col relative overflow-x-hidden circuit-bg" data-alt="A subtle, futuristic circuit board pattern background, very dark navy, low opacity, clean high-tech grid lines, glowing nodes, cyberpunk aesthetic, perfect for a high-end AI dashboard backdrop.">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/60 backdrop-blur-xl border-b border-outline-variant/30 shadow-[0_0_15px_rgba(47,217,244,0.1)]">
+<div class="flex justify-between items-center px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="flex items-center gap-3">
+<img alt="CodeToken Cloud Logo" class="w-8 h-8" src="data:image/png;base64,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"/>
+<span class="font-headline-lg text-headline-lg font-bold bg-gradient-to-r from-primary to-tertiary bg-clip-text text-transparent">CodeToken Cloud</span>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="font-body-md text-body-md text-primary border-b-2 border-primary pb-1 hover:text-primary transition-colors duration-300" href="#">Features</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Docs</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Pricing</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Status</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Blog</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">dark_mode</span>
+</button>
+<button class="bg-gradient-to-r from-primary-container to-secondary-container text-white px-6 py-2 rounded-lg font-body-md hover:opacity-90 transition-all glow-border flex items-center gap-2">
+                    Get API Access <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow pt-32 pb-24 px-margin-desktop max-w-container-max mx-auto w-full relative z-10 hex-bg">
+<!-- Hero Section -->
+<section class="grid md:grid-cols-2 gap-12 items-center mb-32">
+<div>
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-outline-variant bg-surface/50 mb-6">
+<div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+<span class="font-label-caps text-label-caps text-primary uppercase tracking-wider">AI API Gateway for Developers</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-on-surface mb-6 leading-tight">
+                    One Endpoint for <br/>
+<span class="bg-gradient-to-r from-primary to-tertiary-container bg-clip-text text-transparent glow-text">Multiple AI Models</span>
+</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mb-10 max-w-xl">
+                    CodeToken Cloud is a fast, reliable, and OpenAI-compatible API gateway that gives your app access to the best AI models through a single, unified endpoint.
+                </p>
+<div class="flex flex-wrap gap-4 mb-12">
+<button class="bg-gradient-to-r from-primary-container to-secondary-container text-white px-8 py-3 rounded-lg font-body-md hover:opacity-90 transition-all glow-border flex items-center gap-2">
+                        Start Building <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+<button class="px-8 py-3 rounded-lg font-body-md border border-primary text-primary hover:bg-primary/10 transition-all flex items-center gap-2">
+                        View Docs <span class="material-symbols-outlined text-sm">menu_book</span>
+</button>
+</div>
+<!-- API Card -->
+<div class="bg-surface/40 backdrop-blur-md border border-outline-variant rounded-xl p-4 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none"></div>
+<div class="flex justify-between items-center mb-2">
+<span class="font-label-caps text-label-caps text-on-surface-variant">OPENAI-COMPATIBLE ENDPOINT</span>
+</div>
+<div class="bg-surface-container-lowest rounded-md p-3 mb-3 border border-outline-variant/50 font-code-sm text-code-sm flex justify-between items-center">
+<div>
+<span class="text-tertiary mr-2 font-bold">POST</span>
+<span class="text-on-surface">https://api.codetoken.cloud/v1/chat/completions</span>
+</div>
+<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-[18px]">content_copy</span></button>
+</div>
+<div class="font-code-sm text-code-sm text-on-surface-variant">
+                        Headers: <span class="text-on-surface">Authorization: Bearer </span><span class="text-tertiary-container">YOUR_API_KEY</span>
+</div>
+</div>
+</div>
+<!-- Hero Graphic -->
+<div class="relative flex justify-center items-center">
+<div class="absolute inset-0 bg-primary/20 blur-[100px] rounded-full"></div>
+<div class="relative w-[400px] h-[400px] flex justify-center items-center">
+<svg class="absolute w-full h-full animate-[spin_60s_linear_infinite] opacity-50" viewbox="0 0 200 200">
+<path d="M100 10 L180 50 L180 150 L100 190 L20 150 L20 50 Z" fill="none" stroke="#22d3ee" stroke-dasharray="4 4" stroke-width="0.5"></path>
+<path d="M100 20 L170 60 L170 140 L100 180 L30 140 L30 60 Z" fill="none" stroke="#d9b0ff" stroke-dasharray="2 6" stroke-width="0.5"></path>
+</svg>
+<svg class="absolute w-[90%] h-[90%] drop-shadow-[0_0_15px_rgba(34,211,238,0.5)]" viewbox="0 0 200 200">
+<path d="M100 5 L190 55 L190 145 L100 195 L10 145 L10 55 Z" fill="rgba(14,20,22,0.8)" stroke="url(#hex-grad)" stroke-width="2"></path>
+<defs>
+<lineargradient id="hex-grad" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#22d3ee"></stop>
+<stop offset="100%" stop-color="#730bc1"></stop>
+</lineargradient>
+</defs>
+</svg>
+<div class="relative z-10 flex flex-col items-center">
+<img alt="CodeToken Logo Graphic" class="w-24 h-24 mb-4 drop-shadow-[0_0_20px_rgba(34,211,238,0.8)]" src="data:image/png;base64,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"/>
+<div class="font-code-sm text-primary animate-pulse flex gap-2 items-center">
+<span class="material-symbols-outlined text-[16px]">code</span> ACTIVE
+                        </div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest w-full pt-20 pb-10 border-t border-outline-variant/20 z-10 relative">
+<div class="grid grid-cols-2 md:grid-cols-5 gap-gutter px-margin-desktop max-w-container-max mx-auto mb-12">
+<div class="col-span-2 md:col-span-2 pr-12">
+<div class="flex items-center gap-3 mb-6">
+<img alt="CodeToken Cloud Logo" class="w-6 h-6" src="data:image/png;base64,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"/>
+<span class="font-headline-lg text-headline-lg font-bold text-on-surface text-[20px]">CodeToken Cloud</span>
+</div>
+<p class="font-body-md text-on-surface-variant text-sm mb-6">The AI API gateway built for developers.</p>
+<div class="flex gap-4">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.379.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"></path></svg></a>
+</div>
+</div>
+<div>
+<h4 class="font-body-md font-semibold text-on-surface mb-4">Product</h4>
+<ul class="space-y-3">
+<li><a class="font-body-md text-on-surface-variant hover:text-primary transition-all text-sm" href="#">Features</a></li>
+<li><a class="font-body-md text-on-surface-variant hover:text-primary transition-all text-sm" href="#">Pricing</a></li>
+<li><a class="font-body-md text-on-surface-variant hover:text-primary transition-all text-sm" href="#">Status</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-body-md font-semibold text-on-surface mb-4">Developers</h4>
+<ul class="space-y-3">
+<li><a class="font-body-md text-on-surface-variant hover:text-primary transition-all text-sm" href="#">Docs</a></li>
+<li><a class="font-body-md text-on-surface-variant hover:text-primary transition-all text-sm" href="#">API Reference</a></li>
+<li><a class="font-body-md text-on-surface-variant hover:text-primary transition-all text-sm" href="#">SDKs</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-body-md font-semibold text-on-surface mb-4">Company</h4>
+<ul class="space-y-3">
+<li><a class="font-body-md text-on-surface-variant hover:text-primary transition-all text-sm" href="#">Blog</a></li>
+<li><a class="font-body-md text-on-surface-variant hover:text-primary transition-all text-sm" href="#">About Us</a></li>
+<li><a class="font-body-md text-on-surface-variant hover:text-primary transition-all text-sm" href="#">Contact</a></li>
+</ul>
+</div>
+</div>
+<div class="px-margin-desktop max-w-container-max mx-auto text-center border-t border-outline-variant/10 pt-8">
+<p class="font-body-md text-on-surface-variant text-xs">© 2025 CodeToken Cloud, Inc. All rights reserved.</p>
+</div>
+</footer>
+</body></html>
