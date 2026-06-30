@@ -9,12 +9,14 @@ export const en = {
     tagline: "The AI API gateway built for developers."
   },
   nav: {
-    features: "Features",
+    features: "Home",
+    radar: "Radar",
     docs: "Docs",
     pricing: "Pricing",
     status: "Status",
     blog: "Blog",
-    getApiAccess: "Get API Access"
+    getApiAccess: "Get API Access",
+    dashboard: "DashBoard"
   },
   controls: {
     language: "EN",
@@ -25,69 +27,20 @@ export const en = {
     titleLine1: "One Endpoint for",
     titleLine2: "Multiple AI Models",
     description:
-      "CodeToken Cloud is a fast, reliable, and OpenAI-compatible API gateway that gives your app access to multiple AI models through a single unified endpoint.",
+      "CodeToken Cloud is a fast, reliable, and OpenAI-compatible API gateway that gives your app access to the best AI models through a single, unified endpoint.",
     primaryCta: "Start Building",
-    secondaryCta: "View Docs"
+    secondaryCta: "View Docs",
+    graphicStatus: "ACTIVE"
   },
   endpoint: {
-    label: "OPENAI-COMPATIBLE ENDPOINT",
-    requestLabel: "Request",
-    authLabel: "Authentication",
+    label: "Just One ENDPOINT",
     method: "POST",
-    url: "https://api.codetoken.cloud/v1/chat/completions",
-    auth: "Headers: Authorization: Bearer YOUR_API_KEY",
-    stats: [
-      { label: "Protocol", value: "HTTPS" },
-      { label: "Format", value: "JSON" },
-      { label: "Mode", value: "Static" }
-    ]
+    url: "https://api.codetoken.cloud",
+    authMessage: "Copy YOUR_API_KEY to login Codex or Claude Code and more"
   },
-  sections: {
-    featuresEyebrow: "Features",
-    featuresTitle: "Built for API-first AI products",
-    docsEyebrow: "Docs",
-    docsTitle: "Documentation entry reserved",
-    docsDescription:
-      "This static homepage keeps a clear anchor for future API reference, SDK guides, and integration examples."
-  },
-  features: [
-    {
-      title: "OpenAI-Compatible",
-      description:
-        "Use familiar request formats and client patterns without rewriting your application."
-    },
-    {
-      title: "Multi-Model Routing",
-      description:
-        "Route requests across multiple AI providers from a single gateway endpoint."
-    },
-    {
-      title: "Usage Tracking",
-      description:
-        "Keep visibility into API activity so teams can understand usage over time."
-    },
-    {
-      title: "Low Latency",
-      description:
-        "Designed for responsive developer workflows and production application traffic."
-    },
-    {
-      title: "Secure API Keys",
-      description:
-        "Centralize API access and reduce the need to expose provider keys in apps."
-    },
-    {
-      title: "Developer Friendly",
-      description:
-        "Simple endpoints, clean defaults, and an architecture ready for documentation."
-    }
-  ],
   footer: {
-    product: "Product",
-    developers: "Developers",
-    company: "Company",
-    productLinks: ["Features", "Pricing", "Status"],
-    developerLinks: ["Docs", "API Reference", "SDKs"],
-    companyLinks: ["Blog", "About Us", "Contact"]
+    copyright: "© 2026 CodeToken Cloud, Inc. All rights reserved.",
+    contact: "Contact",
+    contactEmail: "admin@codetoken.cloud"
   }
 };

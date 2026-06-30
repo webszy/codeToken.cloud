@@ -1,8 +1,6 @@
 ---
 import type { SiteCopy } from "../i18n";
-import LanguageSwitcher from "./LanguageSwitcher.astro";
 import Logo from "./Logo.astro";
-import ThemeToggle from "./ThemeToggle.astro";
 
 interface Props {
   copy: SiteCopy;
@@ -11,37 +9,51 @@ interface Props {
 const { copy } = Astro.props;
 
 const navItems = [
-  { label: copy.nav.features, href: "#features" },
-  { label: copy.nav.docs, href: "#docs" },
-  { label: copy.nav.pricing, href: "#pricing" },
-  { label: copy.nav.status, href: "#status" },
-  { label: copy.nav.blog, href: "#blog" }
+  { label: copy.nav.features, href: "#features", active: true },
+  { label: copy.nav.pricing, href: "#pricing", active: false },
+  { label: copy.nav.radar, href: "#radar", active: false },
+  { label: copy.nav.status, href: "#status", active: false }
 ];
 ---
 
-<header class="sticky top-0 z-20 border-b border-border/70 bg-background/86 backdrop-blur-xl">
-  <div class="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-6 lg:px-8">
+<header class="relative z-50 w-full border-b border-border/30 bg-card/60 shadow-[0_0_18px_rgba(47,217,244,0.1)] backdrop-blur-xl">
+  <div class="site-container flex h-[88px] items-center justify-between">
     <Logo brandName={copy.brand.name} />
 
-    <nav class="hidden items-center gap-7 lg:flex" aria-label="Primary navigation">
+    <nav class="hidden items-center gap-10 md:flex" aria-label="Primary navigation">
       {
         navItems.map((item) => (
-          <a class="text-sm font-semibold text-muted transition hover:text-foreground" href={item.href}>
+          <a
+            class:list={[
+              "pb-1 text-[18px] font-medium leading-none transition-colors duration-300 hover:text-primary",
+              item.active ? "border-b-2 border-primary text-primary" : "text-muted"
+            ]}
+            href={item.href}
+          >
             {item.label}
           </a>
         ))
       }
     </nav>
 
-    <div class="flex items-center gap-2 sm:gap-3">
-      <LanguageSwitcher label={copy.controls.language} />
-      <ThemeToggle label={copy.controls.theme} />
+    <div class="flex items-center gap-5">
+      <button class="grid h-10 w-10 place-items-center text-muted transition-colors hover:text-primary" type="button" aria-label="Theme toggle placeholder">
+        <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20.2 14.6A7.7 7.7 0 0 1 9.4 3.8 8.7 8.7 0 1 0 20.2 14.6Z" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
       <a
-        class="inline-flex h-10 items-center rounded-md bg-primary px-4 text-sm font-bold text-primary-foreground transition hover:brightness-110"
-        href="https://api.codetoken.cloud"
+        data-auth-cta
+        data-auth-label-default={copy.nav.getApiAccess}
+        data-auth-label-when-auth={copy.nav.dashboard}
+        class="glow-button inline-flex h-12 items-center gap-2 rounded-lg bg-gradient-to-r from-cyan-400 to-blue-600 px-7 text-[17px] font-medium text-white transition hover:opacity-90"
+        href="https://codetoken.cloud/login"
         rel="noreferrer"
       >
-        {copy.nav.getApiAccess}
+        <span data-auth-cta-text>{copy.nav.getApiAccess}</span>
+        <svg class="h-5 w-5" viewBox="0 0 20 20" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 10H15M11 6L15 10L11 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
       </a>
     </div>
   </div>

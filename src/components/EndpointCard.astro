@@ -8,36 +8,26 @@ interface Props {
 const { copy } = Astro.props;
 ---
 
-<aside class="flex items-center">
-  <div class="w-full rounded-lg border border-border bg-card/88 p-5 shadow-2xl shadow-sky-950/30">
-    <div class="mb-5 flex items-center justify-between border-b border-border/70 pb-4">
-      <p class="text-xs font-extrabold tracking-[0.22em] text-primary">{copy.endpoint.label}</p>
-      <span class="rounded-md bg-primary/10 px-2.5 py-1 text-xs font-bold text-primary">v1</span>
+<div class="api-card relative max-w-[665px] overflow-hidden rounded-xl border border-border bg-card/40 p-5 backdrop-blur-md">
+  <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-cyan-300/5 to-transparent"></div>
+  <div class="relative">
+    <div class="mb-3 flex items-center justify-between">
+      <span class="font-mono text-[13px] font-semibold uppercase leading-none tracking-[0.19em] text-muted">
+        {copy.endpoint.label}
+      </span>
     </div>
-    <div class="space-y-4 font-mono text-sm">
-      <div>
-        <p class="mb-2 text-xs font-semibold uppercase text-muted">{copy.endpoint.requestLabel}</p>
-        <div class="overflow-x-auto rounded-md border border-border bg-background/70 p-4">
-          <span class="mr-3 text-primary">{copy.endpoint.method}</span>
-          <span class="text-foreground">{copy.endpoint.url}</span>
-        </div>
+    <div class="mb-3 flex items-center justify-between rounded-md border border-border/50 bg-[rgb(var(--surface-lowest))] p-3 font-mono text-[16px] leading-normal">
+      <div class="min-w-0 overflow-x-auto whitespace-nowrap">
+        <span class="mr-3 font-bold text-[rgb(var(--tertiary))]">{copy.endpoint.method}</span>
+        <span class="text-foreground">{copy.endpoint.url}</span>
       </div>
-      <div>
-        <p class="mb-2 text-xs font-semibold uppercase text-muted">{copy.endpoint.authLabel}</p>
-        <div class="overflow-x-auto rounded-md border border-border bg-background/70 p-4 text-muted">
-          {copy.endpoint.auth}
-        </div>
-      </div>
-      <div class="grid grid-cols-3 gap-3 pt-2">
-        {
-          copy.endpoint.stats.map((stat) => (
-            <div class="rounded-md border border-border bg-background/50 p-3">
-              <p class="text-xs text-muted">{stat.label}</p>
-              <p class="mt-1 font-sans text-sm font-bold text-foreground">{stat.value}</p>
-            </div>
-          ))
-        }
-      </div>
+      <button class="ml-3 shrink-0 text-muted transition hover:text-primary" type="button" aria-label="Copy endpoint">
+        <svg class="h-[22px] w-[22px]" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 9H7.5A2.5 2.5 0 0 0 5 11.5V19A2.5 2.5 0 0 0 7.5 21H15A2.5 2.5 0 0 0 17.5 18.5V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          <path d="M11.5 3H19A2 2 0 0 1 21 5V12.5A2 2 0 0 1 19 14.5H11.5A2 2 0 0 1 9.5 12.5V5A2 2 0 0 1 11.5 3Z" stroke="currentColor" stroke-width="2" />
+        </svg>
+      </button>
     </div>
+    <p class="font-mono text-[16px] leading-normal text-muted">{copy.endpoint.authMessage}</p>
   </div>
-</aside>
+</div>

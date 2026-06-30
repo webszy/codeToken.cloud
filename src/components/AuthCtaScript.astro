@@ -1,0 +1,55 @@
+<script is:inline>
+  (() => {
+    const LOGIN_URL = "https://codetoken.cloud/login";
+    const DASHBOARD_URL = "https://codetoken.cloud/dashboard";
+
+    const parseExpiry = (value) => {
+      if (!value) return Number.NaN;
+
+      const trimmed = value.trim();
+      const numeric = Number(trimmed);
+
+      if (Number.isFinite(numeric)) {
+        return numeric < 1_000_000_000_000 ? numeric * 1000 : numeric;
+      }
+
+      return Date.parse(trimmed);
+    };
+
+    const hasValidSession = () => {
+      try {
+        const authUser = window.localStorage.getItem("auth_user");
+        const expiresAt = parseExpiry(window.localStorage.getItem("token_expires_at"));
+
+        return Boolean(authUser) && Number.isFinite(expiresAt) && expiresAt > Date.now();
+      } catch {
+        return false;
+      }
+    };
+
+    const updateAuthCtas = () => {
+      const isAuthenticated = hasValidSession();
+
+      document.querySelectorAll("[data-auth-cta]").forEach((cta) => {
+        if (!(cta instanceof HTMLAnchorElement)) return;
+
+        cta.href = isAuthenticated ? DASHBOARD_URL : LOGIN_URL;
+
+        const text = cta.querySelector("[data-auth-cta-text]");
+        const label = isAuthenticated ? cta.dataset.authLabelWhenAuth : cta.dataset.authLabelDefault;
+
+        if (text && label) {
+          text.textContent = label;
+        }
+      });
+    };
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", updateAuthCtas, { once: true });
+    } else {
+      updateAuthCtas();
+    }
+
+    window.addEventListener("storage", updateAuthCtas);
+  })();
+</script>

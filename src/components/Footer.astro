@@ -6,38 +6,20 @@ interface Props {
 }
 
 const { copy } = Astro.props;
-
-const columns = [
-  { title: copy.footer.product, links: copy.footer.productLinks },
-  { title: copy.footer.developers, links: copy.footer.developerLinks },
-  { title: copy.footer.company, links: copy.footer.companyLinks }
-];
 ---
 
-<footer class="py-12">
-  <div class="mx-auto grid max-w-7xl gap-10 px-5 sm:px-6 md:grid-cols-[1.2fr_2fr] lg:px-8">
-    <div>
-      <p class="font-display text-lg font-extrabold tracking-normal text-foreground">{copy.brand.name}</p>
-      <p class="mt-3 max-w-sm leading-7 text-muted">{copy.brand.tagline}</p>
-    </div>
-
-    <div class="grid gap-8 sm:grid-cols-3">
-      {
-        columns.map((column) => (
-          <div>
-            <h2 class="text-sm font-bold uppercase tracking-[0.16em] text-foreground">{column.title}</h2>
-            <ul class="mt-4 space-y-3">
-              {column.links.map((link) => (
-                <li>
-                  <a class="text-sm font-medium text-muted transition hover:text-foreground" href="#">
-                    {link}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))
-      }
-    </div>
+<footer class="relative z-10 border-t border-border/20 bg-[rgb(var(--surface-lowest))]">
+  <div class="site-container flex min-h-24 flex-col items-center justify-center gap-3 py-8 text-center text-[15px] text-muted sm:flex-row sm:gap-6">
+    <p>{copy.footer.copyright}</p>
+    <a
+      class="inline-grid h-9 w-9 place-items-center rounded-md border border-border/70 text-primary transition hover:border-primary/70 hover:text-foreground"
+      href={`mailto:${copy.footer.contactEmail}`}
+      aria-label={`Contact ${copy.footer.contactEmail}`}
+    >
+      <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4.75 6.75H19.25V17.25H4.75V6.75Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+        <path d="M5.25 7.25L12 12.75L18.75 7.25" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </a>
   </div>
 </footer>

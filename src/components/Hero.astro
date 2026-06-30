@@ -1,5 +1,7 @@
 ---
 import type { SiteCopy } from "../i18n";
+import EndpointCard from "./EndpointCard.astro";
+import Logo from "./Logo.astro";
 
 interface Props {
   copy: SiteCopy;
@@ -8,34 +10,84 @@ interface Props {
 const { copy } = Astro.props;
 ---
 
-<section class="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-6 sm:py-20 lg:grid-cols-[1.02fr_0.98fr] lg:px-8 lg:py-24">
-  <div class="flex flex-col justify-center">
-    <p class="mb-6 inline-flex w-fit rounded-md border border-primary/30 bg-primary/10 px-3 py-1 text-sm font-bold text-primary">
-      {copy.hero.badge}
-    </p>
-    <h1 class="max-w-4xl font-display text-5xl font-extrabold leading-[1.02] tracking-normal text-foreground sm:text-6xl lg:text-7xl">
-      {copy.hero.titleLine1}
-      <span class="block text-primary">{copy.hero.titleLine2}</span>
+<section
+  id="features"
+  class="site-container relative z-10 grid min-h-[948px] grid-cols-1 items-start gap-12 pt-[72px] pb-24 lg:grid-cols-[700px_1fr]"
+>
+  <div class="pt-[2px]">
+    <div class="mb-12 inline-flex items-center gap-3 rounded-full border border-border bg-card/50 px-4 py-1.5">
+      <span class="h-2.5 w-2.5 rounded-full bg-primary shadow-[0_0_16px_rgba(138,235,255,0.85)]"></span>
+      <span class="font-mono text-[13px] font-semibold uppercase leading-none tracking-[0.2em] text-primary">
+        {copy.hero.badge}
+      </span>
+    </div>
+
+    <h1 class="font-display text-[64px] font-bold leading-[1.1] tracking-normal text-foreground xl:text-[70px]">
+      {copy.hero.titleLine1}<br />
+      <span class="headline-gradient">{copy.hero.titleLine2}</span>
     </h1>
-    <p class="mt-6 max-w-2xl text-lg leading-8 text-muted sm:text-xl">
+
+    <p class="mt-10 max-w-[650px] text-[20px] leading-[1.6] text-muted">
       {copy.hero.description}
     </p>
-    <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+
+    <div class="mb-[58px] mt-[52px] flex flex-wrap gap-5">
       <a
-        class="inline-flex h-12 items-center justify-center rounded-md bg-primary px-6 text-sm font-bold text-primary-foreground transition hover:brightness-110"
-        href="https://api.codetoken.cloud"
+        data-auth-cta
+        data-auth-label-default={copy.hero.primaryCta}
+        class="glow-button inline-flex h-[61px] items-center gap-3 rounded-lg bg-gradient-to-r from-cyan-400 to-blue-600 px-10 text-[18px] font-medium text-white transition hover:opacity-90"
+        href="https://codetoken.cloud/login"
         rel="noreferrer"
       >
-        {copy.hero.primaryCta}
+        <span data-auth-cta-text>{copy.hero.primaryCta}</span>
+        <svg class="cta-arrow-motion h-5 w-5" viewBox="0 0 20 20" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 10H15M11 6L15 10L11 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
       </a>
       <a
-        class="inline-flex h-12 items-center justify-center rounded-md border border-border bg-card/70 px-6 text-sm font-bold text-foreground transition hover:border-primary/60"
-        href="#docs"
+        class="inline-flex h-[61px] items-center gap-3 rounded-lg border border-primary px-10 text-[18px] font-medium text-primary transition hover:bg-primary/10"
+        href="https://app.notion.com/p/webszy/CodeToken-38f306e2c52f80a8b056ca46d90111ff?source=copy_link"
+        rel="noreferrer"
       >
         {copy.hero.secondaryCta}
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 5.5A2.5 2.5 0 0 1 7.5 3H20V18H7.5A2.5 2.5 0 0 0 5 20.5V5.5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+          <path d="M5 20.5A2.5 2.5 0 0 0 7.5 23H20V18" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+        </svg>
       </a>
     </div>
+
+    <EndpointCard copy={copy} />
   </div>
 
-  <slot name="endpoint" />
+  <div class="relative flex min-h-[610px] items-start justify-center pt-[122px]">
+    <div class="absolute top-[172px] h-[430px] w-[430px] rounded-full bg-primary/20 blur-[100px]"></div>
+    <div class="relative h-[470px] w-[470px]">
+      <svg class="hero-graphic-spin absolute inset-0 h-full w-full opacity-55" viewBox="0 0 200 200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <path d="M100 10 L180 50 L180 150 L100 190 L20 150 L20 50 Z" fill="none" stroke="#22d3ee" stroke-dasharray="4 4" stroke-width="0.5" />
+        <path d="M100 20 L170 60 L170 140 L100 180 L30 140 L30 60 Z" fill="none" stroke="#d9b0ff" stroke-dasharray="2 6" stroke-width="0.5" />
+      </svg>
+      <svg class="absolute left-1/2 top-1/2 h-[428px] w-[428px] -translate-x-1/2 -translate-y-1/2 drop-shadow-[0_0_18px_rgba(34,211,238,0.55)]" viewBox="0 0 200 200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <path d="M100 5 L190 55 L190 145 L100 195 L10 145 L10 55 Z" fill="rgba(14,20,22,0.82)" stroke="url(#hero-hex-grad)" stroke-width="2" />
+        <defs>
+          <linearGradient id="hero-hex-grad" x1="0%" x2="100%" y1="0%" y2="100%">
+            <stop offset="0%" stop-color="#22d3ee" />
+            <stop offset="100%" stop-color="#730bc1" />
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="absolute inset-0 flex flex-col items-center justify-center">
+        <div class="mb-8 drop-shadow-[0_0_24px_rgba(34,211,238,0.8)]">
+          <Logo brandName="" size="xl" />
+        </div>
+        <div class="flex items-center gap-2 font-mono text-[18px] tracking-[0.12em] text-primary">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 7L4 12L9 17" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M15 7L20 12L15 17" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          {copy.hero.graphicStatus}
+        </div>
+      </div>
+    </div>
+  </div>
 </section>

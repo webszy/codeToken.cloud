@@ -1,31 +1,26 @@
 ---
 interface Props {
   brandName: string;
+  size?: "sm" | "md" | "xl";
 }
 
-const { brandName } = Astro.props;
+const { brandName, size = "md" } = Astro.props;
+const iconClass = {
+  sm: "h-6 w-6",
+  md: "h-8 w-8",
+  xl: "h-24 w-24"
+}[size];
+const textClass = size === "sm" ? "text-[40px]" : "text-[32px]";
+const label = brandName || "CodeToken Cloud mark";
 ---
 
-<a href="/" class="flex items-center gap-3" aria-label={brandName}>
-  <span class="relative grid h-10 w-10 place-items-center rounded-md border border-border/80 bg-card shadow-soft-glow">
-    <svg
-      class="h-6 w-6 text-primary"
-      viewBox="0 0 24 24"
-      fill="none"
-      aria-hidden="true"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path d="M8 4L3 12L8 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-      <path d="M16 4L21 12L16 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-      <path d="M14 6L10 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-    </svg>
-    <img
-      class="absolute inset-1.5 h-7 w-7 rounded-sm bg-card object-contain"
-      src="/logo.png"
-      alt=""
-      loading="eager"
-      onerror="this.remove()"
-    />
-  </span>
-  <span class="font-display text-base font-bold tracking-normal text-foreground sm:text-lg">{brandName}</span>
+<a href="/" class="group flex items-center gap-3" aria-label={label}>
+  <img class={iconClass} src="/logo.svg" alt="" aria-hidden="true" loading="eager" />
+  {
+    brandName && (
+      <span class:list={["brand-gradient font-display font-bold leading-none tracking-normal", textClass]}>
+        {brandName}
+      </span>
+    )
+  }
 </a>
