@@ -1,12 +1,32 @@
 export const en = {
   meta: {
-    title: "CodeToken Cloud | AI API Gateway for Developers",
+    title: "CodeToken Cloud - OpenAI, Codex and Claude API Gateway",
     description:
-      "CodeToken Cloud is an OpenAI-compatible API gateway for routing multiple AI models through one endpoint."
+      "CodeToken Cloud is an OpenAI-compatible AI API gateway for developers, Codex workflows, Claude integrations, agents, automation tools, and multi-model AI applications.",
+    keywords: [
+      "OpenAI API Gateway",
+      "Codex API Gateway",
+      "Claude API Proxy",
+      "OpenAI Compatible API",
+      "AI API Gateway",
+      "LLM API Gateway",
+      "AI API Proxy",
+      "Multi Model AI API",
+      "AI Token Gateway",
+      "Developer AI Tools",
+      "CodeToken Cloud"
+    ],
+    canonical: "https://codetoken.cloud",
+    ogTitle: "CodeToken Cloud - Codex and Claude API Gateway",
+    ogDescription:
+      "Connect Claude, Codex workflows, and other AI models through one unified OpenAI-compatible API gateway.",
+    twitterTitle: "CodeToken Cloud - AI API Gateway for Codex and Claude",
+    twitterDescription:
+      "A unified AI API gateway for developers building with Codex, Claude, agents, and automation workflows.",
+    locale: "en_US"
   },
   brand: {
-    name: "CodeToken Cloud",
-    tagline: "The AI API gateway built for developers."
+    name: "CodeToken.Cloud"
   },
   nav: {
     features: "Home",
@@ -23,20 +43,19 @@ export const en = {
     theme: "Dark"
   },
   hero: {
-    badge: "AI API Gateway for Developers",
-    titleLine1: "One Endpoint for",
-    titleLine2: "Multiple AI Models",
+    badge: "AI API Gateway for Developers,more easily to use Codex/Claude",
+    title: "One Gateway for Codex/Claude and more tools",
     description:
-      "CodeToken Cloud is a fast, reliable, and OpenAI-compatible API gateway that gives your app access to the best AI models through a single, unified endpoint.",
-    primaryCta: "Start Building",
-    secondaryCta: "View Docs",
+      "CodeToken Cloud is an OpenAI-compatible AI API gateway for developers building with OpenAI, Codex workflows, Claude integrations, agents, automation scripts, and multi-model AI applications.",
+    primaryCta: "Get API Access",
+    secondaryCta: "View API Docs",
     graphicStatus: "ACTIVE"
   },
   endpoint: {
-    label: "Just One ENDPOINT",
+    label: "JUST ONE ENDPOINT",
     method: "Base_Url",
     url: "https://api.codetoken.cloud",
-    authMessage: "Copy YOUR_API_KEY to login Codex or Claude Code and more"
+    authMessage: "Copy YOUR_API_KEY to login Codex or Claude Code and more\""
   },
   footer: {
     copyright: "© 2026 CodeToken Cloud, Inc. All rights reserved.",

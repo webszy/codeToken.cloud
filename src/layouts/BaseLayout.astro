@@ -1,22 +1,97 @@
 ---
 import "../styles/global.css";
+import { siteSeo } from "../config/seo";
 
 interface Props {
   title: string;
   description: string;
+  keywords?: string[] | string;
+  canonical?: string;
+  ogImage?: string;
+  lang?: string;
+  locale?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  twitterTitle?: string;
+  twitterDescription?: string;
 }
 
-const { title, description } = Astro.props;
+const {
+  title,
+  description,
+  keywords = siteSeo.keywords,
+  canonical = siteSeo.canonical,
+  ogImage = siteSeo.ogImage,
+  lang = "en",
+  locale = siteSeo.locale,
+  ogTitle = title,
+  ogDescription = description,
+  twitterTitle = title,
+  twitterDescription = description
+} = Astro.props;
+
+const keywordContent = Array.isArray(keywords) ? keywords.join(", ") : keywords;
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: siteSeo.siteName,
+  applicationCategory: "DeveloperApplication",
+  operatingSystem: "Web",
+  url: siteSeo.canonical,
+  description: siteSeo.description,
+  keywords:
+    "OpenAI API Gateway, Codex API Gateway, Claude API Proxy, OpenAI Compatible API, AI API Gateway, LLM API Gateway",
+  creator: {
+    "@type": "Organization",
+    name: siteSeo.siteName,
+    url: siteSeo.canonical
+  }
+};
 ---
 
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang={lang} data-theme="dark">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywordContent} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content={siteSeo.siteName} />
+    <meta name="theme-color" content="#050B14" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteSeo.siteName} />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content={locale} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={twitterTitle} />
+    <meta name="twitter:description" content={twitterDescription} />
+    <meta name="twitter:image" content={ogImage} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+    <!-- Google tag (gtag.js) -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-NQTVMJTHRG"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-NQTVMJTHRG");
+    </script>
+    <!-- Cloudflare Web Analytics -->
+    <script
+      is:inline
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token": "ad6397d1156b41e18617a46b369f1104"}'></script>
+    <!-- End Cloudflare Web Analytics -->
   </head>
   <body class="antialiased">
     <slot />

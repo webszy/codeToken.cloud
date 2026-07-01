@@ -8,6 +8,9 @@ interface Props {
 }
 
 const { copy } = Astro.props;
+const heroTitleParts = copy.hero.title.split(" for ");
+const heroTitlePrefix = heroTitleParts.length > 1 ? `${heroTitleParts[0]} for` : copy.hero.title;
+const heroTitleSuffix = heroTitleParts.length > 1 ? heroTitleParts.slice(1).join(" for ") : "";
 ---
 
 <section
@@ -22,9 +25,16 @@ const { copy } = Astro.props;
       </span>
     </div>
 
-    <h1 class="font-display text-[64px] font-bold leading-[1.1] tracking-normal text-foreground xl:text-[70px]">
-      {copy.hero.titleLine1}<br />
-      <span class="headline-gradient">{copy.hero.titleLine2}</span>
+    <h1 class="headline-gradient max-w-[760px] font-display text-[56px] font-bold leading-[1.1] tracking-normal xl:text-[62px]">
+      {heroTitlePrefix}
+      {
+        heroTitleSuffix && (
+          <>
+            <br />
+            <span>{heroTitleSuffix}</span>
+          </>
+        )
+      }
     </h1>
 
     <p class="mt-10 max-w-[650px] text-[20px] leading-[1.6] text-muted">
@@ -36,7 +46,7 @@ const { copy } = Astro.props;
         data-auth-cta
         data-auth-label-default={copy.hero.primaryCta}
         class="glow-button inline-flex h-[61px] items-center gap-3 rounded-lg bg-gradient-to-r from-cyan-400 to-blue-600 px-10 text-[18px] font-medium text-white transition hover:opacity-90"
-        href="https://codetoken.cloud/login"
+        href="https://api.codetoken.cloud/login"
         rel="noreferrer"
       >
         <span data-auth-cta-text>{copy.hero.primaryCta}</span>
@@ -46,7 +56,7 @@ const { copy } = Astro.props;
       </a>
       <a
         class="inline-flex h-[61px] items-center gap-3 rounded-lg border border-primary px-10 text-[18px] font-medium text-primary transition hover:bg-primary/10"
-        href="https://app.notion.com/p/webszy/CodeToken-38f306e2c52f80a8b056ca46d90111ff?source=copy_link"
+        href="#docs"
         rel="noreferrer"
       >
         {copy.hero.secondaryCta}

@@ -5,11 +5,24 @@ import Hero from "../components/Hero.astro";
 import AuthCtaScript from "../components/AuthCtaScript.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCopy } from "../i18n";
+import { siteSeo } from "../config/seo";
 
 const copy = getCopy("en");
 ---
 
-<BaseLayout title={copy.meta.title} description={copy.meta.description}>
+<BaseLayout
+  title={copy.meta.title}
+  description={copy.meta.description}
+  keywords={copy.meta.keywords}
+  canonical={copy.meta.canonical}
+  ogImage={siteSeo.ogImage}
+  lang="en"
+  locale={copy.meta.locale}
+  ogTitle={copy.meta.ogTitle}
+  ogDescription={copy.meta.ogDescription}
+  twitterTitle={copy.meta.twitterTitle}
+  twitterDescription={copy.meta.twitterDescription}
+>
   <div class="site-background">
     <Header copy={copy} />
     <main class="site-main-scroll">
