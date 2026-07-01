@@ -2,6 +2,7 @@
   (() => {
     const LOGIN_URL = "https://api.codetoken.cloud/login";
     const DASHBOARD_URL = "https://api.codetoken.cloud/dashboard";
+    const AUTH_CTA_SELECTOR = "[data-auth-cta]";
 
     const parseExpiry = (value) => {
       if (!value) return Number.NaN;
@@ -27,14 +28,16 @@
       }
     };
 
+    const getAuthTargetUrl = () => (hasValidSession() ? DASHBOARD_URL : LOGIN_URL);
+
+    const handleAuthCtaClick = () => {
+      window.location.href = getAuthTargetUrl();
+    };
+
     const updateAuthCtas = () => {
       const isAuthenticated = hasValidSession();
 
-      document.querySelectorAll("[data-auth-cta]").forEach((cta) => {
-        if (!(cta instanceof HTMLAnchorElement)) return;
-
-        cta.href = isAuthenticated ? DASHBOARD_URL : LOGIN_URL;
-
+      document.querySelectorAll(AUTH_CTA_SELECTOR).forEach((cta) => {
         const text = cta.querySelector("[data-auth-cta-text]");
         const label = isAuthenticated ? cta.dataset.authLabelWhenAuth : cta.dataset.authLabelDefault;
 
@@ -44,10 +47,25 @@
       });
     };
 
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", updateAuthCtas, { once: true });
-    } else {
+    const bindAuthCtaClicks = () => {
+      document.querySelectorAll(AUTH_CTA_SELECTOR).forEach((cta) => {
+        if (!(cta instanceof HTMLButtonElement)) return;
+        if (cta.dataset.authCtaBound === "true") return;
+
+        cta.dataset.authCtaBound = "true";
+        cta.addEventListener("click", handleAuthCtaClick);
+      });
+    };
+
+    const initializeAuthCtas = () => {
       updateAuthCtas();
+      bindAuthCtaClicks();
+    };
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initializeAuthCtas, { once: true });
+    } else {
+      initializeAuthCtas();
     }
 
     window.addEventListener("storage", updateAuthCtas);

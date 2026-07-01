@@ -148,6 +148,11 @@ select {
   animation: cta-arrow-slide 1.15s ease-in-out infinite;
 }
 
+.hero-logo-heartbeat {
+  animation: hero-heartbeat 1.8s ease-in-out infinite;
+  transform-origin: center;
+}
+
 @keyframes hero-spin {
   to {
     transform: rotate(360deg);
@@ -165,8 +170,32 @@ select {
   }
 }
 
+@keyframes hero-heartbeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  14% {
+    transform: scale(1.06);
+  }
+
+  28% {
+    transform: scale(1);
+  }
+
+  42% {
+    transform: scale(1.04);
+  }
+
+  70% {
+    transform: scale(1);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .cta-arrow-motion {
+  .cta-arrow-motion,
+  .hero-logo-heartbeat {
     animation: none;
   }
 }

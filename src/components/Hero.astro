@@ -42,18 +42,17 @@ const heroTitleSuffix = heroTitleParts.length > 1 ? heroTitleParts.slice(1).join
     </p>
 
     <div class="mb-[58px] mt-[52px] flex flex-wrap gap-5">
-      <a
+      <button
         data-auth-cta
         data-auth-label-default={copy.hero.primaryCta}
         class="glow-button inline-flex h-[61px] items-center gap-3 rounded-lg bg-gradient-to-r from-cyan-400 to-blue-600 px-10 text-[18px] font-medium text-white transition hover:opacity-90"
-        href="https://api.codetoken.cloud/login"
-        rel="noreferrer"
+        type="button"
       >
         <span data-auth-cta-text>{copy.hero.primaryCta}</span>
         <svg class="cta-arrow-motion h-5 w-5" viewBox="0 0 20 20" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
           <path d="M5 10H15M11 6L15 10L11 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
-      </a>
+      </button>
       <a
         class="inline-flex h-[61px] items-center gap-3 rounded-lg border border-primary px-10 text-[18px] font-medium text-primary transition hover:bg-primary/10"
         href="#docs"
@@ -87,8 +86,8 @@ const heroTitleSuffix = heroTitleParts.length > 1 ? heroTitleParts.slice(1).join
         </defs>
       </svg>
       <div class="absolute inset-0 flex flex-col items-center justify-center">
-        <div class="mb-8 drop-shadow-[0_0_24px_rgba(34,211,238,0.8)]">
-          <Logo brandName="" size="xl" />
+        <div class="hero-logo-heartbeat mb-8 drop-shadow-[0_0_24px_rgba(34,211,238,0.8)]">
+          <Logo brandName="" size="xl" staticLogo />
         </div>
         <div class="flex items-center gap-2 font-mono text-[18px] tracking-[0.12em] text-primary">
           <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">

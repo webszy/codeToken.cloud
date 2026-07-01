@@ -2,9 +2,11 @@
 interface Props {
   brandName: string;
   size?: "sm" | "md" | "xl";
+  authCta?: boolean;
+  staticLogo?: boolean;
 }
 
-const { brandName, size = "md" } = Astro.props;
+const { brandName, size = "md", authCta = false, staticLogo = false } = Astro.props;
 const iconClass = {
   sm: "h-6 w-6",
   md: "h-8 w-8",
@@ -14,13 +16,39 @@ const textClass = size === "sm" ? "text-[40px]" : "text-[32px]";
 const label = brandName || "CodeToken Cloud mark";
 ---
 
-<a href="/" class="group flex items-center gap-3" aria-label={label}>
-  <img class={iconClass} src="/logo.svg" alt="" aria-hidden="true" loading="eager" />
-  {
-    brandName && (
-      <span class:list={["brand-gradient font-display font-bold leading-none tracking-normal", textClass]}>
-        {brandName}
-      </span>
-    )
-  }
-</a>
+{
+  staticLogo ? (
+    <div class="group flex items-center gap-3" aria-label={label}>
+      <img class={iconClass} src="/logo.svg" alt="" aria-hidden="true" loading="eager" />
+      {
+        brandName && (
+          <span class:list={["brand-gradient font-display font-bold leading-none tracking-normal", textClass]}>
+            {brandName}
+          </span>
+        )
+      }
+    </div>
+  ) : authCta ? (
+    <button data-auth-cta class="group flex items-center gap-3 border-0 bg-transparent p-0" type="button" aria-label={label}>
+      <img class={iconClass} src="/logo.svg" alt="" aria-hidden="true" loading="eager" />
+      {
+        brandName && (
+          <span class:list={["brand-gradient font-display font-bold leading-none tracking-normal", textClass]}>
+            {brandName}
+          </span>
+        )
+      }
+    </button>
+  ) : (
+    <a href="/" class="group flex items-center gap-3" aria-label={label}>
+      <img class={iconClass} src="/logo.svg" alt="" aria-hidden="true" loading="eager" />
+      {
+        brandName && (
+          <span class:list={["brand-gradient font-display font-bold leading-none tracking-normal", textClass]}>
+            {brandName}
+          </span>
+        )
+      }
+    </a>
+  )
+}
