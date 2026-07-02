@@ -22,7 +22,7 @@ export const siteSeo = {
   ogTitle: "CodeToken Cloud - OpenAI, Codex and Claude API Gateway",
   ogDescription:
     "Connect OpenAI, Claude, Codex workflows, and other AI models through one unified OpenAI-compatible API gateway.",
-  twitterTitle: "CodeToken Cloud - AI API Gateway for OpenAI, Codex and Claude",
+  twitterTitle: "CodeToken Cloud - AI API Gateway For Codex and Claude",
   twitterDescription:
     "A unified AI API gateway for developers building with OpenAI, Codex, Claude, agents, and automation workflows."
 };

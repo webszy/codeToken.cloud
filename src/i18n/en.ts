@@ -47,7 +47,7 @@ export const en = {
     title: "One Gateway for Codex/Claude and more tools",
     description:
       "CodeToken Cloud is an OpenAI-compatible AI API gateway for developers building with OpenAI, Codex workflows, Claude integrations, agents, automation scripts, and multi-model AI applications.",
-    primaryCta: "Get API Access",
+    primaryCta: "Start Building",
     secondaryCta: "View API Docs",
     graphicStatus: "ACTIVE"
   },

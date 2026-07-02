@@ -8,9 +8,6 @@ interface Props {
 }
 
 const { copy } = Astro.props;
-const heroTitleParts = copy.hero.title.split(" for ");
-const heroTitlePrefix = heroTitleParts.length > 1 ? `${heroTitleParts[0]} for` : copy.hero.title;
-const heroTitleSuffix = heroTitleParts.length > 1 ? heroTitleParts.slice(1).join(" for ") : "";
 ---
 
 <section
@@ -26,15 +23,7 @@ const heroTitleSuffix = heroTitleParts.length > 1 ? heroTitleParts.slice(1).join
     </div>
 
     <h1 class="headline-gradient max-w-[760px] font-display text-[56px] font-bold leading-[1.1] tracking-normal xl:text-[62px]">
-      {heroTitlePrefix}
-      {
-        heroTitleSuffix && (
-          <>
-            <br />
-            <span>{heroTitleSuffix}</span>
-          </>
-        )
-      }
+      {copy.hero.title}
     </h1>
 
     <p class="mt-10 max-w-[650px] text-[20px] leading-[1.6] text-muted">
@@ -55,7 +44,7 @@ const heroTitleSuffix = heroTitleParts.length > 1 ? heroTitleParts.slice(1).join
       </button>
       <a
         class="inline-flex h-[61px] items-center gap-3 rounded-lg border border-primary px-10 text-[18px] font-medium text-primary transition hover:bg-primary/10"
-        href="#docs"
+        href="https://app.notion.com/p/webszy/CodeToken-38f306e2c52f80a8b056ca46d90111ff?source=copy_link"
         rel="noreferrer"
       >
         {copy.hero.secondaryCta}

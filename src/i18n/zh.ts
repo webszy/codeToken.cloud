@@ -44,7 +44,7 @@ export const zh = {
     title: "一个网关，连接 Codex 与 Claude",
     description:
       "CodeToken Cloud 是面向开发者、Codex 工作流、Claude 集成、Agent、自动化脚本和多模型 AI 应用的 OpenAI 兼容 API 网关。",
-    primaryCta: "获取 API 访问",
+    primaryCta: "开始体验吧",
     secondaryCta: "查看文档",
     graphicStatus: "ACTIVE"
   },
