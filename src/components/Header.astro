@@ -9,10 +9,10 @@ interface Props {
 const { copy } = Astro.props;
 
 const navItems = [
-  { label: copy.nav.features, href: "#features", active: true },
-  { label: copy.nav.pricing, href: "#pricing", active: false },
-  { label: copy.nav.radar, href: "#radar", active: false },
-  { label: copy.nav.status, href: "#status", active: false }
+  { label: copy.nav.features, href: "#features", target: "#features" },
+  { label: copy.nav.pricing, href: "#pricing", target: "#priceBegin" },
+  { label: copy.nav.radar, href: "#radar", target: "#radarBegin" },
+  { label: copy.nav.status, href: "#status", target: "#statusBegin" }
 ];
 ---
 
@@ -25,10 +25,13 @@ const navItems = [
         navItems.map((item) => (
           <a
             class:list={[
-              "pb-1 text-[18px] font-medium leading-none transition-colors duration-300 hover:text-primary",
-              item.active ? "border-b-2 border-primary text-primary" : "text-muted"
+              "border-b-2 pb-1 text-[18px] font-medium leading-none transition-colors duration-300 hover:text-primary",
+              item.href === "#features" ? "border-primary text-primary" : "border-transparent text-muted"
             ]}
+            data-nav-link
+            data-nav-target={item.target}
             href={item.href}
+            aria-current={item.href === "#features" ? "page" : undefined}
           >
             {item.label}
           </a>
@@ -57,3 +60,139 @@ const navItems = [
     </div>
   </div>
 </header>
+
+<script>
+  const activeClasses = ["border-primary", "text-primary"];
+  const inactiveClasses = ["border-transparent", "text-muted"];
+  const navLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>("[data-nav-link]"));
+  const scrollContainer = document.querySelector<HTMLElement>(".site-main-scroll");
+  const scrollTopPadding = 20;
+  const snapScrollLockMs = 850;
+
+  const setActiveNav = (targetId: string) => {
+    navLinks.forEach((link) => {
+      const isActive = link.dataset.navTarget === targetId;
+      link.classList.toggle(activeClasses[0], isActive);
+      link.classList.toggle(activeClasses[1], isActive);
+      link.classList.toggle(inactiveClasses[0], !isActive);
+      link.classList.toggle(inactiveClasses[1], !isActive);
+
+      if (isActive) {
+        link.setAttribute("aria-current", "page");
+      } else {
+        link.removeAttribute("aria-current");
+      }
+    });
+  };
+
+  if (scrollContainer && navLinks.length > 0) {
+    const sections = navLinks
+      .map((link) => {
+        const id = link.dataset.navTarget || "";
+        const element = document.querySelector<HTMLElement>(id);
+        const href = link.getAttribute("href") || id;
+        return element ? { id, element, href } : null;
+      })
+      .filter((section): section is { id: string; element: HTMLElement; href: string } => Boolean(section));
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const desktopWheelSnap = window.matchMedia("(min-width: 900px)");
+
+    const getTargetScrollTop = (element: HTMLElement) => {
+      const containerTop = scrollContainer.getBoundingClientRect().top;
+      const targetTop = element.getBoundingClientRect().top;
+      return scrollContainer.scrollTop + targetTop - containerTop - scrollTopPadding;
+    };
+
+    const scrollToSection = (section: { id: string; element: HTMLElement; href: string }, behavior: ScrollBehavior = "smooth") => {
+      setActiveNav(section.id);
+      scrollContainer.scrollTo({
+        top: getTargetScrollTop(section.element),
+        behavior: prefersReducedMotion.matches ? "auto" : behavior
+      });
+      history.replaceState(null, "", section.href);
+    };
+
+    const getClosestSectionIndex = () => {
+      let closestIndex = 0;
+      let closestDistance = Number.POSITIVE_INFINITY;
+
+      sections.forEach((section, index) => {
+        const distance = Math.abs(getTargetScrollTop(section.element) - scrollContainer.scrollTop);
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = index;
+        }
+      });
+
+      return closestIndex;
+    };
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", (event) => {
+        const targetId = link.dataset.navTarget;
+        const section = sections.find((item) => item.id === targetId);
+        if (!section) return;
+
+        event.preventDefault();
+        scrollToSection(section);
+      });
+    });
+
+    let ticking = false;
+    let wheelLocked = false;
+
+    const syncActiveFromScroll = () => {
+      const containerTop = scrollContainer.getBoundingClientRect().top;
+      const activationOffset = 140;
+      let activeId = sections[0]?.id || "#features";
+
+      sections.forEach((section) => {
+        const top = section.element.getBoundingClientRect().top - containerTop;
+        if (top <= activationOffset) {
+          activeId = section.id;
+        }
+      });
+
+      setActiveNav(activeId);
+      ticking = false;
+    };
+
+    scrollContainer.addEventListener(
+      "scroll",
+      () => {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(syncActiveFromScroll);
+      },
+      { passive: true }
+    );
+
+    syncActiveFromScroll();
+
+    scrollContainer.addEventListener(
+      "wheel",
+      (event) => {
+        if (!desktopWheelSnap.matches || prefersReducedMotion.matches || sections.length < 2) return;
+        if (Math.abs(event.deltaY) < 8) return;
+
+        const currentIndex = getClosestSectionIndex();
+        const nextIndex = event.deltaY > 0 ? Math.min(currentIndex + 1, sections.length - 1) : Math.max(currentIndex - 1, 0);
+
+        if (nextIndex === currentIndex) return;
+
+        event.preventDefault();
+
+        if (wheelLocked) return;
+
+        wheelLocked = true;
+        scrollToSection(sections[nextIndex]);
+
+        window.setTimeout(() => {
+          wheelLocked = false;
+        }, snapScrollLockMs);
+      },
+      { passive: false }
+    );
+  }
+</script>

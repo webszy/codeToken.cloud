@@ -19,10 +19,10 @@
 
     const hasValidSession = () => {
       try {
-        const authUser = window.localStorage.getItem("auth_user");
+        const authToken = window.localStorage.getItem("auth_token");
         const expiresAt = parseExpiry(window.localStorage.getItem("token_expires_at"));
 
-        return Boolean(authUser) && Number.isFinite(expiresAt) && expiresAt > Date.now();
+        return Boolean(authToken) && Number.isFinite(expiresAt) && expiresAt > Date.now();
       } catch {
         return false;
       }

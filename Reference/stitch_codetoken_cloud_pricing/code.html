@@ -1,0 +1,380 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;600&amp;family=Geist:wght@400;600&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">try{
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-bright": "#343a3c",
+                        "surface-container-highest": "#2f3638",
+                        "on-surface": "#dde4e5",
+                        "surface-container": "#1a2122",
+                        "outline": "#859397",
+                        "surface-container-lowest": "#090f11",
+                        "on-primary-fixed": "#001f25",
+                        "inverse-primary": "#006877",
+                        "on-primary-fixed-variant": "#004e5a",
+                        "on-tertiary-fixed-variant": "#6900b3",
+                        "inverse-on-surface": "#2b3233",
+                        "tertiary": "#ecd3ff",
+                        "background": "#0e1416",
+                        "surface-dim": "#0e1416",
+                        "on-primary-container": "#005763",
+                        "primary-container": "#22d3ee",
+                        "on-secondary": "#002e6a",
+                        "on-error": "#690005",
+                        "on-primary": "#00363e",
+                        "secondary-container": "#0566d9",
+                        "on-secondary-container": "#e6ecff",
+                        "surface": "#0e1416",
+                        "error": "#ffb4ab",
+                        "on-tertiary-container": "#730bc1",
+                        "tertiary-fixed-dim": "#ddb7ff",
+                        "on-surface-variant": "#bbc9cd",
+                        "surface-container-low": "#161d1e",
+                        "secondary-fixed": "#d8e2ff",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#2c0051",
+                        "surface-variant": "#2f3638",
+                        "primary-fixed-dim": "#2fd9f4",
+                        "on-secondary-fixed-variant": "#004395",
+                        "on-secondary-fixed": "#001a42",
+                        "primary": "#8aebff",
+                        "outline-variant": "#3c494c",
+                        "primary-fixed": "#a2eeff",
+                        "tertiary-container": "#d9b0ff",
+                        "secondary": "#adc6ff",
+                        "surface-tint": "#2fd9f4",
+                        "on-background": "#dde4e5",
+                        "inverse-surface": "#dde4e5",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "on-tertiary": "#490080",
+                        "error-container": "#93000a",
+                        "tertiary-fixed": "#f0dbff",
+                        "surface-container-high": "#242b2d"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.125rem",
+                        lg: "0.25rem",
+                        xl: "0.5rem",
+                        full: "0.75rem"
+                    },
+                    spacing: {
+                        "margin-mobile": "16px",
+                        "container-max": "1280px",
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "unit": "4px"
+                    },
+                    fontFamily: {
+                        "headline-lg-mobile": ["Sora"],
+                        "code-sm": ["JetBrains Mono"],
+                        "body-md": ["Geist"],
+                        "headline-lg": ["Sora"],
+                        "display-lg": ["Sora"],
+                        "label-caps": ["JetBrains Mono"]
+                    },
+                    fontSize: {
+                        "headline-lg-mobile": ["24px", { lineHeight: "1.2", fontWeight: "600" }],
+                        "code-sm": ["14px", { lineHeight: "1.5", fontWeight: "400" }],
+                        "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+                        "headline-lg": ["32px", { lineHeight: "1.2", fontWeight: "600" }],
+                        "display-lg": ["56px", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "label-caps": ["12px", { lineHeight: "1", letterSpacing: "0.1em", fontWeight: "600" }]
+                    }
+                }
+            }
+        }
+    }catch(_e){}</script></head><body class="text-on-surface font-body-md antialiased relative min-h-screen flex flex-col bg-background circuit-bg">
+<!-- TopNavBar (Shared Component) -->
+<nav class="fixed top-0 w-full z-50 bg-surface/60 backdrop-blur-xl border-b border-outline-variant/30 shadow-[0_0_15px_rgba(47,217,244,0.1)]">
+<div class="flex justify-between items-center px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="font-headline-lg text-headline-lg font-bold bg-gradient-to-r from-primary to-tertiary bg-clip-text text-transparent flex items-center gap-2"><img alt="CodeToken Cloud" class="h-8 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAG6yE-L3se2JlRUYBkT_l9zG3vDwqp0ZKC2WtH2Msdz7O9QEKm9Czb6F-75-UNwZXHwe1hCXWbPw2vuauX7U8X5gOa6LjDzax1OU40bih_6FKzM6Jz1RBtjdhG_IyZY-jdMolKqN9R-KzrpTxNde7oA-BSuwkKGZ3UabjHhQFtcDU7VgV4dYhQnctZZtRQycluJc8e31Xjp1zNGRaV01ebFTUJhnab1TGndO1SLvPe--7ZtBoRWyFs2QP-jOw5f-eXA"></div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Features</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Docs</a>
+<a class="text-primary border-b-2 border-primary pb-1 font-semibold" href="#">Pricing</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Status</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Blog</a>
+</div>
+<div class="flex items-center space-x-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors duration-300">
+<span class="material-symbols-outlined">dark_mode</span>
+</button>
+<a class="hidden md:flex items-center gap-2 px-6 py-2 rounded-lg bg-gradient-to-r from-primary to-tertiary text-on-primary-fixed font-semibold hover:opacity-90 transition-opacity shadow-[0_0_15px_rgba(34,211,238,0.5)]" href="#">
+                    Get API Access
+                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+<button class="md:hidden text-on-surface-variant">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow pt-32 pb-24 relative hex-bg">
+<!-- Background Ambient Glow -->
+<div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
+<div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-tertiary/10 rounded-full blur-[120px] pointer-events-none"></div>
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop relative z-10">
+<!-- Header Section -->
+<div class="text-center mb-16 space-y-6 max-w-3xl mx-auto">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/30 bg-primary/10 text-primary font-label-caps text-label-caps uppercase tracking-widest">
+<span id="priceBegin" class="w-2 h-2 rounded-full bg-primary animate-pulse shadow-[0_0_8px_rgba(34,211,238,0.8)]"></span>
+                    Pricing
+                </div>
+<h1 class="font-display-lg text-display-lg bg-gradient-to-r from-white via-primary to-tertiary bg-clip-text text-transparent pb-2">
+                    Pay as You Go Pricing
+                </h1>
+<p class="text-on-surface-variant text-lg leading-relaxed">
+                    Recharge credits and use them across OpenAI, Codex, Claude, and multi-model AI workflows. No monthly subscription required.
+                </p>
+</div>
+<!-- Pricing Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column: Model Pricing -->
+<div class="lg:col-span-7 space-y-6">
+<!-- Tabs -->
+
+<!-- Data Table -->
+<div class="glass-panel rounded-xl overflow-hidden neon-border">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant/30 bg-surface-container-low/50 font-label-caps text-label-caps text-on-surface-variant uppercase">
+<th class="py-4 px-6 font-semibold">Model</th>
+<th class="py-4 px-6 font-semibold">Official Input<br><span class="text-[10px] lowercase text-outline">/1M tokens</span></th>
+<th class="py-4 px-6 font-semibold">Cached Input<br><span class="text-[10px] lowercase text-outline">/1M tokens</span></th>
+<th class="py-4 px-6 font-semibold">Official Output<br><span class="text-[10px] lowercase text-outline">/1M tokens</span></th>
+<th class="py-4 px-6 font-semibold">Avg Official<br><span class="text-[10px] lowercase text-outline">/1M tokens</span></th>
+<th class="py-4 px-6 font-semibold text-primary">CodeToken<br><span class="text-[10px] lowercase text-outline">/1M tokens</span></th>
+</tr>
+</thead>
+<tbody class="font-code-sm text-code-sm divide-y divide-outline-variant/20" style="transition: opacity 0.15s ease-in-out; opacity: 1;" data-stitch-orig-opacity="1">
+                <tr class="hover:bg-surface-container-highest/30 transition-colors">
+                    <td class="py-4 px-6 font-semibold text-on-surface">GPT-5.5</td>
+                    <td class="py-4 px-6 text-on-surface-variant">$5.00</td>
+                    <td class="py-4 px-6 text-on-surface-variant">$0.50</td>
+                    <td class="py-4 px-6 text-on-surface-variant">$30.00</td>
+                    <td class="py-4 px-6 text-on-surface-variant line-through opacity-50">$6.76</td>
+                    <td class="py-4 px-6 font-bold text-primary glow-text">$1.01</td>
+                </tr>
+            
+                <tr class="hover:bg-surface-container-highest/30 transition-colors">
+                    <td class="py-4 px-6 font-semibold text-on-surface">Claude Opus 4.8</td>
+                    <td class="py-4 px-6 text-on-surface-variant">$15.00</td>
+                    <td class="py-4 px-6 text-on-surface-variant">$1.50</td>
+                    <td class="py-4 px-6 text-on-surface-variant">$75.00</td>
+                    <td class="py-4 px-6 text-on-surface-variant line-through opacity-50">$15.82</td>
+                    <td class="py-4 px-6 font-bold text-primary glow-text">$2.37</td>
+                </tr>
+            </tbody>
+</table>
+</div>
+</div>
+<!-- Assumptions Panel -->
+<div class="glass-panel rounded-lg p-4 flex flex-wrap items-center justify-between gap-4 border border-outline-variant/20 bg-surface-container-lowest/80">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-sm">info</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Assumptions</span>
+</div>
+<div class="flex flex-wrap gap-4 font-code-sm text-code-sm text-on-surface-variant">
+<div class="">Input: <span class="text-on-surface font-semibold">80%</span></div>
+<div class="">Output: <span class="text-on-surface font-semibold">20%</span></div>
+<div class="">Cache Hit: <span class="text-on-surface font-semibold">90%</span></div>
+<div class="">Multiplier: <span class="text-tertiary font-semibold">0.15x</span></div>
+</div>
+<div class="w-full text-xs text-outline mt-2 pt-2 border-t border-outline-variant/20">
+                            Avg Official = (Input * % + Output * %) | CodeToken = Avg Official * Multiplier (adjusted for cache)
+                        </div>
+</div>
+</div>
+<!-- Right Column: Credit Calculator -->
+<div class="lg:col-span-5 relative">
+<!-- Glowing hex background accent -->
+<div class="absolute inset-0 bg-[url('__PRESERVED_IMG_0__')] opacity-50 mix-blend-screen pointer-events-none z-0"></div>
+<div class="glass-panel rounded-xl p-6 lg:p-8 neon-border active h-full flex flex-col relative z-10 bg-surface-container/60">
+    <div class="flex items-start justify-between mb-2">
+        <div>
+            <h3 class="font-headline-lg-mobile text-headline-lg-mobile font-semibold text-on-surface flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">compare_arrows</span> Model Comparison
+            </h3>
+            <p class="text-on-surface-variant text-sm mt-1">See how much more token capacity you get with CodeToken.</p>
+        </div>
+        <div class="flex space-x-1 mt-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span>
+            <span class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span>
+            <span class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span>
+        </div>
+    </div>
+    
+    <div class="space-y-6 flex-grow mt-6">
+        <div class="flex items-end gap-4">
+            <div class="flex-grow space-y-2">
+                <label class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider block">Recharge Amount</label>
+                <div class="relative group">
+                    <div class="absolute -inset-0.5 bg-gradient-to-r from-primary to-tertiary rounded-lg blur opacity-30 group-hover:opacity-60 transition duration-500"></div>
+                    <input class="relative w-full bg-surface-container-lowest border border-outline-variant/50 rounded-lg px-4 py-3 font-code-sm text-code-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" type="text" value="$ 10.00">
+                </div>
+            </div>
+            <button class="py-3 px-6 rounded-lg bg-gradient-to-r from-primary to-tertiary text-on-primary-fixed font-semibold font-body-md shadow-[0_0_15px_rgba(34,211,238,0.4)] hover:shadow-[0_0_25px_rgba(217,176,255,0.6)] transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 h-[48px]">Calculate</button>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-5 gap-6">
+            <div class="sm:col-span-3 space-y-4">
+                <div class="bg-surface-container-lowest/80 rounded-lg p-4 border border-outline-variant/30 space-y-3">
+                    <div class="text-[10px] font-label-caps text-outline uppercase tracking-widest border-b border-outline-variant/10 pb-1">GPT-5.5</div>
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="text-on-surface-variant font-code-sm">Official API</span>
+                        <span class="font-code-sm text-on-surface">1.48M</span>
+                    </div>
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="text-on-surface-variant font-code-sm flex items-center gap-1"><span class="material-symbols-outlined text-[10px] text-primary">bolt</span> CodeToken</span>
+                        <span class="font-code-sm font-bold text-primary glow-text">9.86M</span>
+                    </div>
+                    <div class="flex justify-between items-center text-xs pt-1 border-t border-outline-variant/10">
+                        <span class="text-on-surface-variant font-code-sm">Savings</span>
+                        <span class="font-code-sm text-tertiary">85%</span>
+                    </div>
+                </div>
+                
+                <div class="bg-surface-container-lowest/80 rounded-lg p-4 border border-outline-variant/30 space-y-3">
+                    <div class="text-[10px] font-label-caps text-outline uppercase tracking-widest border-b border-outline-variant/10 pb-1">Claude Opus</div>
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="text-on-surface-variant font-code-sm">Official API</span>
+                        <span class="font-code-sm text-on-surface">0.63M</span>
+                    </div>
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="text-on-surface-variant font-code-sm flex items-center gap-1"><span class="material-symbols-outlined text-[10px] text-tertiary">bolt</span> CodeToken</span>
+                        <span class="font-code-sm font-bold text-tertiary glow-magenta">4.22M</span>
+                    </div>
+                    <div class="flex justify-between items-center text-xs pt-1 border-t border-outline-variant/10">
+                        <span class="text-on-surface-variant font-code-sm">Savings</span>
+                        <span class="font-code-sm text-primary">85%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sm:col-span-2 flex flex-col justify-center">
+                <div class="rounded-xl border border-primary/20 p-4 text-center flex flex-col h-full justify-center shadow-[0_0_20px_rgba(34,211,238,0.15)] relative overflow-hidden bg-surface-container-lowest/80">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-tertiary"></div>
+                    <div class="text-[10px] text-on-surface-variant mb-1">Recharge Amount: $10.00</div>
+                    <div class="text-[10px] uppercase text-outline mb-0.5 font-label-caps">CodeToken Cloud</div>
+                    <div class="font-display-lg text-3xl font-bold text-primary glow-text mb-2">9.86M</div>
+                    
+                    <div class="space-y-1.5 text-sm">
+                        <div class="bg-surface-container/50 py-1 px-2 rounded border border-outline-variant/20 flex justify-between items-center text-[10px]">
+                            <span class="text-on-surface-variant">Official API</span>
+                            <span class="text-on-surface font-code-sm">1.48M</span>
+                        </div>
+                        <div class="text-primary font-semibold text-xs">6.67× More Capacity</div>
+                        <div class="text-tertiary text-[10px]">Save about 85%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <p class="text-[10px] text-outline mt-6 italic border-t border-outline-variant/10 pt-4">* Based on 80% input, 20% output, 90% input cache hit rate, and CodeToken pricing at 0.15× official pricing.</p>
+</div>
+</div>
+</div>
+</div>
+<script>
+(function() {
+    const gptTab = document.querySelector('main .flex.space-x-2.border-b button:nth-child(1)');
+    const claudeTab = document.querySelector('main .flex.space-x-2.border-b button:nth-child(2)');
+    const tableBody = document.querySelector('table tbody');
+
+    const gptData = [
+        { model: 'GPT-5.5', input: '$5.00', cached: '$0.50', output: '$30.00', avg: '$6.76', code: '$1.01' },
+        { model: 'GPT-5.5 Long', input: '$10.00', cached: '$1.00', output: '$45.00', avg: '$10.52', code: '$1.58' }
+    ];
+
+    const claudeData = [
+        { model: 'Claude 3.5 Sonnet', input: '$3.00', cached: '$0.30', output: '$15.00', avg: '$3.84', code: '$0.58' },
+        { model: 'Claude 3.5 Opus', input: '$15.00', cached: '$1.50', output: '$75.00', avg: '$18.90', code: '$2.84' },
+        { model: 'Claude 3.5 Haiku', input: '$0.25', cached: '$0.03', output: '$1.25', avg: '$0.32', code: '$0.05' }
+    ];
+
+    function updateTable(data) {
+        tableBody.style.opacity = '0';
+        setTimeout(() => {
+            tableBody.innerHTML = data.map(row => `
+                <tr class="hover:bg-surface-container-highest/30 transition-colors">
+                    <td class="py-4 px-6 font-semibold text-on-surface">${row.model}</td>
+                    <td class="py-4 px-6 text-on-surface-variant">${row.input}</td>
+                    <td class="py-4 px-6 text-on-surface-variant">${row.cached}</td>
+                    <td class="py-4 px-6 text-on-surface-variant">${row.output}</td>
+                    <td class="py-4 px-6 text-on-surface-variant line-through opacity-50">${row.avg}</td>
+                    <td class="py-4 px-6 font-bold text-primary glow-text">${row.code}</td>
+                </tr>
+            `).join('');
+            tableBody.style.opacity = '1';
+        }, 150);
+    }
+
+    function setActiveTab(active, inactive) {
+        if (!active || !inactive) return;
+        active.classList.add('text-primary', 'border-b-2', 'border-primary', 'glow-text');
+        active.classList.remove('text-on-surface-variant', 'font-medium');
+        active.classList.add('font-semibold');
+        
+        inactive.classList.remove('text-primary', 'border-b-2', 'border-primary', 'glow-text', 'font-semibold');
+        inactive.classList.add('text-on-surface-variant', 'font-medium');
+    }
+
+    if (gptTab) gptTab.addEventListener('click', () => {
+        setActiveTab(gptTab, claudeTab);
+        updateTable(gptData);
+    });
+
+    if (claudeTab) claudeTab.addEventListener('click', () => {
+        setActiveTab(claudeTab, gptTab);
+        updateTable(claudeData);
+    });
+
+    if (tableBody) tableBody.style.transition = 'opacity 0.15s ease-in-out';
+})();
+</script></main>
+<!-- Footer (Shared Component) -->
+<footer class="bg-surface-container-lowest w-full pt-20 pb-10 border-t border-outline-variant/20">
+<div class="grid grid-cols-2 md:grid-cols-5 gap-gutter px-margin-desktop max-w-container-max mx-auto font-body-md text-body-md">
+<div class="col-span-2 md:col-span-2 mb-8 md:mb-0">
+<div class="font-headline-lg text-headline-lg font-bold text-on-surface mb-4 flex items-center gap-2"><img alt="CodeToken Cloud" class="h-8 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhr1_wxxkh4OIAkTIVUE-ubkDBU1LRrdzW4FlYFG6I0ry00Chjeinmf4SyhvkrGhJ-xj1HyuMEXmL0eU-6cH0M2xnaiXQchPTidW0_nMOOEetsUUtXjqicIGUad6el4is3gGtlGyDLe7moa5uHVVPQ1RWmd7tZXqIHT8kRLtotqIwMv2pthS4bPBR9B5oOoF-x9nS0RZnoj411cnOCkBcAkgM-JpfbJ2eaWLTJal7_YWtNc6Pmyu3brqhwWWWtptx7bg"></div>
+<p class="text-on-surface-variant text-sm max-w-xs mt-4">
+                    The AI API gateway built for developers. One endpoint for multiple models, blazing fast, and cost-effective.
+                </p>
+</div>
+<div>
+<h4 class="font-semibold text-on-surface mb-4">Product</h4>
+<ul class="space-y-2">
+<li class=""><a class="text-on-surface-variant hover:text-primary underline transition-all" href="#">Features</a></li>
+<li class=""><a class="text-on-surface-variant hover:text-primary underline transition-all" href="#">Pricing</a></li>
+<li class=""><a class="text-on-surface-variant hover:text-primary underline transition-all" href="#">Status</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-semibold text-on-surface mb-4">Developers</h4>
+<ul class="space-y-2">
+<li class=""><a class="text-on-surface-variant hover:text-primary underline transition-all" href="#">Docs</a></li>
+<li class=""><a class="text-on-surface-variant hover:text-primary underline transition-all" href="#">API Reference</a></li>
+<li class=""><a class="text-on-surface-variant hover:text-primary underline transition-all" href="#">SDKs</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-semibold text-on-surface mb-4">Company</h4>
+<ul class="space-y-2">
+<li class=""><a class="text-on-surface-variant hover:text-primary underline transition-all" href="#">Blog</a></li>
+<li class=""><a class="text-on-surface-variant hover:text-primary underline transition-all" href="#">About Us</a></li>
+<li class=""><a class="text-on-surface-variant hover:text-primary underline transition-all" href="#">Contact</a></li>
+<li class=""><a class="text-on-surface-variant hover:text-primary underline transition-all" href="#">Privacy Policy</a></li>
+<li class=""><a class="text-on-surface-variant hover:text-primary underline transition-all" href="#">Terms of Service</a></li>
+</ul>
+</div>
+</div>
+<div class="border-t border-outline-variant/10 mt-12 pt-8 px-margin-desktop max-w-container-max mx-auto text-center md:text-left flex flex-col md:flex-row justify-between items-center text-sm text-outline">
+<p class="">© 2025 CodeToken Cloud, Inc. All rights reserved.</p>
+<div class="flex space-x-4 mt-4 md:mt-0">
+<a class="hover:text-primary transition-colors" href="#"></a></div></div></footer>
+
+</body></html>

@@ -1,0 +1,247 @@
+---
+const scoreCards = [
+  {
+    model: "GPT-5.5 xhigh",
+    score: "4.8",
+    color: "green",
+    glow: "rgba(74,222,128,0.3)"
+  },
+  {
+    model: "GPT-5.5 high",
+    score: "6.6",
+    color: "blue",
+    glow: "rgba(96,165,250,0.3)"
+  },
+  {
+    model: "GPT-5.5 medium",
+    score: "6.7",
+    color: "orange",
+    glow: "rgba(251,146,60,0.3)"
+  },
+  {
+    model: "GPT-5.4 xhigh",
+    score: "5.3",
+    color: "purple",
+    glow: "rgba(192,132,252,0.3)"
+  },
+  {
+    model: "GPT-5.4 high",
+    score: "5.4",
+    color: "red",
+    glow: "rgba(248,113,113,0.3)"
+  }
+];
+
+const metricRows = [
+  {
+    model: "GPT-5.5 high",
+    iq: "6.6",
+    pass: "92.1%",
+    cost: "$0.018",
+    costDetail: "($0.003 / $0.015)",
+    time: "2.41",
+    tokens: "1,842",
+    cacheHit: "78.4%",
+    color: "blue"
+  },
+  {
+    model: "GPT-5.5 medium",
+    iq: "6.7",
+    pass: "89.3%",
+    cost: "$0.010",
+    costDetail: "($0.002 / $0.008)",
+    time: "1.87",
+    tokens: "1,276",
+    cacheHit: "72.1%",
+    color: "orange"
+  },
+  {
+    model: "GPT-5.5 xhigh",
+    iq: "4.8",
+    pass: "85.7%",
+    cost: "$0.045",
+    costDetail: "($0.008 / $0.037)",
+    time: "3.62",
+    tokens: "2,731",
+    cacheHit: "81.2%",
+    color: "green"
+  },
+  {
+    model: "GPT-5.4 high",
+    iq: "5.4",
+    pass: "83.6%",
+    cost: "$0.008",
+    costDetail: "($0.002 / $0.006)",
+    time: "1.65",
+    tokens: "1,103",
+    cacheHit: "69.3%",
+    color: "red"
+  },
+  {
+    model: "GPT-5.4 xhigh",
+    iq: "5.3",
+    pass: "81.2%",
+    cost: "$0.032",
+    costDetail: "($0.006 / $0.026)",
+    time: "2.94",
+    tokens: "2,214",
+    cacheHit: "76.8%",
+    color: "purple"
+  }
+];
+
+const colorClasses = {
+  green: {
+    text: "text-green-400",
+    dot: "bg-green-400 shadow-[0_0_8px_rgba(74,222,128,0.6)]",
+    hover: "hover:border-green-400/50",
+    veil: "bg-green-500/5"
+  },
+  blue: {
+    text: "text-blue-400",
+    dot: "bg-blue-400 shadow-[0_0_8px_rgba(96,165,250,0.6)]",
+    hover: "hover:border-blue-400/50",
+    veil: "bg-blue-500/5"
+  },
+  orange: {
+    text: "text-orange-400",
+    dot: "bg-orange-400 shadow-[0_0_8px_rgba(251,146,60,0.6)]",
+    hover: "hover:border-orange-400/50",
+    veil: "bg-orange-500/5"
+  },
+  purple: {
+    text: "text-purple-400",
+    dot: "bg-purple-400 shadow-[0_0_8px_rgba(192,132,252,0.6)]",
+    hover: "hover:border-purple-400/50",
+    veil: "bg-purple-500/5"
+  },
+  red: {
+    text: "text-red-400",
+    dot: "bg-red-400 shadow-[0_0_8px_rgba(248,113,113,0.6)]",
+    hover: "hover:border-red-400/50",
+    veil: "bg-red-500/5"
+  }
+} as const;
+---
+
+<section id="radar" class="radar-section relative z-10 overflow-hidden py-24 md:py-28">
+  <div class="pointer-events-none absolute right-[14%] top-[12%] h-72 w-72 rounded-full bg-primary/10 blur-[110px]" aria-hidden="true"></div>
+  <div class="pointer-events-none absolute bottom-[16%] left-[10%] h-72 w-72 rounded-full bg-[rgb(var(--tertiary)_/_0.08)] blur-[120px]" aria-hidden="true"></div>
+
+  <div class="site-container relative z-10">
+    <div class="mx-auto mb-12 max-w-3xl text-center">
+      <div id="radarBegin" class="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 font-mono text-[12px] font-semibold uppercase leading-none tracking-[0.18em] text-primary">
+          <span class="h-2 w-2 rounded-full bg-primary shadow-[0_0_10px_rgba(138,235,255,0.9)]"></span>
+          Radar
+        </div>
+      <h2 class="headline-gradient pb-2 font-display text-[38px] font-bold leading-[1.12] tracking-normal md:text-[56px]">
+        AI Coding Radar
+      </h2>
+      <p class="mx-auto mt-5 max-w-2xl text-[18px] leading-[1.7] text-muted">
+        Compare coding model quality, pass rate, latency, token usage, and cache efficiency in one operational view.
+      </p>
+    </div>
+
+    <div class="mb-12 flex w-full border-b border-border/40 pb-px">
+      <button class="border-b-2 border-primary bg-primary/10 px-6 py-3 font-mono text-[12px] font-semibold uppercase leading-none tracking-[0.14em] text-primary" type="button">
+        Codex
+      </button>
+      <button class="border-b-2 border-transparent px-6 py-3 font-mono text-[12px] font-semibold uppercase leading-none tracking-[0.14em] text-muted transition hover:bg-[rgb(var(--surface-container)_/_0.28)] hover:text-foreground" type="button">
+        Claude
+      </button>
+    </div>
+
+    <div class="mb-12 grid grid-cols-1 gap-6 md:grid-cols-5">
+      {
+        scoreCards.map((card) => {
+          const classes = colorClasses[card.color as keyof typeof colorClasses];
+
+          return (
+            <article class:list={["radar-card group relative overflow-hidden rounded-lg border border-border/50 bg-[rgb(var(--card)_/_0.62)] p-6 transition-all duration-300", classes.hover]}>
+              <div class:list={["absolute inset-0 opacity-0 transition-opacity group-hover:opacity-100", classes.veil]}></div>
+              <div class="relative z-10 mb-4 font-mono text-[12px] font-semibold uppercase leading-none tracking-[0.12em] text-muted">{card.model}</div>
+              <div class:list={["relative z-10 font-display text-[56px] font-bold leading-none tracking-normal", classes.text]} style={`text-shadow: 0 0 15px ${card.glow};`}>
+                {card.score}
+              </div>
+              <div class="absolute right-4 top-4 flex gap-1" aria-hidden="true">
+                <span class:list={["h-1.5 w-1.5 rounded-full opacity-50", classes.dot]}></span>
+                <span class:list={["h-1.5 w-1.5 rounded-full opacity-50", classes.dot]}></span>
+                <span class:list={["h-1.5 w-1.5 rounded-full opacity-50", classes.dot]}></span>
+              </div>
+            </article>
+          );
+        })
+      }
+    </div>
+
+    <section class="radar-table overflow-hidden rounded-lg border border-primary/20 bg-[rgb(var(--surface-container)_/_0.4)] shadow-[0_0_30px_rgba(47,217,244,0.05)] backdrop-blur-2xl" aria-label="Multi-model metrics">
+      <div class="overflow-x-auto">
+        <table class="min-w-[900px] w-full whitespace-nowrap text-left font-mono text-[14px] leading-[1.5]">
+          <thead class="border-b border-border/40 bg-[rgb(var(--surface-container)_/_0.32)] text-[rgb(var(--tertiary))]">
+            <tr>
+              <th class="px-6 py-4 font-medium">Model</th>
+              <th class="px-6 py-4 font-medium">IQ</th>
+              <th class="px-6 py-4 font-medium">Pass</th>
+              <th class="px-6 py-4 font-medium">Cost <span class="text-xs text-muted/60">(/ 1K tokens)</span></th>
+              <th class="px-6 py-4 font-medium">Time <span class="text-xs text-muted/60">(s)</span></th>
+              <th class="px-6 py-4 font-medium">Tokens <span class="text-xs text-muted/60">(/ req)</span></th>
+              <th class="px-6 py-4 font-medium">Cache Hit <span class="text-xs text-muted/60">(%)</span></th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-border/20 text-foreground">
+            {
+              metricRows.map((row, index) => {
+                const classes = colorClasses[row.color as keyof typeof colorClasses];
+
+                return (
+                  <tr class:list={["group transition-colors hover:bg-primary/5", index % 2 === 1 && "bg-[rgb(var(--surface-container)_/_0.12)]"]}>
+                    <td class="flex items-center gap-3 px-6 py-4">
+                      <span class:list={["h-2 w-2 rounded-full", classes.dot]}></span>
+                      {row.model}
+                    </td>
+                    <td class:list={["px-6 py-4 font-bold transition-colors group-hover:text-primary", classes.text]}>{row.iq}</td>
+                    <td class="px-6 py-4 text-green-400/90">{row.pass}</td>
+                    <td class="px-6 py-4">
+                      {row.cost} <span class="ml-1 text-xs text-muted">{row.costDetail}</span>
+                    </td>
+                    <td class="px-6 py-4">{row.time}</td>
+                    <td class="px-6 py-4">{row.tokens}</td>
+                    <td class="px-6 py-4 text-green-400/90">{row.cacheHit}</td>
+                  </tr>
+                );
+              })
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</section>
+
+<style>
+  .radar-section {
+    background:
+      linear-gradient(rgb(var(--background) / 0.9), rgb(var(--background) / 0.96)),
+      radial-gradient(circle at 72% 18%, rgb(var(--primary) / 0.1), transparent 24rem),
+      radial-gradient(circle at 18% 78%, rgb(var(--tertiary) / 0.07), transparent 26rem);
+  }
+
+  .radar-section::before {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    content: "";
+    opacity: 0.42;
+    background-image: url("data:image/svg+xml,%3Csvg width='72' height='62' viewBox='0 0 72 62' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M36 1L70 19.5V42.5L36 61L2 42.5V19.5Z' fill='%238aebff' fill-opacity='0.035'/%3E%3C/svg%3E");
+    background-size: 72px 62px;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 82%, transparent 100%);
+  }
+
+  .radar-card,
+  .radar-table {
+    box-shadow:
+      0 24px 80px rgb(0 0 0 / 0.22),
+      inset 0 1px 0 rgb(255 255 255 / 0.04);
+    backdrop-filter: blur(18px);
+  }
+</style>

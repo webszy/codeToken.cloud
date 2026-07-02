@@ -1,0 +1,304 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>CodeToken Cloud - AI Coding Radar</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;600;700&amp;family=Geist:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-tertiary": "#490080",
+                        "on-error": "#690005",
+                        "on-primary-container": "#005763",
+                        "on-background": "#dde4e5",
+                        "on-tertiary-container": "#730bc1",
+                        "on-error-container": "#ffdad6",
+                        "primary-fixed-dim": "#2fd9f4",
+                        "secondary-container": "#0566d9",
+                        "on-tertiary-fixed": "#2c0051",
+                        "tertiary": "#ecd3ff",
+                        "on-primary-fixed-variant": "#004e5a",
+                        "surface-bright": "#343a3c",
+                        "tertiary-container": "#d9b0ff",
+                        "surface-container-low": "#161d1e",
+                        "secondary-fixed": "#d8e2ff",
+                        "inverse-surface": "#dde4e5",
+                        "on-tertiary-fixed-variant": "#6900b3",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "on-surface-variant": "#bbc9cd",
+                        "on-secondary": "#002e6a",
+                        "surface-container-highest": "#2f3638",
+                        "surface-container-lowest": "#090f11",
+                        "on-primary": "#00363e",
+                        "inverse-primary": "#006877",
+                        "primary-container": "#22d3ee",
+                        "on-secondary-fixed": "#001a42",
+                        "surface": "#0e1416",
+                        "on-surface": "#dde4e5",
+                        "inverse-on-surface": "#2b3233",
+                        "tertiary-fixed-dim": "#ddb7ff",
+                        "on-secondary-fixed-variant": "#004395",
+                        "background": "#0e1416",
+                        "surface-tint": "#2fd9f4",
+                        "on-primary-fixed": "#001f25",
+                        "outline-variant": "#3c494c",
+                        "outline": "#859397",
+                        "secondary": "#adc6ff",
+                        "surface-dim": "#0e1416",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed": "#f0dbff",
+                        "on-secondary-container": "#e6ecff",
+                        "surface-container-high": "#242b2d",
+                        "primary-fixed": "#a2eeff",
+                        "surface-variant": "#2f3638",
+                        "surface-container": "#1a2122",
+                        "primary": "#8aebff",
+                        "error-container": "#93000a"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    spacing: {
+                        "unit": "4px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "margin-desktop": "64px"
+                    },
+                    fontFamily: {
+                        "headline-lg-mobile": ["Sora"],
+                        "label-caps": ["JetBrains Mono"],
+                        "display-lg": ["Sora"],
+                        "body-md": ["Geist"],
+                        "headline-lg": ["Sora"],
+                        "code-sm": ["JetBrains Mono"]
+                    },
+                    fontSize: {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "display-lg": ["56px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "code-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .hexagon-bg {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='103.923' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l30 17.32v34.64L30 69.28 0 51.96V17.32z' fill='none' stroke='rgba(47, 217, 244, 0.05)' stroke-width='1'/%3E%3C/svg%3E");
+            background-size: 60px 103.923px;
+        }
+        .glow-neon-cyan {
+            box-shadow: 0 0 15px rgba(138, 235, 255, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen hexagon-bg">
+<!-- Sidebar Nav injected via script for context, hidden on mobile -->
+<!-- Main Content Area -->
+<main class="p-margin-mobile md:p-margin-desktop max-w-container-max mx-auto relative z-10 px-6">
+<!-- Header -->
+<header class="mb-12">
+
+<!-- Source Tabs -->
+<div class="flex gap-4 border-b border-outline-variant/30 pb-px mt-8">
+<button class="px-6 py-3 font-label-caps text-label-caps text-primary border-b-2 border-primary bg-primary/10 transition-colors">
+                Codex
+            </button>
+<button class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/20 transition-colors border-b-2 border-transparent">
+                Claude
+            </button>
+</div>
+</header>
+<!-- IQ Score Cards -->
+<section class="grid grid-cols-1 md:grid-cols-5 gap-gutter mb-12">
+<!-- Card 1 -->
+<div class="bg-surface/60 backdrop-blur-xl border border-outline-variant/50 rounded-xl p-6 relative overflow-hidden group hover:border-green-400/50 transition-all duration-300">
+<div class="absolute inset-0 bg-green-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-4">GPT-5.5 xhigh</div>
+<div class="font-display-lg text-display-lg text-green-400 tracking-tighter" style="text-shadow: 0 0 15px rgba(74, 222, 128, 0.3);">4.8</div>
+<div class="absolute top-0 right-0 p-4">
+<div class="flex gap-1">
+<div class="w-1.5 h-1.5 rounded-full bg-green-400/50"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-green-400/50"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-green-400/50"></div>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface/60 backdrop-blur-xl border border-outline-variant/50 rounded-xl p-6 relative overflow-hidden group hover:border-blue-400/50 transition-all duration-300">
+<div class="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-4">GPT-5.5 high</div>
+<div class="font-display-lg text-display-lg text-blue-400 tracking-tighter" style="text-shadow: 0 0 15px rgba(96, 165, 250, 0.3);">6.6</div>
+<div class="absolute top-0 right-0 p-4">
+<div class="flex gap-1">
+<div class="w-1.5 h-1.5 rounded-full bg-blue-400/50"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-blue-400/50"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-blue-400/50"></div>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface/60 backdrop-blur-xl border border-outline-variant/50 rounded-xl p-6 relative overflow-hidden group hover:border-orange-400/50 transition-all duration-300">
+<div class="absolute inset-0 bg-orange-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-4">GPT-5.5 medium</div>
+<div class="font-display-lg text-display-lg text-orange-400 tracking-tighter" style="text-shadow: 0 0 15px rgba(251, 146, 60, 0.3);">6.7</div>
+<div class="absolute top-0 right-0 p-4">
+<div class="flex gap-1">
+<div class="w-1.5 h-1.5 rounded-full bg-orange-400/50"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-orange-400/50"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-orange-400/50"></div>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface/60 backdrop-blur-xl border border-outline-variant/50 rounded-xl p-6 relative overflow-hidden group hover:border-purple-400/50 transition-all duration-300">
+<div class="absolute inset-0 bg-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-4">GPT-5.4 xhigh</div>
+<div class="font-display-lg text-display-lg text-purple-400 tracking-tighter" style="text-shadow: 0 0 15px rgba(192, 132, 252, 0.3);">5.3</div>
+<div class="absolute top-0 right-0 p-4">
+<div class="flex gap-1">
+<div class="w-1.5 h-1.5 rounded-full bg-purple-400/50"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-purple-400/50"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-purple-400/50"></div>
+</div>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="bg-surface/60 backdrop-blur-xl border border-outline-variant/50 rounded-xl p-6 relative overflow-hidden group hover:border-red-400/50 transition-all duration-300">
+<div class="absolute inset-0 bg-red-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-4">GPT-5.4 high</div>
+<div class="font-display-lg text-display-lg text-red-400 tracking-tighter" style="text-shadow: 0 0 15px rgba(248, 113, 113, 0.3);">5.4</div>
+<div class="absolute top-0 right-0 p-4">
+<div class="flex gap-1">
+<div class="w-1.5 h-1.5 rounded-full bg-red-400/50"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-red-400/50"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-red-400/50"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Multi-model metrics table -->
+<section class="bg-surface-container/40 backdrop-blur-2xl border border-primary/20 rounded-xl overflow-hidden shadow-[0_0_30px_rgba(47,217,244,0.05)]">
+<div class="overflow-x-auto">
+<table class="w-full text-left font-code-sm text-code-sm whitespace-nowrap">
+<thead class="bg-surface-variant/30 text-secondary-fixed-dim border-b border-outline-variant/30">
+<tr>
+<th class="py-4 px-6 font-medium">Model</th>
+<th class="py-4 px-6 font-medium">IQ</th>
+<th class="py-4 px-6 font-medium">Pass</th>
+<th class="py-4 px-6 font-medium">Cost <span class="text-on-surface-variant/50 text-xs">(/ 1K tokens)</span></th>
+<th class="py-4 px-6 font-medium">Time <span class="text-on-surface-variant/50 text-xs">(s)</span></th>
+<th class="py-4 px-6 font-medium">Tokens <span class="text-on-surface-variant/50 text-xs">(/ req)</span></th>
+<th class="py-4 px-6 font-medium">Cache Hit <span class="text-on-surface-variant/50 text-xs">(%)</span></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10 text-on-background">
+<!-- Row 1 -->
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="py-4 px-6 flex items-center gap-3">
+<span class="w-2 h-2 rounded-full bg-blue-400 shadow-[0_0_8px_rgba(96,165,250,0.6)]"></span>
+                            GPT-5.5 high
+                        </td>
+<td class="py-4 px-6 text-blue-400 font-bold group-hover:text-primary transition-colors">6.6</td>
+<td class="py-4 px-6 text-green-400/90">92.1%</td>
+<td class="py-4 px-6">
+                            $0.018 <span class="text-on-surface-variant text-xs ml-1">($0.003 / $0.015)</span>
+</td>
+<td class="py-4 px-6">2.41</td>
+<td class="py-4 px-6">1,842</td>
+<td class="py-4 px-6 text-green-400/90">78.4%</td>
+</tr>
+<!-- Row 2 -->
+<tr class="bg-surface-variant/10 hover:bg-primary/5 transition-colors group">
+<td class="py-4 px-6 flex items-center gap-3">
+<span class="w-2 h-2 rounded-full bg-orange-400 shadow-[0_0_8px_rgba(251,146,60,0.6)]"></span>
+                            GPT-5.5 medium
+                        </td>
+<td class="py-4 px-6 text-orange-400 font-bold group-hover:text-primary transition-colors">6.7</td>
+<td class="py-4 px-6 text-green-400/90">89.3%</td>
+<td class="py-4 px-6">
+                            $0.010 <span class="text-on-surface-variant text-xs ml-1">($0.002 / $0.008)</span>
+</td>
+<td class="py-4 px-6">1.87</td>
+<td class="py-4 px-6">1,276</td>
+<td class="py-4 px-6 text-green-400/90">72.1%</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="py-4 px-6 flex items-center gap-3">
+<span class="w-2 h-2 rounded-full bg-green-400 shadow-[0_0_8px_rgba(74,222,128,0.6)]"></span>
+                            GPT-5.5 xhigh
+                        </td>
+<td class="py-4 px-6 text-green-400 font-bold group-hover:text-primary transition-colors">4.8</td>
+<td class="py-4 px-6 text-green-400/90">85.7%</td>
+<td class="py-4 px-6">
+                            $0.045 <span class="text-on-surface-variant text-xs ml-1">($0.008 / $0.037)</span>
+</td>
+<td class="py-4 px-6">3.62</td>
+<td class="py-4 px-6">2,731</td>
+<td class="py-4 px-6 text-green-400/90">81.2%</td>
+</tr>
+<!-- Row 4 -->
+<tr class="bg-surface-variant/10 hover:bg-primary/5 transition-colors group">
+<td class="py-4 px-6 flex items-center gap-3">
+<span class="w-2 h-2 rounded-full bg-red-400 shadow-[0_0_8px_rgba(248,113,113,0.6)]"></span>
+                            GPT-5.4 high
+                        </td>
+<td class="py-4 px-6 text-red-400 font-bold group-hover:text-primary transition-colors">5.4</td>
+<td class="py-4 px-6 text-green-400/90">83.6%</td>
+<td class="py-4 px-6">
+                            $0.008 <span class="text-on-surface-variant text-xs ml-1">($0.002 / $0.006)</span>
+</td>
+<td class="py-4 px-6">1.65</td>
+<td class="py-4 px-6">1,103</td>
+<td class="py-4 px-6 text-green-400/90">69.3%</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="py-4 px-6 flex items-center gap-3">
+<span class="w-2 h-2 rounded-full bg-purple-400 shadow-[0_0_8px_rgba(192,132,252,0.6)]"></span>
+                            GPT-5.4 xhigh
+                        </td>
+<td class="py-4 px-6 text-purple-400 font-bold group-hover:text-primary transition-colors">5.3</td>
+<td class="py-4 px-6 text-green-400/90">81.2%</td>
+<td class="py-4 px-6">
+                            $0.032 <span class="text-on-surface-variant text-xs ml-1">($0.006 / $0.026)</span>
+</td>
+<td class="py-4 px-6">2.94</td>
+<td class="py-4 px-6">2,214</td>
+<td class="py-4 px-6 text-green-400/90">76.8%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</main>
+<!-- Bottom Nav for Mobile Context -->
+<div class="fixed bottom-0 left-0 w-full md:hidden bg-surface-container-low/90 backdrop-blur-xl border-t border-outline-variant/20 z-40 flex justify-around py-3">
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">grid_view</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary glow-neon-cyan" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">radar</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">rocket_launch</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">account_balance_wallet</span>
+</a>
+</div>
+
+
+</body></html>

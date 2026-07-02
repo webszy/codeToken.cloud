@@ -2,6 +2,9 @@
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
+import PriceSection from "../components/PriceSection.astro";
+import RadarSection from "../components/RadarSection.astro";
+import StatusSection from "../components/StatusSection.astro";
 import AuthCtaScript from "../components/AuthCtaScript.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCopy } from "../i18n";
@@ -27,6 +30,9 @@ const copy = getCopy("en");
     <Header copy={copy} />
     <main class="site-main-scroll">
       <Hero copy={copy} />
+      <PriceSection />
+      <RadarSection />
+      <StatusSection />
     </main>
     <Footer copy={copy} />
     <AuthCtaScript />
