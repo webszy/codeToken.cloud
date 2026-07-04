@@ -175,7 +175,7 @@ const toneClasses = {
           const classes = toneClasses[card.tone as keyof typeof toneClasses];
 
           return (
-            <article class:list={["status-card group flex flex-col gap-4 rounded-lg border p-6 transition-shadow duration-300", classes.border, classes.shadow]} data-status-card={card.key}>
+            <article class:list={["status-card group flex flex-col gap-4 rounded-lg border p-6 transition-shadow duration-300", classes.border, classes.shadow]} data-status-card={card.key} data-status-tone={card.tone}>
               <div class="flex items-start justify-between gap-4">
                 <div class:list={["flex items-center gap-2", classes.icon]}>
                   <div class:list={["flex h-8 w-8 items-center justify-center rounded-lg border", classes.iconBox]}>
@@ -381,12 +381,47 @@ const toneClasses = {
       radial-gradient(circle at 82% 74%, rgb(var(--tertiary) / 0.07), transparent 26rem);
   }
 
+  :global([data-theme="light"]) .status-section {
+    background:
+      linear-gradient(180deg, rgba(246, 250, 253, 0.9), rgba(255, 255, 255, 0.96)),
+      radial-gradient(circle at 20% 20%, rgba(34, 211, 238, 0.1), transparent 24rem),
+      radial-gradient(circle at 82% 74%, rgba(124, 58, 237, 0.07), transparent 26rem);
+  }
+
   .status-card {
     background: linear-gradient(180deg, rgb(var(--surface-container) / 0.78), rgb(var(--surface-lowest) / 0.94));
     box-shadow:
       0 24px 80px rgb(0 0 0 / 0.22),
       inset 0 1px 0 rgb(255 255 255 / 0.04);
     backdrop-filter: blur(20px);
+  }
+
+  :global([data-theme="light"]) .status-card {
+    background: rgba(255, 255, 255, 0.86);
+    border-color: rgba(148, 163, 184, 0.28);
+    box-shadow:
+      0 18px 50px rgba(15, 23, 42, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  }
+
+  :global([data-theme="light"]) .status-card[data-status-tone="cyan"] {
+    border-color: rgba(103, 232, 249, 0.62);
+  }
+
+  :global([data-theme="light"]) .status-card[data-status-tone="blue"] {
+    border-color: rgba(147, 197, 253, 0.62);
+  }
+
+  :global([data-theme="light"]) .status-card[data-status-tone="purple"] {
+    border-color: rgba(216, 180, 254, 0.68);
+  }
+
+  :global([data-theme="light"]) .status-card[data-status-tone="green"] {
+    border-color: rgba(134, 239, 172, 0.68);
+  }
+
+  :global([data-theme="light"]) .status-card[data-status-tone="amber"] {
+    border-color: rgba(252, 211, 77, 0.68);
   }
 
   .status-sequence-dot {
@@ -406,6 +441,11 @@ const toneClasses = {
     transform: scale(1.16);
   }
 
+  :global([data-theme="light"]) .status-sequence-dot.is-active {
+    background: #0891b2;
+    box-shadow: 0 0 8px rgba(34, 211, 238, 0.42);
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .status-sequence-dot {
       transition: none;
@@ -414,6 +454,11 @@ const toneClasses = {
     .status-sequence-dot:first-child {
       background: rgb(var(--primary));
       box-shadow: 0 0 8px rgb(47 217 244 / 0.8);
+    }
+
+    :global([data-theme="light"]) .status-sequence-dot:first-child {
+      background: #0891b2;
+      box-shadow: 0 0 8px rgba(34, 211, 238, 0.42);
     }
   }
 </style>

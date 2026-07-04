@@ -16,11 +16,11 @@ const navItems = [
 ];
 ---
 
-<header class="relative z-50 w-full border-b border-border/30 bg-card/60 shadow-[0_0_18px_rgba(47,217,244,0.1)] backdrop-blur-xl">
-  <div class="site-container flex h-[88px] items-center justify-between">
+<header class="site-header relative z-50 min-w-0 border-b border-border/30 bg-card/60 shadow-[0_0_18px_rgba(47,217,244,0.1)] backdrop-blur-xl">
+  <div class="site-container flex h-[72px] min-w-0 items-center justify-between gap-4 md:h-[88px]">
     <Logo brandName={copy.brand.name} />
 
-    <nav class="hidden items-center gap-10 md:flex" aria-label="Primary navigation">
+    <nav class="hidden items-center gap-10 xl:flex" aria-label="Primary navigation">
       {
         navItems.map((item) => (
           <a
@@ -39,17 +39,27 @@ const navItems = [
       }
     </nav>
 
-    <div class="flex items-center gap-5">
-      <button hidden class="grid h-10 w-10 place-items-center text-muted transition-colors hover:text-primary" type="button" aria-label="Theme toggle placeholder">
-        <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <div class="flex shrink-0 items-center gap-3 sm:gap-5">
+      <button
+        data-theme-icon-toggle
+        class="grid h-11 w-11 place-items-center rounded-md text-muted transition-colors hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        type="button"
+        aria-label="Switch to dark theme"
+        aria-pressed="false"
+      >
+        <svg data-theme-icon-dark class="h-7 w-7" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
           <path d="M20.2 14.6A7.7 7.7 0 0 1 9.4 3.8 8.7 8.7 0 1 0 20.2 14.6Z" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <svg data-theme-icon-light class="hidden h-7 w-7" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 4V2M12 22V20M20 12H22M2 12H4M17.7 6.3L19.1 4.9M4.9 19.1L6.3 17.7M17.7 17.7L19.1 19.1M4.9 4.9L6.3 6.3" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
+          <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="2.1" />
         </svg>
       </button>
       <button
         data-auth-cta
         data-auth-label-default={copy.nav.getApiAccess}
         data-auth-label-when-auth={copy.nav.dashboard}
-        class="glow-button inline-flex h-12 items-center gap-2 rounded-lg bg-gradient-to-r from-cyan-400 to-blue-600 px-7 text-[17px] font-medium text-white transition hover:opacity-90"
+        class="glow-button hidden h-11 items-center gap-2 rounded-lg bg-gradient-to-r from-cyan-400 to-blue-600 px-5 text-[15px] font-medium text-white transition hover:opacity-90 sm:inline-flex xl:h-12 xl:px-7 xl:text-[17px]"
         type="button"
       >
         <span data-auth-cta-text>{copy.nav.getApiAccess}</span>
@@ -68,6 +78,45 @@ const navItems = [
   const scrollContainer = document.querySelector<HTMLElement>(".site-main-scroll");
   const scrollTopPadding = 20;
   const snapScrollLockMs = 850;
+  const themeStorageKey = "codetoken-theme";
+  const themeIconToggle = document.querySelector<HTMLButtonElement>("[data-theme-icon-toggle]");
+  const darkIcon = themeIconToggle?.querySelector<SVGElement>("[data-theme-icon-dark]");
+  const lightIcon = themeIconToggle?.querySelector<SVGElement>("[data-theme-icon-light]");
+  const themeColorMeta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
+
+  const applyTheme = (theme: "light" | "dark") => {
+    document.documentElement.dataset.theme = theme;
+    themeColorMeta?.setAttribute("content", theme === "dark" ? "#050B14" : "#F6FAFD");
+
+    if (darkIcon) {
+      darkIcon.classList.toggle("hidden", theme === "dark");
+    }
+
+    if (lightIcon) {
+      lightIcon.classList.toggle("hidden", theme !== "dark");
+    }
+
+    if (themeIconToggle) {
+      themeIconToggle.setAttribute("aria-pressed", String(theme === "dark"));
+      themeIconToggle.setAttribute("aria-label", theme === "dark" ? "Switch to light theme" : "Switch to dark theme");
+      themeIconToggle.dataset.currentTheme = theme;
+    }
+  };
+
+  const initialTheme = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+  applyTheme(initialTheme);
+
+  themeIconToggle?.addEventListener("click", () => {
+    const current = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+    const nextTheme = current === "dark" ? "light" : "dark";
+    applyTheme(nextTheme);
+
+    try {
+      localStorage.setItem(themeStorageKey, nextTheme);
+    } catch {
+      // Theme still changes for this page even when storage is unavailable.
+    }
+  });
 
   const setActiveNav = (targetId: string) => {
     navLinks.forEach((link) => {

@@ -162,10 +162,10 @@ const colorClasses = {
 
     <div class="mb-6 flex w-full items-center justify-between gap-4 border-b border-border/40 pb-px" data-radar-tabs>
       <div class="flex min-w-0">
-        <button class="border-b-2 border-primary bg-primary/10 px-6 py-3 font-mono text-[12px] font-semibold uppercase leading-none tracking-[0.14em] text-primary" type="button" data-radar-source="codex" aria-pressed="true">
+        <button class="min-h-11 border-b-2 border-primary bg-primary/10 px-6 py-3 font-mono text-[12px] font-semibold uppercase leading-none tracking-[0.14em] text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" type="button" data-radar-source="codex" aria-pressed="true">
           {radar.tabs.codex}
         </button>
-        <button class="border-b-2 border-transparent px-6 py-3 font-mono text-[12px] font-semibold uppercase leading-none tracking-[0.14em] text-muted transition hover:bg-[rgb(var(--surface-container)_/_0.28)] hover:text-foreground" type="button" data-radar-source="claude" aria-pressed="false">
+        <button class="min-h-11 border-b-2 border-transparent px-6 py-3 font-mono text-[12px] font-semibold uppercase leading-none tracking-[0.14em] text-muted transition hover:bg-[rgb(var(--surface-container)_/_0.28)] hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" type="button" data-radar-source="claude" aria-pressed="false">
           {radar.tabs.claude}
         </button>
       </div>
@@ -473,6 +473,13 @@ const colorClasses = {
       radial-gradient(circle at 18% 78%, rgb(var(--tertiary) / 0.07), transparent 26rem);
   }
 
+  :global([data-theme="light"]) .radar-section {
+    background:
+      linear-gradient(180deg, rgba(246, 250, 253, 0.9), rgba(255, 255, 255, 0.96)),
+      radial-gradient(circle at 72% 18%, rgba(34, 211, 238, 0.1), transparent 24rem),
+      radial-gradient(circle at 18% 78%, rgba(124, 58, 237, 0.07), transparent 26rem);
+  }
+
   .radar-section::before {
     position: absolute;
     inset: 0;
@@ -484,6 +491,10 @@ const colorClasses = {
     mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 82%, transparent 100%);
   }
 
+  :global([data-theme="light"]) .radar-section::before {
+    opacity: 0.24;
+  }
+
   .radar-card,
   .radar-table {
     box-shadow:
@@ -492,11 +503,36 @@ const colorClasses = {
     backdrop-filter: blur(18px);
   }
 
+  :global([data-theme="light"]) .radar-card,
+  :global([data-theme="light"]) .radar-table {
+    background: rgba(255, 255, 255, 0.86);
+    border-color: rgba(148, 163, 184, 0.28);
+    box-shadow:
+      0 18px 50px rgba(15, 23, 42, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  }
+
+  :global([data-theme="light"]) .radar-table thead {
+    background: #eef6fc;
+    color: #6d28d9;
+  }
+
+  :global([data-theme="light"]) .radar-table tbody tr:hover {
+    background: rgba(2, 132, 199, 0.055);
+  }
+
   .radar-thanks-link {
+    align-items: center;
     color: rgba(180, 210, 230, 0.55);
+    display: inline-flex;
     font-size: 11px;
     letter-spacing: 0.14em;
     margin-bottom: 6px;
+    min-height: 44px;
     text-transform: uppercase;
+  }
+
+  :global([data-theme="light"]) .radar-thanks-link {
+    color: rgba(82, 99, 122, 0.72);
   }
 </style>

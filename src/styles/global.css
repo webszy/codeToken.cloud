@@ -5,6 +5,22 @@
 @tailwind utilities;
 
 :root,
+[data-theme="light"] {
+  --background: 246 250 253;
+  --foreground: 15 23 42;
+  --muted: 82 99 122;
+  --card: 255 255 255;
+  --border: 203 213 225;
+  --primary: 3 105 161;
+  --primary-foreground: 255 255 255;
+  --surface-lowest: 255 255 255;
+  --surface-low: 241 247 252;
+  --surface-container: 226 236 246;
+  --tertiary: 109 40 217;
+  --tertiary-container: 124 58 237;
+  --secondary-container: 37 99 235;
+}
+
 [data-theme="dark"] {
   --background: 2 6 23;
   --foreground: 221 228 229;
@@ -19,22 +35,6 @@
   --tertiary: 236 211 255;
   --tertiary-container: 217 176 255;
   --secondary-container: 5 102 217;
-}
-
-[data-theme="light"] {
-  --background: 248 250 252;
-  --foreground: 15 23 42;
-  --muted: 71 85 105;
-  --card: 255 255 255;
-  --border: 203 213 225;
-  --primary: 2 132 199;
-  --primary-foreground: 255 255 255;
-  --surface-lowest: 255 255 255;
-  --surface-low: 248 250 252;
-  --surface-container: 226 232 240;
-  --tertiary: 109 40 217;
-  --tertiary-container: 124 58 237;
-  --secondary-container: 37 99 235;
 }
 
 * {
@@ -57,6 +57,13 @@ body {
   letter-spacing: 0;
 }
 
+[data-theme="light"] body {
+  background:
+    radial-gradient(circle at top left, rgba(34, 211, 238, 0.14), transparent 32rem),
+    radial-gradient(circle at top right, rgba(124, 58, 237, 0.1), transparent 34rem),
+    linear-gradient(180deg, #f6fafd 0%, #eef6fc 45%, #f8fbff 100%);
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -77,6 +84,7 @@ select {
 .site-background {
   position: relative;
   display: grid;
+  min-width: 0;
   height: 100dvh;
   min-height: 100vh;
   grid-template-rows: auto minmax(0, 1fr) auto;
@@ -88,9 +96,17 @@ select {
     rgb(2 6 23);
 }
 
+[data-theme="light"] .site-background {
+  background:
+    radial-gradient(circle at 18% 8%, rgba(34, 211, 238, 0.16), transparent 26rem),
+    radial-gradient(circle at 78% 16%, rgba(124, 58, 237, 0.12), transparent 30rem),
+    linear-gradient(180deg, #f6fafd 0%, #eef6fc 48%, #ffffff 100%);
+}
+
 .site-main-scroll {
   position: relative;
   z-index: 10;
+  min-width: 0;
   min-height: 0;
   overflow-x: hidden;
   overflow-y: auto;
@@ -108,8 +124,14 @@ select {
   mask-image: linear-gradient(to bottom, black 0%, black 72%, transparent 100%);
 }
 
+[data-theme="light"] .site-background::before {
+  opacity: 0.38;
+  mask-image: linear-gradient(to bottom, black 0%, black 56%, transparent 100%);
+}
+
 .site-container {
   width: min(100%, 1536px);
+  min-width: 0;
   margin-inline: auto;
   padding-inline: 78px;
 }
@@ -126,14 +148,141 @@ select {
   text-shadow: 0 0 28px rgb(var(--primary) / 0.42);
 }
 
+[data-theme="light"] .headline-gradient {
+  background: linear-gradient(90deg, #0284c7 0%, #2563eb 50%, #7c3aed 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 24px rgba(34, 211, 238, 0.12);
+}
+
+[data-theme="light"] .brand-gradient {
+  background: linear-gradient(90deg, #0284c7, #7c3aed);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 .glow-button {
   box-shadow:
     0 0 18px rgb(34 211 238 / 0.35),
     inset 0 1px 0 rgb(255 255 255 / 0.18);
 }
 
+[data-theme="light"] .glow-button {
+  color: #ffffff;
+  background: linear-gradient(135deg, #06b6d4 0%, #2563eb 100%);
+  box-shadow:
+    0 10px 24px rgba(37, 99, 235, 0.22),
+    0 0 0 1px rgba(255, 255, 255, 0.28) inset;
+}
+
+[data-theme="light"] .glow-button:hover {
+  box-shadow:
+    0 14px 34px rgba(37, 99, 235, 0.28),
+    0 0 24px rgba(34, 211, 238, 0.22);
+  transform: translateY(-1px);
+}
+
 .api-card {
   box-shadow: 0 0 34px rgb(34 211 238 / 0.08);
+}
+
+[data-theme="light"] .site-header {
+  background: rgba(255, 255, 255, 0.72);
+  border-bottom-color: rgba(148, 163, 184, 0.22);
+  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.05);
+  backdrop-filter: blur(18px);
+}
+
+[data-theme="light"] footer {
+  background: #f1f7fc;
+  border-top-color: rgba(148, 163, 184, 0.28);
+}
+
+[data-theme="light"] .api-card {
+  background: rgba(255, 255, 255, 0.82);
+  border-color: rgba(148, 163, 184, 0.28);
+  box-shadow:
+    0 18px 50px rgba(15, 23, 42, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+[data-theme="light"] .api-card > .absolute {
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.08), transparent 62%);
+}
+
+[data-theme="light"] .price-panel,
+[data-theme="light"] .status-card,
+[data-theme="light"] .radar-card,
+[data-theme="light"] .radar-table {
+  background: rgba(255, 255, 255, 0.86);
+  border-color: rgba(148, 163, 184, 0.28);
+  box-shadow:
+    0 18px 50px rgba(15, 23, 42, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(18px);
+}
+
+[data-theme="light"] .neon-border {
+  box-shadow:
+    0 0 0 1px rgba(14, 165, 233, 0.12),
+    0 16px 44px rgba(37, 99, 235, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+[data-theme="light"] .glow-text {
+  text-shadow: 0 0 14px rgba(34, 211, 238, 0.18);
+}
+
+[data-theme="light"] .glow-magenta {
+  text-shadow: 0 0 14px rgba(124, 58, 237, 0.16);
+}
+
+[data-theme="light"] .hero-graphic-spin {
+  opacity: 0.38;
+}
+
+[data-theme="light"] .hero-core-hex {
+  fill: rgba(255, 255, 255, 0.78);
+}
+
+[data-theme="light"] .hero-logo-heartbeat {
+  filter: drop-shadow(0 10px 24px rgba(2, 132, 199, 0.18));
+}
+
+[data-theme="light"] .radar-section .text-green-400,
+[data-theme="light"] .radar-section .text-green-400\/90 {
+  color: #15803d;
+}
+
+[data-theme="light"] .radar-section .text-blue-400,
+[data-theme="light"] .status-section .text-blue-400 {
+  color: #2563eb;
+}
+
+[data-theme="light"] .status-section .text-blue-200 {
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .radar-section .text-orange-400 {
+  color: #c2410c;
+}
+
+[data-theme="light"] .radar-section .text-purple-400 {
+  color: #7e22ce;
+}
+
+[data-theme="light"] .radar-section .text-red-400 {
+  color: #dc2626;
+}
+
+[data-theme="light"] .status-section .text-cyan-300 {
+  color: #0891b2;
+}
+
+[data-theme="light"] .status-section .text-amber-400 {
+  color: #b45309;
 }
 
 .hex-outline {
@@ -203,5 +352,18 @@ select {
 @media (max-width: 900px) {
   .site-container {
     padding-inline: 24px;
+  }
+}
+
+@media (max-width: 767px) {
+  .site-background {
+    display: block;
+    height: auto;
+    min-height: 100dvh;
+    overflow: visible;
+  }
+
+  .site-main-scroll {
+    overflow: visible;
   }
 }

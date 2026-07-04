@@ -50,7 +50,7 @@ const jsonLd = {
 ---
 
 <!doctype html>
-<html lang={lang} data-theme="dark">
+<html lang={lang} data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -61,7 +61,7 @@ const jsonLd = {
     <link rel="canonical" href={canonical} />
     <meta name="robots" content="index, follow" />
     <meta name="author" content={siteSeo.siteName} />
-    <meta name="theme-color" content="#050B14" />
+    <meta name="theme-color" content="#F6FAFD" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={siteSeo.siteName} />
     <meta property="og:title" content={ogTitle} />
@@ -73,6 +73,23 @@ const jsonLd = {
     <meta name="twitter:title" content={twitterTitle} />
     <meta name="twitter:description" content={twitterDescription} />
     <meta name="twitter:image" content={ogImage} />
+    <script is:inline>
+      (() => {
+        const storageKey = "codetoken-theme";
+        const themeColor = document.querySelector('meta[name="theme-color"]');
+        let stored = null;
+
+        try {
+          stored = localStorage.getItem(storageKey);
+        } catch {
+          stored = null;
+        }
+
+        const theme = stored === "dark" || stored === "light" ? stored : "light";
+        document.documentElement.dataset.theme = theme;
+        themeColor?.setAttribute("content", theme === "dark" ? "#050B14" : "#F6FAFD");
+      })();
+    </script>
     <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
     <script is:inline defer src="/feed-data.js"></script>
     <!-- Google tag (gtag.js) -->

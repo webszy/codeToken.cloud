@@ -12,30 +12,30 @@ const { copy } = Astro.props;
 
 <section
   id="features"
-  class="site-container relative z-10 grid min-h-[948px] grid-cols-1 items-start gap-12 pt-[72px] pb-24 lg:grid-cols-[700px_1fr]"
+  class="site-container relative z-10 grid min-h-[auto] grid-cols-1 items-start gap-10 pt-12 pb-20 md:gap-12 md:pt-[72px] md:pb-24 xl:min-h-[948px] xl:grid-cols-[700px_1fr]"
 >
   <div class="pt-[2px]">
-    <div class="mb-12 inline-flex items-center gap-3 rounded-full border border-border bg-card/50 px-4 py-1.5">
-      <span class="h-2.5 w-2.5 rounded-full bg-primary shadow-[0_0_16px_rgba(138,235,255,0.85)]"></span>
-      <span class="font-mono text-[13px] font-semibold uppercase leading-none tracking-[0.2em] text-primary">
+    <div class="mb-8 inline-flex max-w-full items-center gap-3 rounded-full border border-border bg-card/50 px-3 py-2 md:mb-12 md:px-4 md:py-1.5">
+      <span class="h-2.5 w-2.5 shrink-0 rounded-full bg-primary shadow-[0_0_16px_rgba(138,235,255,0.85)]"></span>
+      <span class="min-w-0 break-words font-mono text-[11px] font-semibold uppercase leading-snug tracking-[0.12em] text-primary sm:text-[13px] sm:tracking-[0.2em]">
         {copy.hero.badge}
       </span>
     </div>
 
-    <h1 class="headline-gradient max-w-[760px] font-display text-[56px] font-bold leading-[1.1] tracking-normal xl:text-[62px]">
+    <h1 class="headline-gradient max-w-[760px] font-display text-[32px] font-bold leading-[1.1] tracking-normal min-[375px]:text-[36px] sm:text-[48px] lg:text-[56px] xl:text-[62px]">
       {copy.hero.title}
     </h1>
 
-    <p class="mt-10 max-w-[650px] text-[20px] leading-[1.6] text-muted">
+    <p class="mt-7 max-w-[650px] text-[17px] leading-[1.6] text-muted sm:text-[20px] lg:mt-10">
       {copy.hero.description}
     </p>
 
-    <div class="mb-[58px] mt-[52px] flex flex-wrap gap-5">
+    <div class="mb-10 mt-9 flex flex-wrap gap-4 sm:gap-5 lg:mb-[58px] lg:mt-[52px]">
       <button
         data-auth-cta
         data-auth-label-default={copy.hero.primaryCta}
         data-auth-label-when-auth="Token is Ready"
-        class="glow-button inline-flex h-[61px] items-center gap-3 rounded-lg bg-gradient-to-r from-cyan-400 to-blue-600 px-10 text-[18px] font-medium text-white transition hover:opacity-90"
+        class="glow-button inline-flex h-12 items-center gap-3 rounded-lg bg-gradient-to-r from-cyan-400 to-blue-600 px-6 text-[16px] font-medium text-white transition hover:opacity-90 sm:h-[61px] sm:px-10 sm:text-[18px]"
         type="button"
       >
         <span data-auth-cta-text>{copy.hero.primaryCta}</span>
@@ -44,7 +44,7 @@ const { copy } = Astro.props;
         </svg>
       </button>
       <a
-        class="inline-flex h-[61px] items-center gap-3 rounded-lg border border-primary px-10 text-[18px] font-medium text-primary transition hover:bg-primary/10"
+        class="inline-flex h-12 items-center gap-3 rounded-lg border border-primary px-6 text-[16px] font-medium text-primary transition hover:bg-primary/10 sm:h-[61px] sm:px-10 sm:text-[18px]"
         href="https://app.notion.com/p/webszy/CodeToken-38f306e2c52f80a8b056ca46d90111ff?source=copy_link"
         rel="noreferrer"
       >
@@ -59,15 +59,15 @@ const { copy } = Astro.props;
     <EndpointCard copy={copy} />
   </div>
 
-  <div class="relative flex min-h-[610px] items-start justify-center pt-[122px]">
-    <div class="absolute top-[172px] h-[430px] w-[430px] rounded-full bg-primary/20 blur-[100px]"></div>
-    <div class="relative h-[470px] w-[470px]">
+  <div class="relative flex min-h-[320px] min-w-0 items-start justify-center pt-8 md:min-h-[520px] md:pt-16 xl:min-h-[610px] xl:pt-[122px]">
+    <div class="absolute top-16 h-[260px] w-[260px] rounded-full bg-primary/20 blur-[80px] md:top-28 md:h-[380px] md:w-[380px] xl:top-[172px] xl:h-[430px] xl:w-[430px] xl:blur-[100px]"></div>
+    <div class="relative h-[280px] w-[280px] sm:h-[340px] sm:w-[340px] md:h-[430px] md:w-[430px] xl:h-[470px] xl:w-[470px]">
       <svg class="hero-graphic-spin absolute inset-0 h-full w-full opacity-55" viewBox="0 0 200 200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
         <path d="M100 10 L180 50 L180 150 L100 190 L20 150 L20 50 Z" fill="none" stroke="#22d3ee" stroke-dasharray="4 4" stroke-width="0.5" />
         <path d="M100 20 L170 60 L170 140 L100 180 L30 140 L30 60 Z" fill="none" stroke="#d9b0ff" stroke-dasharray="2 6" stroke-width="0.5" />
       </svg>
-      <svg class="absolute left-1/2 top-1/2 h-[428px] w-[428px] -translate-x-1/2 -translate-y-1/2 drop-shadow-[0_0_18px_rgba(34,211,238,0.55)]" viewBox="0 0 200 200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-        <path d="M100 5 L190 55 L190 145 L100 195 L10 145 L10 55 Z" fill="rgba(14,20,22,0.82)" stroke="url(#hero-hex-grad)" stroke-width="2" />
+      <svg class="absolute left-1/2 top-1/2 h-[255px] w-[255px] -translate-x-1/2 -translate-y-1/2 drop-shadow-[0_0_18px_rgba(34,211,238,0.55)] sm:h-[310px] sm:w-[310px] md:h-[392px] md:w-[392px] xl:h-[428px] xl:w-[428px]" viewBox="0 0 200 200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <path class="hero-core-hex" d="M100 5 L190 55 L190 145 L100 195 L10 145 L10 55 Z" fill="rgba(14,20,22,0.82)" stroke="url(#hero-hex-grad)" stroke-width="2" />
         <defs>
           <linearGradient id="hero-hex-grad" x1="0%" x2="100%" y1="0%" y2="100%">
             <stop offset="0%" stop-color="#22d3ee" />
