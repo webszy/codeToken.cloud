@@ -1,4 +1,14 @@
 ---
+import type { SiteCopy } from "../i18n";
+
+interface Props {
+  copy: SiteCopy;
+}
+
+const { copy } = Astro.props;
+const { radar } = copy;
+const radarDefaultThanks = radar.thanksPrefix ? `${radar.thanksPrefix} codexradar` : "";
+
 const scoreCards = [
   {
     model: "GPT-5.5 xhigh",
@@ -124,7 +134,15 @@ const colorClasses = {
 } as const;
 ---
 
-<section id="radar" class="radar-section relative z-10 overflow-hidden py-24 md:py-28">
+<section
+  id="radar"
+  class="radar-section relative z-10 overflow-hidden py-24 md:py-28"
+  data-radar-copy
+  data-last-updated-prefix={radar.runtime.lastUpdatedPrefix}
+  data-not-available={radar.runtime.notAvailable}
+  data-unknown={radar.runtime.unknown}
+  data-thanks-prefix={radar.thanksPrefix}
+>
   <div class="pointer-events-none absolute right-[14%] top-[12%] h-72 w-72 rounded-full bg-primary/10 blur-[110px]" aria-hidden="true"></div>
   <div class="pointer-events-none absolute bottom-[16%] left-[10%] h-72 w-72 rounded-full bg-[rgb(var(--tertiary)_/_0.08)] blur-[120px]" aria-hidden="true"></div>
 
@@ -132,27 +150,27 @@ const colorClasses = {
     <div class="mx-auto mb-12 max-w-3xl text-center">
       <div id="radarBegin" class="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 font-mono text-[12px] font-semibold uppercase leading-none tracking-[0.18em] text-primary">
           <span class="h-2 w-2 rounded-full bg-primary shadow-[0_0_10px_rgba(138,235,255,0.9)]"></span>
-          Radar
+          {radar.badge}
         </div>
       <h2 class="headline-gradient pb-2 font-display text-[38px] font-bold leading-[1.12] tracking-normal md:text-[56px]">
-        AI Coding Radar
+        {radar.title}
       </h2>
       <p class="mx-auto mt-5 max-w-2xl text-[18px] leading-[1.7] text-muted">
-        Compare coding model quality, pass rate, latency, token usage, and cache efficiency in one operational view.
+        {radar.description}
       </p>
     </div>
 
     <div class="mb-6 flex w-full items-center justify-between gap-4 border-b border-border/40 pb-px" data-radar-tabs>
       <div class="flex min-w-0">
         <button class="border-b-2 border-primary bg-primary/10 px-6 py-3 font-mono text-[12px] font-semibold uppercase leading-none tracking-[0.14em] text-primary" type="button" data-radar-source="codex" aria-pressed="true">
-          Codex
+          {radar.tabs.codex}
         </button>
         <button class="border-b-2 border-transparent px-6 py-3 font-mono text-[12px] font-semibold uppercase leading-none tracking-[0.14em] text-muted transition hover:bg-[rgb(var(--surface-container)_/_0.28)] hover:text-foreground" type="button" data-radar-source="claude" aria-pressed="false">
-          Claude
+          {radar.tabs.claude}
         </button>
       </div>
       <div class="shrink-0 pb-3 font-mono text-[12px] font-semibold uppercase leading-none tracking-[0.14em] text-muted" data-radar-updated>
-        LAST UPDATED · -
+        {radar.runtime.lastUpdatedPrefix}-
       </div>
     </div>
 
@@ -179,18 +197,22 @@ const colorClasses = {
       }
     </div>
 
-    <section class="radar-table overflow-hidden rounded-lg border border-primary/20 bg-[rgb(var(--surface-container)_/_0.4)] shadow-[0_0_30px_rgba(47,217,244,0.05)] backdrop-blur-2xl" aria-label="Multi-model metrics">
+    <div class="mb-[6px] flex justify-end">
+      <a class="radar-thanks-link" href="https://codexradar.com/" target="_blank" rel="noreferrer" data-radar-thanks-link>{radarDefaultThanks}</a>
+    </div>
+
+    <section class="radar-table overflow-hidden rounded-lg border border-primary/20 bg-[rgb(var(--surface-container)_/_0.4)] shadow-[0_0_30px_rgba(47,217,244,0.05)] backdrop-blur-2xl" aria-label={radar.tableAriaLabel}>
       <div class="overflow-x-auto">
         <table class="min-w-[900px] w-full whitespace-nowrap text-left font-mono text-[14px] leading-[1.5]">
           <thead class="border-b border-border/40 bg-[rgb(var(--surface-container)_/_0.32)] text-[rgb(var(--tertiary))]">
             <tr>
-              <th class="px-6 py-4 font-medium">Model</th>
-              <th class="px-6 py-4 font-medium">IQ</th>
-              <th class="px-6 py-4 font-medium">Pass</th>
-              <th class="px-6 py-4 font-medium">Cost <span class="text-xs text-muted/60">(/ 1K tokens)</span></th>
-              <th class="px-6 py-4 font-medium">Time <span class="text-xs text-muted/60">(s)</span></th>
-              <th class="px-6 py-4 font-medium">Tokens <span class="text-xs text-muted/60">(/ req)</span></th>
-              <th class="px-6 py-4 font-medium">Cache Hit <span class="text-xs text-muted/60">(%)</span></th>
+              <th class="px-6 py-4 font-medium">{radar.table.model}</th>
+              <th class="px-6 py-4 font-medium">{radar.table.iq}</th>
+              <th class="px-6 py-4 font-medium">{radar.table.pass}</th>
+              <th class="px-6 py-4 font-medium">{radar.table.cost} <span class="text-xs text-muted/60">{radar.table.costUnit}</span></th>
+              <th class="px-6 py-4 font-medium">{radar.table.time} <span class="text-xs text-muted/60">{radar.table.timeUnit}</span></th>
+              <th class="px-6 py-4 font-medium">{radar.table.tokens} <span class="text-xs text-muted/60">{radar.table.tokensUnit}</span></th>
+              <th class="px-6 py-4 font-medium">{radar.table.cacheHit} <span class="text-xs text-muted/60">{radar.table.cacheHitUnit}</span></th>
             </tr>
           </thead>
           <tbody class="divide-y divide-border/20 text-foreground" data-radar-metrics-body>
@@ -225,6 +247,10 @@ const colorClasses = {
 
 <script is:inline>
   const radarWindow = window;
+  const radarCopyNode = document.querySelector("[data-radar-copy]");
+  const radarCopyDataset = radarCopyNode instanceof HTMLElement ? radarCopyNode.dataset : {};
+  const getRadarCopy = (key) => (Object.prototype.hasOwnProperty.call(radarCopyDataset, key) ? radarCopyDataset[key] || "" : "");
+
   const radarAccentMap = {
     green: {
       text: "text-green-400",
@@ -275,13 +301,15 @@ const colorClasses = {
   const getRadarAccent = (accent) => radarAccentMap[accent || ""] || radarAccentMap.blue;
 
   const formatRadarNumber = (value, digits = 1) => {
-    if (typeof value !== "number" || !Number.isFinite(value)) return "N/A";
+    if (typeof value !== "number" || !Number.isFinite(value)) return getRadarCopy("notAvailable");
     const formatted = value.toFixed(digits);
     return digits === 0 ? formatted : formatted.replace(/\.?0+$/, "");
   };
 
   const formatPassRate = (passed, total) => {
-    if (typeof passed !== "number" || typeof total !== "number" || !Number.isFinite(passed) || !Number.isFinite(total) || total <= 0) return "N/A";
+    if (typeof passed !== "number" || typeof total !== "number" || !Number.isFinite(passed) || !Number.isFinite(total) || total <= 0) {
+      return getRadarCopy("notAvailable");
+    }
     return `${((passed / total) * 100).toFixed(1).replace(/\.?0+$/, "")}%`;
   };
 
@@ -301,6 +329,19 @@ const colorClasses = {
     return `${padRadarDatePart(date.getMonth() + 1)}/${padRadarDatePart(date.getDate())} ${padRadarDatePart(date.getHours())}:${padRadarDatePart(date.getMinutes())}`;
   };
 
+  const formatRadarThanksText = (url) => {
+    const thanksPrefix = getRadarCopy("thanksPrefix");
+    if (typeof url !== "string" || url.trim() === "") return thanksPrefix;
+
+    try {
+      const hostname = new URL(url).hostname.replace(/^www\./, "");
+      const domain = hostname.split(".")[0];
+      return domain ? `${thanksPrefix} ${domain}`.trim() : thanksPrefix;
+    } catch {
+      return thanksPrefix;
+    }
+  };
+
   const createRadarCell = (text, className) => {
     const cell = document.createElement("td");
     cell.className = className;
@@ -315,10 +356,16 @@ const colorClasses = {
     const scoreGrid = document.querySelector("[data-radar-score-grid]");
     const metricsBody = document.querySelector("[data-radar-metrics-body]");
     const updatedNode = document.querySelector("[data-radar-updated]");
+    const thanksLink = document.querySelector("[data-radar-thanks-link]");
     if (!scoreGrid || !metricsBody) return;
 
     if (updatedNode) {
-      updatedNode.textContent = `LAST UPDATED · ${formatRadarUpdatedText(radar.updatedText)}`;
+      updatedNode.textContent = `${getRadarCopy("lastUpdatedPrefix")}${formatRadarUpdatedText(radar.updatedText)}`;
+    }
+
+    if (thanksLink && typeof radar.url === "string" && radar.url.trim() !== "") {
+      thanksLink.href = radar.url;
+      thanksLink.textContent = formatRadarThanksText(radar.url);
     }
 
     const scoreCards = radar.iqCards?.filter((card) => card.label) || [];
@@ -334,7 +381,7 @@ const colorClasses = {
 
           const label = document.createElement("div");
           label.className = "relative z-10 mb-5 font-mono text-[12px] font-semibold uppercase leading-none tracking-[0.12em] text-muted";
-          label.textContent = card.label || "Unknown";
+          label.textContent = card.label || getRadarCopy("unknown");
 
           const score = document.createElement("div");
           score.className = `relative z-10 font-display text-[56px] font-bold leading-none tracking-normal ${accent.text}`;
@@ -368,7 +415,7 @@ const colorClasses = {
           modelCell.className = "flex items-center gap-3 px-6 py-4";
           const dot = document.createElement("span");
           dot.className = `h-2 w-2 rounded-full ${accent.dot}`;
-          modelCell.append(dot, document.createTextNode(row.label || "Unknown"));
+          modelCell.append(dot, document.createTextNode(row.label || getRadarCopy("unknown")));
 
           tr.append(
             modelCell,
@@ -443,5 +490,13 @@ const colorClasses = {
       0 24px 80px rgb(0 0 0 / 0.22),
       inset 0 1px 0 rgb(255 255 255 / 0.04);
     backdrop-filter: blur(18px);
+  }
+
+  .radar-thanks-link {
+    color: rgba(180, 210, 230, 0.55);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    margin-bottom: 6px;
+    text-transform: uppercase;
   }
 </style>

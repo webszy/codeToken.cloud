@@ -1,4 +1,12 @@
 ---
+import type { SiteCopy } from "../i18n";
+
+interface Props {
+  copy: SiteCopy;
+}
+
+const { copy } = Astro.props;
+
 const priceRows = [
   {
     model: "GPT-5.5",
@@ -33,12 +41,7 @@ const comparisonRows = [
   }
 ];
 
-const assumptions = [
-  ["Input", "80%"],
-  ["Output", "20%"],
-  ["Cache Hit", "90%"],
-  ["Multiplier", "0.15x"]
-];
+const { pricing } = copy;
 ---
 
 <section id="pricing" class="price-section relative z-10 overflow-hidden py-24 md:py-28">
@@ -49,13 +52,13 @@ const assumptions = [
     <div class="mx-auto mb-16 max-w-3xl text-center">
       <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 font-mono text-[12px] font-semibold uppercase leading-none tracking-[0.18em] text-primary">
         <span id="priceBegin" class="h-2 w-2 rounded-full bg-primary shadow-[0_0_10px_rgba(138,235,255,0.9)]"></span>
-        Pricing
+        {pricing.badge}
       </div>
       <h2 class="headline-gradient pb-2 font-display text-[38px] font-bold leading-[1.12] tracking-normal md:text-[56px]">
-        Pay as You Go Pricing
+        {pricing.title}
       </h2>
       <p class="mx-auto mt-5 max-w-2xl text-[18px] leading-[1.7] text-muted">
-        Recharge credits and use them across OpenAI, Codex, Claude, and multi-model AI workflows. No monthly subscription required.
+        {pricing.description}
       </p>
     </div>
 
@@ -66,12 +69,12 @@ const assumptions = [
             <table class="min-w-[820px] w-full border-collapse text-left">
               <thead>
                 <tr class="border-b border-border/40 bg-[rgb(var(--surface-container)_/_0.45)] font-mono text-[12px] font-semibold uppercase leading-none tracking-[0.12em] text-muted">
-                  <th class="px-6 py-4">Model</th>
-                  <th class="px-6 py-4">Official Input<br /><span class="text-[10px] font-normal lowercase tracking-normal text-muted/70">/1M tokens</span></th>
-                  <th class="px-6 py-4">Cached Input<br /><span class="text-[10px] font-normal lowercase tracking-normal text-muted/70">/1M tokens</span></th>
-                  <th class="px-6 py-4">Official Output<br /><span class="text-[10px] font-normal lowercase tracking-normal text-muted/70">/1M tokens</span></th>
-                  <th class="px-6 py-4">Avg Official<br /><span class="text-[10px] font-normal lowercase tracking-normal text-muted/70">/1M tokens</span></th>
-                  <th class="px-6 py-4 text-primary">CodeToken<br /><span class="text-[10px] font-normal lowercase tracking-normal text-muted/70">/1M tokens</span></th>
+                  <th class="px-6 py-4">{pricing.table.model}</th>
+                  <th class="px-6 py-4">{pricing.table.officialInput}<br /><span class="text-[10px] font-normal lowercase tracking-normal text-muted/70">{pricing.table.perMillionTokens}</span></th>
+                  <th class="px-6 py-4">{pricing.table.cachedInput}<br /><span class="text-[10px] font-normal lowercase tracking-normal text-muted/70">{pricing.table.perMillionTokens}</span></th>
+                  <th class="px-6 py-4">{pricing.table.officialOutput}<br /><span class="text-[10px] font-normal lowercase tracking-normal text-muted/70">{pricing.table.perMillionTokens}</span></th>
+                  <th class="px-6 py-4">{pricing.table.avgOfficial}<br /><span class="text-[10px] font-normal lowercase tracking-normal text-muted/70">{pricing.table.perMillionTokens}</span></th>
+                  <th class="px-6 py-4 text-primary">{pricing.table.codeToken}<br /><span class="text-[10px] font-normal lowercase tracking-normal text-muted/70">{pricing.table.perMillionTokens}</span></th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-border/25 font-mono text-[14px] leading-[1.5]">
@@ -100,20 +103,20 @@ const assumptions = [
                 <path d="M12 7.25V7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
                 <path d="M21 12A9 9 0 1 1 3 12A9 9 0 0 1 21 12Z" stroke="currentColor" stroke-width="1.8" />
               </svg>
-              <span class="font-mono text-[12px] font-semibold uppercase leading-none tracking-[0.16em] text-muted">Assumptions</span>
+              <span class="font-mono text-[12px] font-semibold uppercase leading-none tracking-[0.16em] text-muted">{pricing.assumptions.title}</span>
             </div>
             <div class="flex flex-wrap gap-4 font-mono text-[14px] text-muted">
               {
-                assumptions.map(([label, value]) => (
+                pricing.assumptions.rows.map(({ label, value }, index) => (
                   <div>
-                    {label}: <span class:list={["font-semibold", label === "Multiplier" ? "text-[rgb(var(--tertiary))]" : "text-foreground"]}>{value}</span>
+                    {label}: <span class:list={["font-semibold", index === 3 ? "text-[rgb(var(--tertiary))]" : "text-foreground"]}>{value}</span>
                   </div>
                 ))
               }
             </div>
           </div>
           <div class="mt-3 border-t border-border/30 pt-3 text-[12px] leading-relaxed text-muted/70">
-            Avg Official = (Input * % + Output * %) | CodeToken = Avg Official * Multiplier (adjusted for cache)
+            {pricing.assumptions.formula}
           </div>
         </div>
       </div>
@@ -144,9 +147,9 @@ const assumptions = [
                   <path d="M7 7H19M19 7L15 3M19 7L15 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                   <path d="M17 17H5M5 17L9 13M5 17L9 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
-                Model Comparison
+                {pricing.calculator.title}
               </h3>
-              <p class="mt-2 text-[14px] leading-relaxed text-muted">See how much more token capacity you get with CodeToken.</p>
+              <p class="mt-2 text-[14px] leading-relaxed text-muted">{pricing.calculator.description}</p>
             </div>
             <div class="mt-1 flex gap-1.5" aria-hidden="true">
               <span class="h-1.5 w-1.5 rounded-full bg-border"></span>
@@ -158,7 +161,7 @@ const assumptions = [
           <div class="mt-6 flex-grow space-y-6">
             <div class="flex flex-col gap-4 sm:flex-row sm:items-end">
               <label class="flex-grow space-y-2">
-                <span class="block font-mono text-[12px] font-semibold uppercase leading-none tracking-[0.14em] text-muted">Recharge Amount</span>
+                <span class="block font-mono text-[12px] font-semibold uppercase leading-none tracking-[0.14em] text-muted">{pricing.calculator.rechargeLabel}</span>
                 <span class="relative block">
                   <span class="absolute -inset-0.5 rounded-lg bg-gradient-to-r from-primary to-[rgb(var(--tertiary))] opacity-30 blur transition duration-500"></span>
                   <input
@@ -168,12 +171,12 @@ const assumptions = [
                     step="1"
                     value="10"
                     data-recharge-input
-                    aria-label="Recharge amount in US dollars"
+                    aria-label={pricing.calculator.rechargeAriaLabel}
                   />
                 </span>
               </label>
               <button class="glow-button h-12 rounded-lg bg-gradient-to-r from-cyan-400 to-blue-600 px-6 text-[16px] font-semibold text-white transition hover:opacity-90" type="button" data-calculate-button>
-                Calculate
+                {pricing.calculator.calculate}
               </button>
             </div>
 
@@ -184,7 +187,7 @@ const assumptions = [
                     <div class="rounded-lg border border-border/35 bg-[rgb(var(--surface-lowest)_/_0.78)] p-4">
                       <div class="border-b border-border/20 pb-2 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted/75">{row.model}</div>
                       <div class="mt-3 flex items-center justify-between text-[12px]">
-                        <span class="font-mono text-muted">Official API</span>
+                        <span class="font-mono text-muted">{pricing.calculator.officialApi}</span>
                         <span class="font-mono text-foreground" data-official-capacity={row.officialCapacity.toString()}>
                           {(row.officialCapacity * 10).toFixed(2)}M
                         </span>
@@ -194,7 +197,7 @@ const assumptions = [
                           <svg class:list={["h-3 w-3", row.accent === "primary" ? "text-primary" : "text-[rgb(var(--tertiary))]"]} viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
                             <path d="M13 2L4 14H11L10 22L20 9H13L13 2Z" fill="currentColor" />
                           </svg>
-                          CodeToken
+                          {pricing.calculator.codeToken}
                         </span>
                         <span
                           class:list={["font-mono font-bold", row.accent === "primary" ? "glow-text text-primary" : "glow-magenta text-[rgb(var(--tertiary))]"]}
@@ -204,7 +207,7 @@ const assumptions = [
                         </span>
                       </div>
                       <div class="mt-3 flex items-center justify-between border-t border-border/20 pt-3 text-[12px]">
-                        <span class="font-mono text-muted">Savings</span>
+                        <span class="font-mono text-muted">{pricing.calculator.savings}</span>
                         <span class:list={["font-mono", row.accent === "primary" ? "text-[rgb(var(--tertiary))]" : "text-primary"]}>85%</span>
                       </div>
                     </div>
@@ -215,16 +218,16 @@ const assumptions = [
               <div class="flex flex-col justify-center sm:col-span-2">
                 <div class="relative flex h-full min-h-64 flex-col justify-center overflow-hidden rounded-lg border border-primary/25 bg-[rgb(var(--surface-lowest)_/_0.82)] p-4 text-center shadow-[0_0_24px_rgba(34,211,238,0.12)]">
                   <div class="absolute left-0 top-0 h-1 w-full bg-gradient-to-r from-primary to-[rgb(var(--tertiary))]"></div>
-                  <div class="mb-1 text-[10px] text-muted">Recharge Amount: $<span data-recharge-display>10.00</span></div>
-                  <div class="mb-1 font-mono text-[10px] uppercase tracking-[0.12em] text-muted/70">CodeToken Cloud</div>
+                  <div class="mb-1 text-[10px] text-muted">{pricing.calculator.rechargeSummaryLabel}: $<span data-recharge-display>10.00</span></div>
+                  <div class="mb-1 font-mono text-[10px] uppercase tracking-[0.12em] text-muted/70">{pricing.calculator.codeToken}</div>
                   <div class="glow-text mb-3 font-display text-[32px] font-bold text-primary" data-summary-code>9.86M</div>
                   <div class="space-y-2 text-[12px]">
                     <div class="flex items-center justify-between rounded border border-border/30 bg-[rgb(var(--surface-container)_/_0.48)] px-2 py-1">
-                      <span class="text-muted">Official API</span>
+                      <span class="text-muted">{pricing.calculator.officialApi}</span>
                       <span class="font-mono text-foreground" data-summary-official>1.48M</span>
                     </div>
-                    <div class="font-semibold text-primary"><span data-summary-ratio>6.66</span>x More Capacity</div>
-                    <div class="text-[rgb(var(--tertiary))]">Save about 85%</div>
+                    <div class="font-semibold text-primary"><span data-summary-ratio>6.66</span>{pricing.calculator.moreCapacitySuffix}</div>
+                    <div class="text-[rgb(var(--tertiary))]">{pricing.calculator.saveAbout}</div>
                   </div>
                 </div>
               </div>
@@ -232,7 +235,7 @@ const assumptions = [
           </div>
 
           <p class="mt-6 border-t border-border/20 pt-4 text-[10px] italic leading-relaxed text-muted/70">
-            * Based on 80% input, 20% output, 90% input cache hit rate, and CodeToken pricing at 0.15x official pricing.
+            {pricing.calculator.footnote}
           </p>
         </div>
       </div>

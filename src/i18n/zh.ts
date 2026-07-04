@@ -54,6 +54,107 @@ export const zh = {
     url: "https://api.codetoken.cloud",
     authMessage: "然后复制 API_KEY 到 Codex 和 Claude中即可"
   },
+  pricing: {
+    badge: "",
+    title: "",
+    description: "",
+    table: {
+      model: "",
+      officialInput: "",
+      cachedInput: "",
+      officialOutput: "",
+      avgOfficial: "",
+      codeToken: "",
+      perMillionTokens: ""
+    },
+    assumptions: {
+      title: "",
+      rows: [
+        { label: "", value: "" },
+        { label: "", value: "" },
+        { label: "", value: "" },
+        { label: "", value: "" }
+      ],
+      formula: ""
+    },
+    calculator: {
+      title: "",
+      description: "",
+      rechargeLabel: "",
+      rechargeAriaLabel: "",
+      calculate: "",
+      officialApi: "",
+      codeToken: "",
+      savings: "",
+      rechargeSummaryLabel: "",
+      moreCapacitySuffix: "",
+      saveAbout: "",
+      footnote: ""
+    }
+  },
+  radar: {
+    badge: "",
+    title: "",
+    description: "",
+    tabs: {
+      codex: "",
+      claude: ""
+    },
+    thanksPrefix: "",
+    tableAriaLabel: "",
+    table: {
+      model: "",
+      iq: "",
+      pass: "",
+      cost: "",
+      costUnit: "",
+      time: "",
+      timeUnit: "",
+      tokens: "",
+      tokensUnit: "",
+      cacheHit: "",
+      cacheHitUnit: ""
+    },
+    runtime: {
+      lastUpdatedPrefix: "",
+      notAvailable: "",
+      unknown: ""
+    }
+  },
+  status: {
+    badge: "",
+    title: "",
+    description: "",
+    samplePointsLabel: "",
+    cards: {
+      serverLoad: "",
+      requests: "",
+      tokens: "",
+      successRate: "",
+      avgQps: "",
+      avgTps: "",
+      ttft: "",
+      upstream: ""
+    },
+    runtime: {
+      notAvailable: "",
+      lastUpdatedUnavailable: "",
+      lastUpdatedPrefix: "",
+      dataWindowLive: "",
+      cpu: "",
+      mem: "",
+      load: "",
+      requestCountTotal: "",
+      today: "",
+      error: "",
+      reqPerSecondLiveAverage: "",
+      tokensPerSecondLiveAverage: "",
+      avgFirstResponse: "",
+      healthy: "",
+      degraded: "",
+      healthScore: ""
+    }
+  },
   footer: {
     copyright: "© 2026 CodeToken Cloud, Inc. All rights reserved.",
     contact: "Contact",
