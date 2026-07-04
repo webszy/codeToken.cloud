@@ -2,31 +2,31 @@
 const scoreCards = [
   {
     model: "GPT-5.5 xhigh",
-    score: "4.8",
+    score: "-",
     color: "green",
     glow: "rgba(74,222,128,0.3)"
   },
   {
     model: "GPT-5.5 high",
-    score: "6.6",
+    score: "-",
     color: "blue",
     glow: "rgba(96,165,250,0.3)"
   },
   {
     model: "GPT-5.5 medium",
-    score: "6.7",
+    score: "-",
     color: "orange",
     glow: "rgba(251,146,60,0.3)"
   },
   {
     model: "GPT-5.4 xhigh",
-    score: "5.3",
+    score: "-",
     color: "purple",
     glow: "rgba(192,132,252,0.3)"
   },
   {
     model: "GPT-5.4 high",
-    score: "5.4",
+    score: "-",
     color: "red",
     glow: "rgba(248,113,113,0.3)"
   }
@@ -35,57 +35,57 @@ const scoreCards = [
 const metricRows = [
   {
     model: "GPT-5.5 high",
-    iq: "6.6",
-    pass: "92.1%",
-    cost: "$0.018",
-    costDetail: "($0.003 / $0.015)",
-    time: "2.41",
-    tokens: "1,842",
-    cacheHit: "78.4%",
+    iq: "-",
+    pass: "-",
+    cost: "-",
+    costDetail: "",
+    time: "-",
+    tokens: "-",
+    cacheHit: "-",
     color: "blue"
   },
   {
     model: "GPT-5.5 medium",
-    iq: "6.7",
-    pass: "89.3%",
-    cost: "$0.010",
-    costDetail: "($0.002 / $0.008)",
-    time: "1.87",
-    tokens: "1,276",
-    cacheHit: "72.1%",
+    iq: "-",
+    pass: "-",
+    cost: "-",
+    costDetail: "",
+    time: "-",
+    tokens: "-",
+    cacheHit: "-",
     color: "orange"
   },
   {
     model: "GPT-5.5 xhigh",
-    iq: "4.8",
-    pass: "85.7%",
-    cost: "$0.045",
-    costDetail: "($0.008 / $0.037)",
-    time: "3.62",
-    tokens: "2,731",
-    cacheHit: "81.2%",
+    iq: "-",
+    pass: "-",
+    cost: "-",
+    costDetail: "",
+    time: "-",
+    tokens: "-",
+    cacheHit: "-",
     color: "green"
   },
   {
     model: "GPT-5.4 high",
-    iq: "5.4",
-    pass: "83.6%",
-    cost: "$0.008",
-    costDetail: "($0.002 / $0.006)",
-    time: "1.65",
-    tokens: "1,103",
-    cacheHit: "69.3%",
+    iq: "-",
+    pass: "-",
+    cost: "-",
+    costDetail: "",
+    time: "-",
+    tokens: "-",
+    cacheHit: "-",
     color: "red"
   },
   {
     model: "GPT-5.4 xhigh",
-    iq: "5.3",
-    pass: "81.2%",
-    cost: "$0.032",
-    costDetail: "($0.006 / $0.026)",
-    time: "2.94",
-    tokens: "2,214",
-    cacheHit: "76.8%",
+    iq: "-",
+    pass: "-",
+    cost: "-",
+    costDetail: "",
+    time: "-",
+    tokens: "-",
+    cacheHit: "-",
     color: "purple"
   }
 ];
@@ -142,16 +142,21 @@ const colorClasses = {
       </p>
     </div>
 
-    <div class="mb-12 flex w-full border-b border-border/40 pb-px">
-      <button class="border-b-2 border-primary bg-primary/10 px-6 py-3 font-mono text-[12px] font-semibold uppercase leading-none tracking-[0.14em] text-primary" type="button">
-        Codex
-      </button>
-      <button class="border-b-2 border-transparent px-6 py-3 font-mono text-[12px] font-semibold uppercase leading-none tracking-[0.14em] text-muted transition hover:bg-[rgb(var(--surface-container)_/_0.28)] hover:text-foreground" type="button">
-        Claude
-      </button>
+    <div class="mb-6 flex w-full items-center justify-between gap-4 border-b border-border/40 pb-px" data-radar-tabs>
+      <div class="flex min-w-0">
+        <button class="border-b-2 border-primary bg-primary/10 px-6 py-3 font-mono text-[12px] font-semibold uppercase leading-none tracking-[0.14em] text-primary" type="button" data-radar-source="codex" aria-pressed="true">
+          Codex
+        </button>
+        <button class="border-b-2 border-transparent px-6 py-3 font-mono text-[12px] font-semibold uppercase leading-none tracking-[0.14em] text-muted transition hover:bg-[rgb(var(--surface-container)_/_0.28)] hover:text-foreground" type="button" data-radar-source="claude" aria-pressed="false">
+          Claude
+        </button>
+      </div>
+      <div class="shrink-0 pb-3 font-mono text-[12px] font-semibold uppercase leading-none tracking-[0.14em] text-muted" data-radar-updated>
+        LAST UPDATED · -
+      </div>
     </div>
 
-    <div class="mb-12 grid grid-cols-1 gap-6 md:grid-cols-5">
+    <div class="mb-12 grid grid-cols-1 gap-6 md:grid-cols-5" data-radar-score-grid>
       {
         scoreCards.map((card) => {
           const classes = colorClasses[card.color as keyof typeof colorClasses];
@@ -159,7 +164,7 @@ const colorClasses = {
           return (
             <article class:list={["radar-card group relative overflow-hidden rounded-lg border border-border/50 bg-[rgb(var(--card)_/_0.62)] p-6 transition-all duration-300", classes.hover]}>
               <div class:list={["absolute inset-0 opacity-0 transition-opacity group-hover:opacity-100", classes.veil]}></div>
-              <div class="relative z-10 mb-4 font-mono text-[12px] font-semibold uppercase leading-none tracking-[0.12em] text-muted">{card.model}</div>
+              <div class="relative z-10 mb-5 font-mono text-[12px] font-semibold uppercase leading-none tracking-[0.12em] text-muted">{card.model}</div>
               <div class:list={["relative z-10 font-display text-[56px] font-bold leading-none tracking-normal", classes.text]} style={`text-shadow: 0 0 15px ${card.glow};`}>
                 {card.score}
               </div>
@@ -188,7 +193,7 @@ const colorClasses = {
               <th class="px-6 py-4 font-medium">Cache Hit <span class="text-xs text-muted/60">(%)</span></th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-border/20 text-foreground">
+          <tbody class="divide-y divide-border/20 text-foreground" data-radar-metrics-body>
             {
               metricRows.map((row, index) => {
                 const classes = colorClasses[row.color as keyof typeof colorClasses];
@@ -217,6 +222,201 @@ const colorClasses = {
     </section>
   </div>
 </section>
+
+<script is:inline>
+  const radarWindow = window;
+  const radarAccentMap = {
+    green: {
+      text: "text-green-400",
+      dot: "bg-green-400 shadow-[0_0_8px_rgba(74,222,128,0.6)]",
+      hover: "hover:border-green-400/50",
+      veil: "bg-green-500/5",
+      glow: "rgba(74,222,128,0.3)"
+    },
+    blue: {
+      text: "text-blue-400",
+      dot: "bg-blue-400 shadow-[0_0_8px_rgba(96,165,250,0.6)]",
+      hover: "hover:border-blue-400/50",
+      veil: "bg-blue-500/5",
+      glow: "rgba(96,165,250,0.3)"
+    },
+    amber: {
+      text: "text-orange-400",
+      dot: "bg-orange-400 shadow-[0_0_8px_rgba(251,146,60,0.6)]",
+      hover: "hover:border-orange-400/50",
+      veil: "bg-orange-500/5",
+      glow: "rgba(251,146,60,0.3)"
+    },
+    orange: {
+      text: "text-orange-400",
+      dot: "bg-orange-400 shadow-[0_0_8px_rgba(251,146,60,0.6)]",
+      hover: "hover:border-orange-400/50",
+      veil: "bg-orange-500/5",
+      glow: "rgba(251,146,60,0.3)"
+    },
+    purple: {
+      text: "text-purple-400",
+      dot: "bg-purple-400 shadow-[0_0_8px_rgba(192,132,252,0.6)]",
+      hover: "hover:border-purple-400/50",
+      veil: "bg-purple-500/5",
+      glow: "rgba(192,132,252,0.3)"
+    },
+    red: {
+      text: "text-red-400",
+      dot: "bg-red-400 shadow-[0_0_8px_rgba(248,113,113,0.6)]",
+      hover: "hover:border-red-400/50",
+      veil: "bg-red-500/5",
+      glow: "rgba(248,113,113,0.3)"
+    }
+  };
+
+  let activeRadarSource = "codex";
+
+  const getRadarAccent = (accent) => radarAccentMap[accent || ""] || radarAccentMap.blue;
+
+  const formatRadarNumber = (value, digits = 1) => {
+    if (typeof value !== "number" || !Number.isFinite(value)) return "N/A";
+    const formatted = value.toFixed(digits);
+    return digits === 0 ? formatted : formatted.replace(/\.?0+$/, "");
+  };
+
+  const formatPassRate = (passed, total) => {
+    if (typeof passed !== "number" || typeof total !== "number" || !Number.isFinite(passed) || !Number.isFinite(total) || total <= 0) return "N/A";
+    return `${((passed / total) * 100).toFixed(1).replace(/\.?0+$/, "")}%`;
+  };
+
+  const padRadarDatePart = (value) => String(value).padStart(2, "0");
+
+  const formatRadarUpdatedText = (value) => {
+    if (typeof value !== "string" || value.trim() === "") return "-";
+
+    const chineseMatch = value.match(/(\d{1,2})月(\d{1,2})日\s*(\d{1,2}):(\d{2})/);
+    if (chineseMatch) {
+      return `${padRadarDatePart(chineseMatch[1])}/${padRadarDatePart(chineseMatch[2])} ${padRadarDatePart(chineseMatch[3])}:${chineseMatch[4]}`;
+    }
+
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return "-";
+
+    return `${padRadarDatePart(date.getMonth() + 1)}/${padRadarDatePart(date.getDate())} ${padRadarDatePart(date.getHours())}:${padRadarDatePart(date.getMinutes())}`;
+  };
+
+  const createRadarCell = (text, className) => {
+    const cell = document.createElement("td");
+    cell.className = className;
+    cell.textContent = text;
+    return cell;
+  };
+
+  const renderRadar = (feed) => {
+    const radar = feed?.aiRadar?.[activeRadarSource];
+    if (!radar) return;
+
+    const scoreGrid = document.querySelector("[data-radar-score-grid]");
+    const metricsBody = document.querySelector("[data-radar-metrics-body]");
+    const updatedNode = document.querySelector("[data-radar-updated]");
+    if (!scoreGrid || !metricsBody) return;
+
+    if (updatedNode) {
+      updatedNode.textContent = `LAST UPDATED · ${formatRadarUpdatedText(radar.updatedText)}`;
+    }
+
+    const scoreCards = radar.iqCards?.filter((card) => card.label) || [];
+    if (scoreCards.length > 0) {
+      scoreGrid.replaceChildren(
+        ...scoreCards.slice(0, 6).map((card) => {
+          const accent = getRadarAccent(card.accent);
+          const article = document.createElement("article");
+          article.className = `radar-card group relative overflow-hidden rounded-lg border border-border/50 bg-[rgb(var(--card)_/_0.62)] p-6 transition-all duration-300 ${accent.hover}`;
+
+          const veil = document.createElement("div");
+          veil.className = `absolute inset-0 opacity-0 transition-opacity group-hover:opacity-100 ${accent.veil}`;
+
+          const label = document.createElement("div");
+          label.className = "relative z-10 mb-5 font-mono text-[12px] font-semibold uppercase leading-none tracking-[0.12em] text-muted";
+          label.textContent = card.label || "Unknown";
+
+          const score = document.createElement("div");
+          score.className = `relative z-10 font-display text-[56px] font-bold leading-none tracking-normal ${accent.text}`;
+          score.style.textShadow = `0 0 15px ${accent.glow}`;
+          score.textContent = formatRadarNumber(card.iq, 0);
+
+          const dots = document.createElement("div");
+          dots.className = "absolute right-4 top-4 flex gap-1";
+          dots.setAttribute("aria-hidden", "true");
+          for (let index = 0; index < 3; index += 1) {
+            const dot = document.createElement("span");
+            dot.className = `h-1.5 w-1.5 rounded-full opacity-50 ${accent.dot}`;
+            dots.append(dot);
+          }
+
+          article.append(veil, label, score, dots);
+          return article;
+        })
+      );
+    }
+
+    const rows = radar.multiModelMetrics?.models?.filter((row) => row.label) || [];
+    if (rows.length > 0) {
+      metricsBody.replaceChildren(
+        ...rows.map((row, index) => {
+          const accent = getRadarAccent(row.accent);
+          const tr = document.createElement("tr");
+          tr.className = `group transition-colors hover:bg-primary/5 ${index % 2 === 1 ? "bg-[rgb(var(--surface-container)_/_0.12)]" : ""}`;
+
+          const modelCell = document.createElement("td");
+          modelCell.className = "flex items-center gap-3 px-6 py-4";
+          const dot = document.createElement("span");
+          dot.className = `h-2 w-2 rounded-full ${accent.dot}`;
+          modelCell.append(dot, document.createTextNode(row.label || "Unknown"));
+
+          tr.append(
+            modelCell,
+            createRadarCell(formatRadarNumber(row.iq, 0), `px-6 py-4 font-bold transition-colors group-hover:text-primary ${accent.text}`),
+            createRadarCell(formatPassRate(row.passed, row.total), "px-6 py-4 text-green-400/90"),
+            createRadarCell(`$${formatRadarNumber(row.costUsd, 2)}`, "px-6 py-4"),
+            createRadarCell(formatRadarNumber(row.durationHours, 1), "px-6 py-4"),
+            createRadarCell(`${formatRadarNumber(row.totalTokensMillion, 2)}M`, "px-6 py-4"),
+            createRadarCell(`${formatRadarNumber(row.cacheHitRate, 1)}%`, "px-6 py-4 text-green-400/90")
+          );
+
+          return tr;
+        })
+      );
+    }
+  };
+
+  const updateRadarTabs = () => {
+    document.querySelectorAll("[data-radar-source]").forEach((button) => {
+      const isActive = button.dataset.radarSource === activeRadarSource;
+      button.setAttribute("aria-pressed", String(isActive));
+      button.classList.toggle("border-primary", isActive);
+      button.classList.toggle("bg-primary/10", isActive);
+      button.classList.toggle("text-primary", isActive);
+      button.classList.toggle("border-transparent", !isActive);
+      button.classList.toggle("text-muted", !isActive);
+    });
+  };
+
+  document.querySelectorAll("[data-radar-source]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const nextSource = button.dataset.radarSource;
+      if (nextSource !== "codex" && nextSource !== "claude") return;
+      activeRadarSource = nextSource;
+      updateRadarTabs();
+      renderRadar(radarWindow.CODETOKEN_FEED);
+    });
+  });
+
+  updateRadarTabs();
+  renderRadar(radarWindow.CODETOKEN_FEED);
+  window.addEventListener("codetoken-feed-ready", (event) => {
+    renderRadar(event.detail);
+  });
+  window.addEventListener("load", () => {
+    renderRadar(radarWindow.CODETOKEN_FEED);
+  });
+</script>
 
 <style>
   .radar-section {
