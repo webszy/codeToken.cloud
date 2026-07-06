@@ -16,18 +16,47 @@ const { copy } = Astro.props;
         {copy.endpoint.label}
       </span>
     </div>
-    <div class="mb-3 grid grid-cols-[minmax(0,1fr)_44px] items-start gap-3 rounded-md border border-border/50 bg-[rgb(var(--surface-lowest))] p-3 font-mono text-[16px] leading-normal">
+    <div class="mb-3 grid grid-cols-[minmax(0,1fr)_40px] items-center gap-2 rounded-md border border-border/50 bg-[rgb(var(--surface-lowest))] p-2 font-mono text-[16px] leading-normal">
       <div class="flex min-w-0 flex-wrap items-baseline gap-x-3 gap-y-1">
         <span class="shrink-0 font-bold text-[rgb(var(--tertiary))]">{copy.endpoint.method}</span>
         <span class="min-w-0 break-all text-foreground">{copy.endpoint.url}</span>
       </div>
-      <button class="inline-grid h-11 w-11 shrink-0 place-items-center rounded-md text-muted transition hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" type="button" aria-label="Copy endpoint">
-        <svg class="h-[22px] w-[22px]" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+      <button class="inline-grid h-10 w-10 shrink-0 place-items-center rounded-md text-muted transition hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" type="button" aria-label="Copy endpoint" data-copy-endpoint data-copy-value={copy.endpoint.url}>
+        <svg class="h-[22px] w-[22px]" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" data-copy-icon>
           <path d="M9 9H7.5A2.5 2.5 0 0 0 5 11.5V19A2.5 2.5 0 0 0 7.5 21H15A2.5 2.5 0 0 0 17.5 18.5V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
           <path d="M11.5 3H19A2 2 0 0 1 21 5V12.5A2 2 0 0 1 19 14.5H11.5A2 2 0 0 1 9.5 12.5V5A2 2 0 0 1 11.5 3Z" stroke="currentColor" stroke-width="2" />
+        </svg>
+        <svg class="hidden h-[22px] w-[22px] text-emerald-400" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" data-copy-success>
+          <path d="M5 12.5L9.25 16.75L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
       </button>
     </div>
     <p class="font-mono text-[16px] leading-normal text-muted">{copy.endpoint.authMessage}</p>
   </div>
 </div>
+
+<script>
+  const copyButtons = document.querySelectorAll<HTMLButtonElement>("[data-copy-endpoint]");
+
+  copyButtons.forEach((button) => {
+    let resetTimer: number | undefined;
+    const copyIcon = button.querySelector<SVGElement>("[data-copy-icon]");
+    const successIcon = button.querySelector<SVGElement>("[data-copy-success]");
+
+    button.addEventListener("click", async () => {
+      const value = button.dataset.copyValue;
+      if (!value || !copyIcon || !successIcon) return;
+
+      await navigator.clipboard.writeText(value);
+
+      copyIcon.classList.add("hidden");
+      successIcon.classList.remove("hidden");
+
+      window.clearTimeout(resetTimer);
+      resetTimer = window.setTimeout(() => {
+        copyIcon.classList.remove("hidden");
+        successIcon.classList.add("hidden");
+      }, 3000);
+    });
+  });
+</script>
