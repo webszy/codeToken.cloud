@@ -148,7 +148,7 @@ export const en = {
       cpu: "CPU",
       mem: "MEM",
       load: "Load",
-      requestCountTotal: "request_count_total",
+      requestCountTotal: "Until Now",
       today: "Today",
       error: "Error",
       reqPerSecondLiveAverage: "req/s · live average",

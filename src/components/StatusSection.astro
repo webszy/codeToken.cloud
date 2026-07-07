@@ -317,7 +317,7 @@ const toneClasses = {
       "%",
       `${getStatusCopy("mem")} ${formatStatusPercent(overview.memory_usage_percent)}% · ${getStatusCopy("load")} ${loadAverage}`
     );
-    setStatusCard("requests", formatRequestCountTotal(overview.request_count_total), "", "");
+    setStatusCard("requests", formatRequestCountTotal(overview.request_count_total), "", getStatusCopy("requestCountTotal"));
     setStatusCard(
       "tokens",
       totalTokens.value,
