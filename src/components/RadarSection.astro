@@ -174,16 +174,16 @@ const colorClasses = {
       </div>
     </div>
 
-    <div class="mb-12 grid grid-cols-1 gap-6 md:grid-cols-5" data-radar-score-grid>
+    <div class="mb-12 grid grid-cols-2 gap-4 md:grid-cols-5 md:gap-6" data-radar-score-grid>
       {
         scoreCards.map((card) => {
           const classes = colorClasses[card.color as keyof typeof colorClasses];
 
           return (
-            <article class:list={["radar-card group relative overflow-hidden rounded-lg border border-border/50 bg-[rgb(var(--card)_/_0.62)] p-6 transition-all duration-300", classes.hover]}>
+            <article class:list={["radar-card group relative overflow-hidden rounded-lg border border-border/50 bg-[rgb(var(--card)_/_0.62)] px-4 pb-2 pt-4 transition-all duration-300 md:p-6", classes.hover]}>
               <div class:list={["absolute inset-0 opacity-0 transition-opacity group-hover:opacity-100", classes.veil]}></div>
-              <div class="relative z-10 mb-5 font-mono text-[12px] font-semibold uppercase leading-none tracking-[0.12em] text-muted">{card.model}</div>
-              <div class:list={["relative z-10 font-display text-[56px] font-bold leading-none tracking-normal", classes.text]} style={`text-shadow: 0 0 15px ${card.glow};`}>
+              <div class="relative z-10 mb-2 font-mono text-[12px] font-semibold uppercase leading-none tracking-[0.12em] text-muted md:mb-5">{card.model}</div>
+              <div class:list={["relative z-10 font-display text-[48px] font-bold leading-none tracking-normal md:text-[56px]", classes.text]} style={`text-shadow: 0 0 15px ${card.glow};`}>
                 {card.score}
               </div>
               <div class="absolute right-4 top-4 flex gap-1" aria-hidden="true">
@@ -374,17 +374,17 @@ const colorClasses = {
         ...scoreCards.slice(0, 6).map((card) => {
           const accent = getRadarAccent(card.accent);
           const article = document.createElement("article");
-          article.className = `radar-card group relative overflow-hidden rounded-lg border border-border/50 bg-[rgb(var(--card)_/_0.62)] p-6 transition-all duration-300 ${accent.hover}`;
+          article.className = `radar-card group relative overflow-hidden rounded-lg border border-border/50 bg-[rgb(var(--card)_/_0.62)] px-4 pb-2 pt-4 transition-all duration-300 md:p-6 ${accent.hover}`;
 
           const veil = document.createElement("div");
           veil.className = `absolute inset-0 opacity-0 transition-opacity group-hover:opacity-100 ${accent.veil}`;
 
           const label = document.createElement("div");
-          label.className = "relative z-10 mb-5 font-mono text-[12px] font-semibold uppercase leading-none tracking-[0.12em] text-muted";
+          label.className = "relative z-10 mb-2 font-mono text-[12px] font-semibold uppercase leading-none tracking-[0.12em] text-muted md:mb-5";
           label.textContent = card.label || getRadarCopy("unknown");
 
           const score = document.createElement("div");
-          score.className = `relative z-10 font-display text-[56px] font-bold leading-none tracking-normal ${accent.text}`;
+          score.className = `relative z-10 font-display text-[48px] font-bold leading-none tracking-normal md:text-[56px] ${accent.text}`;
           score.style.textShadow = `0 0 15px ${accent.glow}`;
           score.textContent = formatRadarNumber(card.iq, 0);
 
