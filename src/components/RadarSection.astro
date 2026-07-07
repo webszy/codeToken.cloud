@@ -535,4 +535,17 @@ const colorClasses = {
   :global([data-theme="light"]) .radar-thanks-link {
     color: rgba(82, 99, 122, 0.72);
   }
+
+  @media (max-width: 640px) {
+    .radar-section [data-radar-tabs] {
+      align-items: flex-start;
+    }
+
+    .radar-section [data-radar-updated] {
+      flex: 0 0 9.5rem;
+      line-height: 1.35;
+      text-align: center;
+      white-space: normal;
+    }
+  }
 </style>

@@ -53,7 +53,7 @@ export const en = {
   },
   endpoint: {
     label: "JUST ONE ENDPOINT",
-    method: "Base_Url",
+    method: "API URL",
     url: "https://api.codetoken.cloud",
     authMessage: "Copy YOUR_API_KEY to login Codex or Claude Code and more\""
   },
