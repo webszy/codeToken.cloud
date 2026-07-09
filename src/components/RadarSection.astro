@@ -371,7 +371,7 @@ const colorClasses = {
     const scoreCards = radar.iqCards?.filter((card) => card.label) || [];
     if (scoreCards.length > 0) {
       scoreGrid.replaceChildren(
-        ...scoreCards.slice(0, 6).map((card) => {
+        ...scoreCards.map((card) => {
           const accent = getRadarAccent(card.accent);
           const article = document.createElement("article");
           article.className = `radar-card group relative min-h-[96px] overflow-hidden rounded-lg border border-border/50 bg-[rgb(var(--card)_/_0.62)] px-4 pb-2 pt-6 transition-all duration-300 md:min-h-0 md:p-6 ${accent.hover}`;
