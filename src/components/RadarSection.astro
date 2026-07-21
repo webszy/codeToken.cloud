@@ -180,11 +180,15 @@ const colorClasses = {
           const classes = colorClasses[card.color as keyof typeof colorClasses];
 
           return (
-            <article class:list={["radar-card group relative min-h-[96px] overflow-hidden rounded-lg border border-border/50 bg-[rgb(var(--card)_/_0.62)] px-4 pb-2 pt-6 transition-all duration-300 md:min-h-0 md:p-6", classes.hover]}>
+            <article class:list={["radar-card group relative min-h-[126px] overflow-hidden rounded-lg border border-border/50 bg-[rgb(var(--card)_/_0.62)] px-4 pb-4 pt-6 transition-all duration-300 md:min-h-0 md:p-6", classes.hover]}>
               <div class:list={["absolute inset-0 opacity-0 transition-opacity group-hover:opacity-100", classes.veil]}></div>
               <div class="relative z-10 mb-2 font-mono text-[12px] font-semibold uppercase leading-none tracking-[0.12em] text-muted md:mb-5">{card.model}</div>
               <div class:list={["relative z-10 font-display text-[40px] font-bold leading-none tracking-normal md:text-[56px]", classes.text]} style={`text-shadow: 0 0 15px ${card.glow};`}>
                 {card.score}
+              </div>
+              <div class="relative z-10 mt-4 grid grid-cols-2 gap-3 border-t border-border/30 pt-3 font-mono text-[10px] uppercase tracking-[0.1em] text-muted">
+                <span>Cost <strong class="font-semibold text-foreground">-</strong></span>
+                <span>Tokens <strong class="ml-1 font-semibold text-foreground">-</strong></span>
               </div>
               <div class="absolute right-4 top-4 flex gap-1" aria-hidden="true">
                 <span class:list={["h-1.5 w-1.5 rounded-full opacity-50", classes.dot]}></span>
@@ -349,6 +353,28 @@ const colorClasses = {
     return cell;
   };
 
+  const createRadarCardMetrics = (row) => {
+    const metrics = document.createElement("div");
+    metrics.className = "relative z-10 mt-4 grid grid-cols-2 gap-3 border-t border-border/30 pt-3 font-mono text-[10px] uppercase tracking-[0.1em] text-muted";
+
+    const cost = document.createElement("span");
+    cost.textContent = "Cost ";
+    const costValue = document.createElement("strong");
+    costValue.className = "font-semibold text-foreground";
+    costValue.textContent = `$${formatRadarNumber(row?.costUsd, 2)}`;
+    cost.append(costValue);
+
+    const tokens = document.createElement("span");
+    tokens.textContent = "Tokens ";
+    const tokensValue = document.createElement("strong");
+    tokensValue.className = "ml-1 font-semibold text-foreground";
+    tokensValue.textContent = `${formatRadarNumber(row?.totalTokensMillion, 2)}M`;
+    tokens.append(tokensValue);
+
+    metrics.append(cost, tokens);
+    return metrics;
+  };
+
   const renderRadar = (feed) => {
     const radar = feed?.aiRadar?.[activeRadarSource];
     if (!radar) return;
@@ -368,13 +394,15 @@ const colorClasses = {
       thanksLink.textContent = formatRadarThanksText(radar.url);
     }
 
+    const rows = radar.multiModelMetrics?.models?.filter((row) => row.label) || [];
+    const metricsByLabel = new Map(rows.map((row) => [row.label, row]));
     const scoreCards = radar.iqCards?.filter((card) => card.label) || [];
     if (scoreCards.length > 0) {
       scoreGrid.replaceChildren(
         ...scoreCards.map((card) => {
           const accent = getRadarAccent(card.accent);
           const article = document.createElement("article");
-          article.className = `radar-card group relative min-h-[96px] overflow-hidden rounded-lg border border-border/50 bg-[rgb(var(--card)_/_0.62)] px-4 pb-2 pt-6 transition-all duration-300 md:min-h-0 md:p-6 ${accent.hover}`;
+          article.className = `radar-card group relative min-h-[126px] overflow-hidden rounded-lg border border-border/50 bg-[rgb(var(--card)_/_0.62)] px-4 pb-4 pt-6 transition-all duration-300 md:min-h-0 md:p-6 ${accent.hover}`;
 
           const veil = document.createElement("div");
           veil.className = `absolute inset-0 opacity-0 transition-opacity group-hover:opacity-100 ${accent.veil}`;
@@ -397,13 +425,12 @@ const colorClasses = {
             dots.append(dot);
           }
 
-          article.append(veil, label, score, dots);
+          article.append(veil, label, score, createRadarCardMetrics(metricsByLabel.get(card.label)), dots);
           return article;
         })
       );
     }
 
-    const rows = radar.multiModelMetrics?.models?.filter((row) => row.label) || [];
     if (rows.length > 0) {
       metricsBody.replaceChildren(
         ...rows.map((row, index) => {
